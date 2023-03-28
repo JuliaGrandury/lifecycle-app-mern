@@ -81,7 +81,7 @@ const deleteItem = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
 
-    await item.remove()
+    await Item.findByIdAndDelete(req.params.id)
     res.status(200).json({ id: req.params.id })
 })
 
