@@ -1,0 +1,175 @@
+.biggest__container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100%;
+    margin: 10%;
+}
+
+.authentication__container {
+    position: relative;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 28px rgba(0, 0, 0, 0.25);
+}
+
+.sign_up__container,
+.sign_in__container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: auto;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign_up__container {
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.sign_in__container {
+    width: 50%;
+    z-index: 2;
+}
+
+.authentication__form {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+    gap: 30px;
+}
+
+.title {
+    margin: 30px 0px;
+    font-weight: bold;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 15px 0 20px;
+}
+
+.textfield {
+    padding: 12px 15px;
+    margin: 20px 20px;
+    width: 100%;
+}
+
+#forgot__password {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+button {
+    color: #fff;
+    background-color: var(--primary-tasman);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 55px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: 1px solid var(--primary-tasman);
+    outline: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.90);
+}
+
+#sign_in__button,
+#sign_up__button {
+    background-color: transparent;
+    border: 1.5px solid #fff;
+}
+
+.authentication__container.right_panel_active .sign_in__container {
+    transform: translateX(100%);
+}
+
+.authentication__container.right_panel_active .sign_up__container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+}
+
+.overlay__container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+
+.authentication__container.right_panel_active .overlay__container {
+    transform: translateX(-100%);
+}
+
+.overlay {
+    position: relative;
+    color: #fff;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    background: linear-gradient(0deg, var(--primary-lightblue), 20%, var(--primary-tasman));
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.authentication__container.right_panel_active .overlay {
+    transform: translateX(50%);
+}
+
+.overlay_left,
+.overlay_right {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay_left {
+    right: 60%;
+    transform: translateX(-20%);
+}
+
+.overlay_right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.authentication__container.right_panel_active .overlay_left {
+    transform: translateX(20%);
+}
