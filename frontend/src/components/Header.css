@@ -1,0 +1,49 @@
+.header { 
+  background-color: yellow;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header ul {
+  border: 1px solid pink;
+  display: flex;
+  align-items: center;
+}
+
+
+
+/* .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #e6e6e6;
+  margin-bottom: 60px;
+} */
+
+/* .header ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header ul li {
+  margin-left: 30px;
+}
+
+.header ul li a {
+  display: flex;
+  align-items: center;
+  color: var(--primary-tasman);
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.header ul li a:hover {
+  color: #777;
+}
+
+.header ul li a svg {
+  margin-right: 5px;
+} */
