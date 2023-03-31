@@ -1,31 +1,29 @@
-.header { 
-  background-color: yellow;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header ul {
-  border: 1px solid pink;
-  display: flex;
-  align-items: center;
-}
-
-
-
-/* .header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
   border-bottom: 1px solid #e6e6e6;
-  margin-bottom: 60px;
-} */
+  margin-bottom: 30px;
+  /* width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 10; */
+}
 
-/* .header ul {
+.header .logo a {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-left: 20px;
+  color: var(--primary-tasman);
+}
+
+.header ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-right: 20px;
 }
 
 .header ul li {
@@ -41,9 +39,14 @@
 }
 
 .header ul li a:hover {
-  color: #777;
+  color: var(--primary-green);
 }
 
-.header ul li a svg {
-  margin-right: 5px;
-} */
+.header button {
+  background-color: transparent;
+  border: transparent;
+  color: var(--primary-tasman);
+  font-size: 25px;
+  margin: 0;
+  padding: 0;
+}

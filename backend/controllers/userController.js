@@ -2,13 +2,14 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
+const { validateIdentifier } = require('../utils/authIdentifier')
 
 // @desc Register new user
 // @route POST /api/v1/users
 // @acces Public
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body
-    if (!name || !email || !password) {
+    const { username, email, password } = req.body
+    if (!username || !email || !password) {
         res.status(400)
         throw new Error('Please add all fields')
     }
@@ -26,7 +27,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     //create the user
     const user = await User.create({
-        name,
+        username,
         email,
         password: hashedPassword
     })
@@ -34,7 +35,7 @@ const registerUser = asyncHandler(async (req, res) => {
     if (user) {
         res.status(201).json({
             _id: user.id,
-            name: user.name,
+            username: user.username,
             email: user.email,
             token: generateToken(user._id)
         })
@@ -48,15 +49,21 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route POST /api/v1/users/login
 // @acces Public
 const loginUser = asyncHandler(async (req, res) => {
-    const { email, password } = req.body
+    const { identifier, password } = req.body
+    const identifierType = validateIdentifier(identifier)
+    let user;
 
-    //check user email
-    const user = await User.findOne({ email })
+    if (identifierType === 'email') {
+        user = await User.findOne({ email: identifier })
+    }
+    else if (identifierType === 'username') {
+        user = await User.findOne({ username: identifier })
+    }
 
     if (user && (await bcrypt.compare(password, user.password))) {
         res.json({
             _id: user.id,
-            name: user.name,
+            username: user.username,
             email: user.email,
             token: generateToken(user._id)
         })

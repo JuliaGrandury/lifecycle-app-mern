@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-// import { ToastContainer } from 'react-toastify'
-// import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header'
 import Authentication from './pages/Authentication'
 import Closets from './pages/Closets'
@@ -16,13 +16,14 @@ function App() {
           <HeaderWrapper />
           <Routes>
             <Route path='/authentication' element={<Authentication />} />
+            {/* <Route path='/' element={<Closets />} /> */}
             <Route path='/closets' element={<Closets />} />
             <Route path='/statistics' element={<Statistics />} />
             <Route path='/settings' element={<Settings />} />
           </Routes>
         </div>
       </Router>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
     </>
   );
 }

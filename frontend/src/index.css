@@ -29,8 +29,8 @@ body {
   height: 100vh;
   background-color: var(--bg-light);
 }
-
-/* a {
+/* 
+a {
   text-decoration: none;
   color: #000;
 }
@@ -186,7 +186,7 @@ h3 {
 
 .btn:hover {
   transform: scale(0.98);
-}
+} */
 
 .loadingSpinnerContainer {
   position: fixed;
@@ -219,7 +219,7 @@ h3 {
     transform: rotate(360deg);
   }
 }
-
+/* 
 @media (max-width: 600px) {
   .form {
     width: 90%;
