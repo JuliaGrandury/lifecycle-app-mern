@@ -27,7 +27,7 @@ const Closets = () => {
 
   return (
     <section className="heading">
-      <h1>Welcome to your closet {user.username}</h1>
+      <h1>Welcome to your closet {user ? user.username : null}</h1>
       <p>Closet Items</p>
     </section>
   )
