@@ -16,7 +16,7 @@ function App() {
           <HeaderWrapper />
           <Routes>
             <Route path='/authentication' element={<Authentication />} />
-            {/* <Route path='/' element={<Closets />} /> */}
+            <Route path='/' element={<Closets />} />
             <Route path='/closets' element={<Closets />} />
             <Route path='/statistics' element={<Statistics />} />
             <Route path='/settings' element={<Settings />} />

@@ -13,7 +13,7 @@ const itemSchema = mongoose.Schema(
         },
         color: {
             type: [String],
-            enum: ['Black', 'Blue', 'Brown', 'Grey', 'Navy', 'Pink', 'Red', 'Sand', 'White', 'Yellow', 'Multicolor'],
+            enum: ['Beige', 'Black', 'Blue', 'Brown', 'Green', 'Grey', 'Magenta', 'Metallic', 'Multicolor', 'Neon', 'Orange', 'Pink', 'Print', 'Red', 'White', 'Yellow'],
             required: [true, 'Please add a color for the item'],
         },
         category: {
@@ -31,7 +31,7 @@ const itemSchema = mongoose.Schema(
         },
         season: {
             type: [String],
-            enum: ['Fall', 'Winter', 'Spring', 'Summer'],
+            enum: ['Fall', 'Winter', 'Spring', 'Summer', 'All'],
             required: [true, 'Please add a season for the item'],
         },
         inCloset: {
@@ -39,7 +39,11 @@ const itemSchema = mongoose.Schema(
         },
         toRepair: {
             type: Boolean,
-        }
+        },
+        // brand: {
+        //     type: String,
+        //     required: false
+        // }
     },
     {
         timestamps: true,

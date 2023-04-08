@@ -29,7 +29,6 @@ const RegisterForm = () => {
         if (registerData.password !== registerData.password2) {
             toast.error('Passwords do not match');
         } else {
-            // const userData = { username: registerData.username, email: registerData.email, password: registerData.password };
             dispatch(register(registerData));
         }
     }

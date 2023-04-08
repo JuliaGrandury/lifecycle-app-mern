@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+// import { getItems, reset } from '../features/items/itemSlice';
+import NewItemForm from '../components/NewItemForm';
 
 const Closets = () => {
   const navigate = useNavigate()
@@ -27,8 +29,9 @@ const Closets = () => {
 
   return (
     <section className="heading">
-      <h1>Welcome to your closet {user ? user.username : null}</h1>
+      <h1>Welcome to your closet {user && user.username}</h1>
       <p>Closet Items</p>
+      <NewItemForm />
     </section>
   )
 }

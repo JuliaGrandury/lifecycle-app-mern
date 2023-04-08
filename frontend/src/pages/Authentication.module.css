@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    min-height: 100%;
     margin-top: 10%;
 }
 
@@ -10,7 +11,7 @@
     position: relative;
     width: 768px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 550px;
     height: 100%;
     background-color: #fff;
     border-radius: 10px;
@@ -174,3 +175,9 @@ button:active {
 .authentication__container.right_panel_active .overlay_left {
     transform: translateX(20%);
 }
+
+
+
+/* --------MEDIA QUERIES FOR SMALL DEVICES (medium: tablets)-------- */
+/* @media screen and (max-width: 1024px) {
+} */

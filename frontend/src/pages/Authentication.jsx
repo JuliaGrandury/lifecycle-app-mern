@@ -6,9 +6,10 @@ import { toast } from 'react-toastify'
 import { reset } from '../features/auth/authSlice'
 import LoginForm from '../components/LoginForm'
 import RegisterForm from '../components/RegisterForm'
+import Spinner from '../components/Spinner'
 
 const Authentication = () => {
-  
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
@@ -21,9 +22,12 @@ const Authentication = () => {
     if (isSuccess || user) {
       navigate('/closets')
     }
-    dispatch(reset)
+    dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
+  if (isLoading) {
+    return <Spinner />
+  }
 
   // remember you can use error and helperText for form validation
   return (

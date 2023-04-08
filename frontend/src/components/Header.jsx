@@ -7,7 +7,7 @@ import './Header.css'
 function Header() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { user } = useSelector((state) => state.auth)
+    // const { user } = useSelector((state) => state.auth)
 
     const onLogout = () => {
         dispatch(logout())
@@ -20,14 +20,12 @@ function Header() {
             <div className='logo'>
                 <Link to='/'>LifeCycle</Link>
             </div>
-            {user ? (
-                <ul>
-                    <li><NavLink to='/closets'>Closets</NavLink></li>
-                    <li><NavLink to='/statistics'>Statistics</NavLink></li>
-                    <li><NavLink to='/settings'>Settings</NavLink></li>
-                    <li><button className='btn' onClick={onLogout}><IoIosLogOut /></button></li>
-                </ul>
-            ) : <></>}
+            <ul>
+                <li><NavLink to='/closets'>Closets</NavLink></li>
+                <li><NavLink to='/statistics'>Statistics</NavLink></li>
+                <li><NavLink to='/settings'>Settings</NavLink></li>
+                <li><button className='btn' onClick={onLogout}><IoIosLogOut /></button></li>
+            </ul>
         </header>
     )
 }

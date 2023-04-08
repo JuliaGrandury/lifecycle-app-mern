@@ -1,0 +1,5 @@
+
+I grew up wearing hand-me-downs for most of my life and only discovered the power and joy that I could find in clothing when entering adulthood. Before then, I had never attributed much value or interest to the way I dressed, as long as I was neither overdressed nor underdressed for events. When I began to put more interest and effort into it, thinking about which items
+
+
+However, the 2.5 trillion clothing industry has a huge problem with pollution, waste, and human rights abuses. Like many of us, I care about our planet, fellow humans, and animals and hope to see us all move towards a more sustainable and fair world. If these reasons do not motivate you, perhaps the financial aspect will. By tracking your clothing, you can avoid breaking the bank while still expressing yourself through fashion.
