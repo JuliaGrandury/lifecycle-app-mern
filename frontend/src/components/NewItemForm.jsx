@@ -2,6 +2,9 @@ import { TextField, Select, MenuItem, InputLabel, FormControl, FormControlLabel,
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
+// don't need to update everytime component remounts
+const colorOptions = ['Beige', 'Black', 'Blue', 'Brown', 'Green', 'Grey', 'Magenta', 'Metallic', 'Multicolor', 'Neon', 'Orange', 'Pink', 'Print', 'Red', 'White', 'Yellow'];
+const categoryOptions = ['Tops', 'Bottoms', 'Dresses and Jumpsuits', 'Shoes', 'Accessories'];
 
 const NewItemForm = () => {
 
@@ -20,22 +23,12 @@ const NewItemForm = () => {
 
     const onSubmit = (event) => {
         event.preventDefault()
+        console.log(newItem)
     }
 
     const handleFormChange = (event) => {
 
         const { name, value, checked } = event.target;
-
-        if (name === 'inCloset' || name === 'toRepair') {
-            console.log(`setting ${name} to ${checked}`)
-            const data = { ...newItem };
-            data[name] = checked;
-            setNewItem(data);
-        } else {
-            const data = { ...newItem };
-            data[name] = value;
-            setNewItem(data);
-        }
 
         // change subcategory options displayed depending on category selected
         if (name === 'category') {
@@ -54,8 +47,8 @@ const NewItemForm = () => {
                     break;
                 case "Shoes":
                     setSubcategories([]);
-                    setSizeOptions([`Women's 6`, `Women's 6.5`, `Women's 7`, `Women's 7.5`, `Women's 8`, `Women's 8.5`, `Women's 9`, `Women's 9.5`, `Women's 10`, `Men's 7,`
-                        `Men's 7.5`, `Men's 8,` `Men's 8.5`, `Men's 9,` `Men's 9.5`, `Men's 10`, `Men's 10.5`, `Men's 11`, `Men's 11.5`, `Men's 12`, `Men's 12.5`,
+                    setSizeOptions([`Women's 6`, `Women's 6.5`, `Women's 7`, `Women's 7.5`, `Women's 8`, `Women's 8.5`, `Women's 9`, `Women's 9.5`, `Women's 10`, `Men's 7`,
+                        `Men's 7.5`, `Men's 8`, `Men's 8.5`, `Men's 9`, `Men's 9.5`, `Men's 10`, `Men's 10.5`, `Men's 11`, `Men's 11.5`, `Men's 12`, `Men's 12.5`,
                         `Men's 13`, `Men's 13.5`, `Men's 14`, `Men's 14.5`, `Men's 15`]);
                     break;
                 case "Accessories":
@@ -69,7 +62,16 @@ const NewItemForm = () => {
             }
         }
 
-        // const file = e.target.files[0];
+        if (name === 'inCloset' || name === 'toRepair') {
+            console.log(`setting ${name} to ${checked}`)
+            const data = { ...newItem };
+            data[name] = checked;
+            setNewItem(data);
+        } else {
+            const data = { ...newItem };
+            data[name] = value;
+            setNewItem(data);
+        }
     }
 
 
@@ -87,33 +89,18 @@ const NewItemForm = () => {
                     <FormControl fullWidth style={{ width: 200 }}>
                         <InputLabel id="color-select-label" >Color</InputLabel>
                         <Select labelId="color-select-label" id="color-select" name="color" label="Color" value={newItem.color} onChange={handleFormChange}>
-                            <MenuItem value={'Beige'}>Beige</MenuItem>
-                            <MenuItem value={'Black'}>Black</MenuItem>
-                            <MenuItem value={'Blue'}>Blue</MenuItem>
-                            <MenuItem value={'Brown'}>Brown</MenuItem>
-                            <MenuItem value={'Green'}>Green</MenuItem>
-                            <MenuItem value={'Grey'}>Grey</MenuItem>
-                            <MenuItem value={'Magenta'}>Magenta</MenuItem>
-                            <MenuItem value={'Metallic'}>Metallic</MenuItem>
-                            <MenuItem value={'Multicolor'}>Multicolor</MenuItem>
-                            <MenuItem value={'Neon'}>Neon</MenuItem>
-                            <MenuItem value={'Orange'}>Orange</MenuItem>
-                            <MenuItem value={'Pink'}>Pink</MenuItem>
-                            <MenuItem value={'Print'}>Print</MenuItem>
-                            <MenuItem value={'Red'}>Red</MenuItem>
-                            <MenuItem value={'White'}>White</MenuItem>
-                            <MenuItem value={'Yellow'}>Yellow</MenuItem>
+                            {colorOptions.map((color) => (
+                                <MenuItem key={color} value={color}>{color}</MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
 
                     <FormControl fullWidth style={{ width: 200 }}>
                         <InputLabel id="category-select-label">Category</InputLabel>
                         <Select labelId="category-select-label" id="category-select" name="category" label="Category" value={newItem.category} onChange={handleFormChange}>
-                            <MenuItem value={'Tops'}>Tops</MenuItem>
-                            <MenuItem value={'Bottoms'}>Bottoms</MenuItem>
-                            <MenuItem value={'Dresses and Jumpsuits'}>Dresses and Jumpsuits</MenuItem>
-                            <MenuItem value={'Shoes'}>Shoes</MenuItem>
-                            <MenuItem value={'Accessories'}>Accessories</MenuItem>
+                            {categoryOptions.map((category) => (
+                                <MenuItem key={category} value={category}>{category}</MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
 
@@ -140,11 +127,11 @@ const NewItemForm = () => {
                     <FormControl fullWidth style={{ width: 200 }}>
                         <InputLabel id="season-select-label">Season</InputLabel>
                         <Select labelId="season-select-label" id="season-select" name="season" label="Season" value={newItem.season} onChange={handleFormChange}>
-                            <MenuItem value={''}>Fall</MenuItem>
-                            <MenuItem value={''}>Winter</MenuItem>
-                            <MenuItem value={''}>Spring</MenuItem>
-                            <MenuItem value={''}>Summer</MenuItem>
-                            <MenuItem value={''}>All</MenuItem>
+                            <MenuItem value={'Fall'}>Fall</MenuItem>
+                            <MenuItem value={'Winter'}>Winter</MenuItem>
+                            <MenuItem value={'Spring'}>Spring</MenuItem>
+                            <MenuItem value={'Summer'}>Summer</MenuItem>
+                            <MenuItem value={'All'}>All</MenuItem>
                         </Select>
                     </FormControl>
 
