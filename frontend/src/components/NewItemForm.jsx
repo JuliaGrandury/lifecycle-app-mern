@@ -1,10 +1,12 @@
-import { TextField, Select, MenuItem, InputLabel, FormControl, FormControlLabel, Switch } from '@mui/material'
+import { TextField, Select, MenuItem, InputLabel, FormControl, FormControlLabel, Switch, Checkbox } from '@mui/material'
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import styles from './NewItemForm.module.css'
 
 // don't need to update everytime component remounts
 const colorOptions = ['Beige', 'Black', 'Blue', 'Brown', 'Green', 'Grey', 'Magenta', 'Metallic', 'Multicolor', 'Neon', 'Orange', 'Pink', 'Print', 'Red', 'White', 'Yellow'];
 const categoryOptions = ['Tops', 'Bottoms', 'Dresses and Jumpsuits', 'Shoes', 'Accessories'];
+const seasonOptions = ['Fall', 'Winter', 'Spring', 'Summer'];
 
 const NewItemForm = () => {
 
@@ -14,12 +16,13 @@ const NewItemForm = () => {
         category: '',
         subcategory: '',
         size: '',
-        season: '',
+        season: [],
         inCloset: true,
         toRepair: false
     })
     const [subcategories, setSubcategories] = useState([]);
     const [sizeOptions, setSizeOptions] = useState([]);
+    const [allChecked, setAllChecked] = useState(false);
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -62,29 +65,57 @@ const NewItemForm = () => {
             }
         }
 
+        // appropriately add items to season array if field is edited
+        if (name === 'season') {
+            console.log(`Editing the ${name}`)
+            if (value.includes('All')) {
+                const data = { ...newItem };
+                data['season'] = seasonOptions;
+                setNewItem(data);
+            }
+
+        }
+
+        // appropriately change boolean values if fields are edited
         if (name === 'inCloset' || name === 'toRepair') {
-            console.log(`setting ${name} to ${checked}`)
             const data = { ...newItem };
             data[name] = checked;
             setNewItem(data);
-        } else {
+        }
+
+        else {
             const data = { ...newItem };
             data[name] = value;
             setNewItem(data);
         }
     }
 
-
+    // helper function to update the season checkboxes depending on each other
+    const handleCheckAll = (event) => {
+        if (event.target.checked) {
+            console.log(`Check all seasons`)
+            setAllChecked(true);
+            const data = { ...newItem };
+            data.season = seasonOptions;
+            setNewItem(data);
+        } else {
+            console.log(`Uncheck all seasons`)
+            setAllChecked(false);
+            const data = { ...newItem };
+            data.season = [];
+            setNewItem(data);
+        }
+    }
 
     return (
-        <div className="newitem__container">
-            <form onSubmit={onSubmit}>
-                <div className="form__group">
+        <div className={styles.newitem__container}>
+            <form className={styles.newitem__form} onSubmit={onSubmit}>
+                <div className={styles.form__group}>
                     <h3>Add an Item</h3>
                 </div>
-                <div className="form__group">
+                <div className={styles.form__group}>
 
-                    <TextField name="name" label="Item Name" InputLabelProps={{ shrink: true }} onChange={handleFormChange} />
+                    <TextField name="name" label="Item Name" onChange={handleFormChange} />
 
                     <FormControl fullWidth style={{ width: 200 }}>
                         <InputLabel id="color-select-label" >Color</InputLabel>
@@ -124,14 +155,18 @@ const NewItemForm = () => {
                         </Select>
                     </FormControl>
 
-                    <FormControl fullWidth style={{ width: 200 }}>
+                    {/* SEASONS CHECKBOXES START HERE */}
+                    <FormControl fullWidth style={{ width: 400 }}>
                         <InputLabel id="season-select-label">Season</InputLabel>
-                        <Select labelId="season-select-label" id="season-select" name="season" label="Season" value={newItem.season} onChange={handleFormChange}>
-                            <MenuItem value={'Fall'}>Fall</MenuItem>
-                            <MenuItem value={'Winter'}>Winter</MenuItem>
-                            <MenuItem value={'Spring'}>Spring</MenuItem>
-                            <MenuItem value={'Summer'}>Summer</MenuItem>
-                            <MenuItem value={'All'}>All</MenuItem>
+                        <Select labelId="season-select-label" name="season" label="Season" multiple value={newItem.season} onChange={handleFormChange} renderValue={(selected) => allChecked ? 'All Seasons' : selected.join(', ')}>
+                            <MenuItem value="selectAll">
+                                <FormControlLabel control={<Checkbox checked={allChecked} />} label="Select All" onChange={handleCheckAll} />
+                            </MenuItem>
+                            {seasonOptions.map((option) => (
+                                <MenuItem key={option} value={option}>
+                                    <FormControlLabel control={<Checkbox checked={allChecked || newItem.season.includes(option)} />} label={option} />
+                                </MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
 
@@ -143,12 +178,12 @@ const NewItemForm = () => {
                         InputProps={{ accept: 'image/*', onChange: handleFormChange }} /> */}
                 </div>
 
-                <div className="form__group">
+                <div className={styles.form__group}>
                     <button className="btn btn-block" type="submit">Add Item</button>
                 </div>
 
-            </form>
-        </div>
+            </form >
+        </div >
     )
 }
 

@@ -31,6 +31,7 @@ const Closets = () => {
     <section className="heading">
       <h1>Welcome to your closet {user && user.username}</h1>
       <p>Closet Items</p>
+
       <NewItemForm />
     </section>
   )
