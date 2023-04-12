@@ -22,7 +22,6 @@ const NewItemForm = () => {
     })
     const [subcategories, setSubcategories] = useState([]);
     const [sizeOptions, setSizeOptions] = useState([]);
-    const [allChecked, setAllChecked] = useState(false);
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -63,23 +62,8 @@ const NewItemForm = () => {
                     setSizeOptions([]);
                     break;
             }
-        }
-
-        // appropriately add items to season array if field is edited
-        if (name === 'season') {
-            console.log(`Editing the ${name}`)
-            if (value.includes('All')) {
-                const data = { ...newItem };
-                data['season'] = seasonOptions;
-                setNewItem(data);
-            }
-
-        }
-
-        // appropriately change boolean values if fields are edited
-        if (name === 'inCloset' || name === 'toRepair') {
             const data = { ...newItem };
-            data[name] = checked;
+            data[name] = value;
             setNewItem(data);
         }
 
@@ -90,22 +74,41 @@ const NewItemForm = () => {
         }
     }
 
-    // helper function to update the season checkboxes depending on each other
-    const handleCheckAll = (event) => {
-        if (event.target.checked) {
-            console.log(`Check all seasons`)
-            setAllChecked(true);
-            const data = { ...newItem };
-            data.season = seasonOptions;
-            setNewItem(data);
-        } else {
-            console.log(`Uncheck all seasons`)
-            setAllChecked(false);
-            const data = { ...newItem };
-            data.season = [];
-            setNewItem(data);
+    const handleCheckboxes = (event) => {
+        const { name, value } = event.target;
+        // if 'Select All' is checked, update all checkboxes
+        if (value.includes('Select All')) {
+            if (newItem.season.length !== seasonOptions.length) {
+                setNewItem((prevItem) => ({
+                    ...prevItem,
+                    season: seasonOptions,
+                }));
+            } else {
+                setNewItem((prevItem) => ({
+                    ...prevItem,
+                    season: [],
+                }));
+            }
+        } else { // if not, update the value of the clicked checkbox
+            setNewItem((prevItem) => ({
+                ...prevItem,
+                [name]: value,
+            }));
         }
     }
+    // to keep track of whether all seasons are checked
+    const allSeasonsChecked = () => {
+        return newItem.season.length === seasonOptions.length;
+    }
+
+    // appropriately change boolean values if fields are edited
+    const handleSwitchChange = (event) => {
+        const { name, checked } = event.target;
+        const data = { ...newItem };
+        data[name] = checked;
+        setNewItem(data);
+    }
+
 
     return (
         <div className={styles.newitem__container}>
@@ -115,9 +118,9 @@ const NewItemForm = () => {
                 </div>
                 <div className={styles.form__group}>
 
-                    <TextField name="name" label="Item Name" onChange={handleFormChange} />
+                    <FormControl className={styles.form__control}><TextField name="name" label="Item Name" onChange={handleFormChange} /></FormControl>
 
-                    <FormControl fullWidth style={{ width: 200 }}>
+                    <FormControl className={styles.form__control}>
                         <InputLabel id="color-select-label" >Color</InputLabel>
                         <Select labelId="color-select-label" id="color-select" name="color" label="Color" value={newItem.color} onChange={handleFormChange}>
                             {colorOptions.map((color) => (
@@ -126,7 +129,7 @@ const NewItemForm = () => {
                         </Select>
                     </FormControl>
 
-                    <FormControl fullWidth style={{ width: 200 }}>
+                    <FormControl className={styles.form__control}>
                         <InputLabel id="category-select-label">Category</InputLabel>
                         <Select labelId="category-select-label" id="category-select" name="category" label="Category" value={newItem.category} onChange={handleFormChange}>
                             {categoryOptions.map((category) => (
@@ -136,7 +139,7 @@ const NewItemForm = () => {
                     </FormControl>
 
                     {subcategories && (
-                        <FormControl fullWidth style={{ width: 200 }}>
+                        <FormControl className={styles.form__control}>
                             <InputLabel id="subcategory-select-label">Subcategory</InputLabel>
                             <Select labelId="subcategory-select-label" id="subcategory-select" name="subcategory" label="Subcategory" value={newItem.subcategory} onChange={handleFormChange}>
                                 {subcategories.map((subcategory) => (
@@ -146,7 +149,7 @@ const NewItemForm = () => {
                         </FormControl>
                     )}
 
-                    <FormControl fullWidth style={{ width: 200 }}>
+                    <FormControl className={styles.form__control}>
                         <InputLabel id="size-select-label" >Size</InputLabel>
                         <Select labelId="size-select-label" id="size-select" name="size" label="Size" value={newItem.size} onChange={handleFormChange}>
                             {sizeOptions.map((option) => (
@@ -156,22 +159,27 @@ const NewItemForm = () => {
                     </FormControl>
 
                     {/* SEASONS CHECKBOXES START HERE */}
-                    <FormControl fullWidth style={{ width: 400 }}>
+                    <FormControl className={styles.form__control}>
                         <InputLabel id="season-select-label">Season</InputLabel>
-                        <Select labelId="season-select-label" name="season" label="Season" multiple value={newItem.season} onChange={handleFormChange} renderValue={(selected) => allChecked ? 'All Seasons' : selected.join(', ')}>
-                            <MenuItem value="selectAll">
-                                <FormControlLabel control={<Checkbox checked={allChecked} />} label="Select All" onChange={handleCheckAll} />
+                        <Select labelId="season-select-label" name="season" label="Season" multiple value={newItem.season} onChange={handleCheckboxes} renderValue={(selected) => allSeasonsChecked() ? 'All Seasons' : selected.join(', ')}>
+                            <MenuItem value="Select All" >
+                                <FormControlLabel control={<Checkbox checked={allSeasonsChecked()} />} label="Select All Seasons" />
                             </MenuItem>
                             {seasonOptions.map((option) => (
-                                <MenuItem key={option} value={option}>
-                                    <FormControlLabel control={<Checkbox checked={allChecked || newItem.season.includes(option)} />} label={option} />
+                                <MenuItem key={option} value={option} className={styles.subcheckboxes}>
+                                    <FormControlLabel control={<Checkbox checked={newItem.season.includes(option)} />} label={option} />
                                 </MenuItem>
                             ))}
                         </Select>
                     </FormControl>
 
-                    <FormControlLabel control={<Switch name="inCloset" checked={newItem.inCloset} color="success" onChange={handleFormChange} />} label="In Closet" />
-                    <FormControlLabel control={<Switch name="toRepair" checked={newItem.toRepair} color="success" onChange={handleFormChange} />} label="To Repair" />
+                    <FormControl className={styles.form__control}>
+                        <FormControlLabel control={<Switch name="inCloset" checked={newItem.inCloset} color="success" onChange={handleSwitchChange} />} label="In Closet" />
+                    </FormControl>
+                    <FormControl className={styles.form__control}>
+                        <FormControlLabel control={<Switch name="toRepair" checked={newItem.toRepair} color="success" onChange={handleSwitchChange} />} label="To Repair" />
+                    </FormControl>
+
 
                     {/* <TextField label="Item Brand" InputLabelProps={{ shrink: true }} onChange={handleFormChange} /> */}
                     {/* <TextField type="file" label="Choose Image" InputLabelProps={{ shrink: true }}
