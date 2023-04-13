@@ -11,6 +11,10 @@ const itemSchema = mongoose.Schema(
             type: String,
             required: [true, 'Please add a name for the item'],
         },
+        brand: {
+            type: String,
+            required: [true, 'Please add a brand for the item'],
+        },
         color: {
             type: [String],
             enum: ['Beige', 'Black', 'Blue', 'Brown', 'Green', 'Grey', 'Magenta', 'Metallic', 'Multicolor', 'Neon', 'Orange', 'Pink', 'Print', 'Red', 'White', 'Yellow'],

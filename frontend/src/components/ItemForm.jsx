@@ -1,17 +1,21 @@
 import { TextField, Select, MenuItem, InputLabel, FormControl, FormControlLabel, Switch, Checkbox } from '@mui/material'
 import { useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import styles from './NewItemForm.module.css'
+import { useDispatch } from "react-redux"
+import { createItem } from '../features/items/itemSlice'
+import styles from './ItemForm.module.css'
+import { IoCloseCircle } from 'react-icons/io5'
 
 // don't need to update everytime component remounts
 const colorOptions = ['Beige', 'Black', 'Blue', 'Brown', 'Green', 'Grey', 'Magenta', 'Metallic', 'Multicolor', 'Neon', 'Orange', 'Pink', 'Print', 'Red', 'White', 'Yellow'];
 const categoryOptions = ['Tops', 'Bottoms', 'Dresses and Jumpsuits', 'Shoes', 'Accessories'];
 const seasonOptions = ['Fall', 'Winter', 'Spring', 'Summer'];
 
-const NewItemForm = () => {
+const NewItemForm = ({ onCloseForm }) => {
 
+    const dispatch = useDispatch()
     const [newItem, setNewItem] = useState({
         name: '',
+        brand: '',
         color: '',
         category: '',
         subcategory: '',
@@ -23,14 +27,10 @@ const NewItemForm = () => {
     const [subcategories, setSubcategories] = useState([]);
     const [sizeOptions, setSizeOptions] = useState([]);
 
-    const onSubmit = (event) => {
-        event.preventDefault()
-        console.log(newItem)
-    }
 
     const handleFormChange = (event) => {
 
-        const { name, value, checked } = event.target;
+        const { name, value } = event.target;
 
         // change subcategory options displayed depending on category selected
         if (name === 'category') {
@@ -109,16 +109,39 @@ const NewItemForm = () => {
         setNewItem(data);
     }
 
+    const onSubmit = (event) => {
+        event.preventDefault()
+        console.log(newItem)
+
+        dispatch(createItem(newItem))
+        onResetForm();
+    }
+
+    const onResetForm = (event) => {
+        setNewItem({
+            name: '',
+            color: '',
+            category: '',
+            subcategory: '',
+            size: '',
+            season: [],
+            inCloset: true,
+            toRepair: false
+        });
+    }
+
 
     return (
         <div className={styles.newitem__container}>
             <form className={styles.newitem__form} onSubmit={onSubmit}>
-                <div className={styles.form__group}>
+                <div className={`${styles.form__group} ${styles.form__heading}`}>
                     <h3>Add an Item</h3>
+                    <button className={styles.close__button} onClick={() => onCloseForm()}><IoCloseCircle /></button>
                 </div>
                 <div className={styles.form__group}>
 
                     <FormControl className={styles.form__control}><TextField name="name" label="Item Name" onChange={handleFormChange} /></FormControl>
+                    <FormControl className={styles.form__control}><TextField name="brand" label="Item Brand" onChange={handleFormChange} /></FormControl>
 
                     <FormControl className={styles.form__control}>
                         <InputLabel id="color-select-label" >Color</InputLabel>
@@ -180,14 +203,13 @@ const NewItemForm = () => {
                         <FormControlLabel control={<Switch name="toRepair" checked={newItem.toRepair} color="success" onChange={handleSwitchChange} />} label="To Repair" />
                     </FormControl>
 
-
-                    {/* <TextField label="Item Brand" InputLabelProps={{ shrink: true }} onChange={handleFormChange} /> */}
                     {/* <TextField type="file" label="Choose Image" InputLabelProps={{ shrink: true }}
                         InputProps={{ accept: 'image/*', onChange: handleFormChange }} /> */}
                 </div>
 
                 <div className={styles.form__group}>
-                    <button className="btn btn-block" type="submit">Add Item</button>
+                    <button className={styles.action__button} type="submit">Add Item</button>
+                    <button className={`${styles.action__button} ${styles.danger}`} onClick={onResetForm}>Clear</button>
                 </div>
 
             </form >

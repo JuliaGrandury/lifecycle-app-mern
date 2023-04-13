@@ -80,7 +80,7 @@ p {
     margin: 15px 0;
 }
 
-button {
+.auth_button {
     color: #fff;
     background-color: var(--primary-tasman);
     font-size: 12px;
@@ -96,7 +96,7 @@ button {
     cursor: pointer;
 }
 
-button:active {
+.auth_button:active {
     transform: scale(0.90);
 }
 

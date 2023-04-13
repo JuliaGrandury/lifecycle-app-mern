@@ -23,6 +23,7 @@ const setItem = asyncHandler(async (req, res) => {
     const item = await Item.create({
         user: req.user.id,
         name: req.body.name,
+        brand: req.body.brand,
         color: req.body.color,
         category: req.body.category,
         subcategory: req.body.subcategory,

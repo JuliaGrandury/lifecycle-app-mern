@@ -32,7 +32,7 @@ const LoginForm = () => {
             <TextField className={styles.textfield} label="Email or Username" color="success" focused name="identifier" onChange={handleFormChange} />
             <TextField className={styles.textfield} label="Password" type="password" color="success" focused name="password" onChange={handleFormChange} />
             <a href="#" id={styles.forgot__password}>Forget your password?</a>
-            <button>Sign In</button>
+            <button className={styles.auth_button} >Sign In</button>
         </form>
     )
 }

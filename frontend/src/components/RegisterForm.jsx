@@ -40,7 +40,7 @@ const RegisterForm = () => {
             <TextField className={styles.textfield} label="Email" color="success" focused name="email" onChange={handleFormChange} />
             <TextField className={styles.textfield} label="Password" type="password" color="success" focused name="password" onChange={handleFormChange} />
             <TextField className={styles.textfield} label="Confirm Password" type="password" color="success" focused name="password2" onChange={handleFormChange} />
-            <button>Sign Up</button>
+            <button className={styles.auth_button}>Sign Up</button>
         </form>
     )
 }

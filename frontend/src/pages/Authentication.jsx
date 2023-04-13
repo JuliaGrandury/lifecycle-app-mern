@@ -46,12 +46,12 @@ const Authentication = () => {
             <div className={styles.overlay_left}>
               <h1 className={styles.title}>Welcome Back!</h1>
               <p>The earth thanks you for your efforts.</p>
-              <button id={styles.sign_in__button} onClick={() => setRightPanelActive(false)}>Sign In</button>
+              <button className={styles.auth_button} id={styles.sign_in__button} onClick={() => setRightPanelActive(false)}>Sign In</button>
             </div>
             <div className={styles.overlay_right}>
               <h1 className={styles.title}>Hey friend,</h1>
               <p>Create an account and join our community of sustainable fashion lovers!</p>
-              <button id={styles.sign_up__button} onClick={() => setRightPanelActive(true)}>Sign Up</button>
+              <button className={styles.auth_button} id={styles.sign_up__button} onClick={() => setRightPanelActive(true)}>Sign Up</button>
             </div>
           </div>
         </div>
