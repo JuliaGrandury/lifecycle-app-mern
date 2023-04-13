@@ -1,3 +1,4 @@
+<div id="top_of_readme"></div>
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -35,7 +36,7 @@ Lifecycle is meant to help users organize and keep track of what they own in ord
 - Submitting borrow or swap requests to friends
 - Tracking items that are "out of closet" for loans or repairs
 - Adding a wishlist of items their circle can view
-
+<p align="right">(<a href="#top_of_readme">back to top</a>)</p>
 
 
 ## Installing LifeCycle
@@ -78,7 +79,7 @@ Note: if you encounter any issues later when connecting to your DB, verify that 
 5. Run the frontend of the application using `npm run start` and the backend using `nodemon server.js`
 6. Run the test suite using `npm test` or a specific file using `npm test <filepath>`
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#top_of_readme">back to top</a>)</p>
 
 
 ## Built With
@@ -97,13 +98,13 @@ Note: if you encounter any issues later when connecting to your DB, verify that 
 - [JSON Web Token](https://jwt.io/) - A standard to secure/authenticate HTTP requests
 - [Bcrypt.js](https://www.npmjs.com/package/bcryptjs) - For hashing passwords
 - [Dotenv](https://www.npmjs.com/package/dotenv) - To load environment variables from a .env file
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#top_of_readme">back to top</a>)</p>
 
 
 
 ## License
 Distributed under the MIT License. See `LICENSE.txt` for more information.
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#top_of_readme">back to top</a>)</p>
 
 
 
@@ -111,4 +112,4 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 Julia Grandury - booleanjules@gmail.com
 
 Project Link: [https://github.com/JuliaGrandury/lifecycle-app-mern](https://github.com/JuliaGrandury/lifecycle-app-mern)
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#top_of_readme">back to top</a>)</p>
