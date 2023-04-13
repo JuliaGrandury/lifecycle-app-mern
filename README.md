@@ -43,9 +43,13 @@ Lifecycle is meant to help users organize and keep track of what they own in ord
 #### Prerequisites
 1. You will need to have Node.js and npm package manager installed. Verify that you do with the commands `node -v` and `npm -v`.
 If you do not, visit [Node.js](https://nodejs.org/en/) and download the version labeled LTS. To install the latest version of npm run `npm install npm@latest -g`. Finally, verify that both are correctly installed using `node -v` and `npm -v`.
-2. You will also need to have a MongoDB account
-
- installed. Verify that you do with the command `psql --version`. If you do not, visit [PostgreSQL](https://www.postgresql.org/download/) to download it and [Install PostgreSQL macOS](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-macos/) or [Install PostgreSQL on Windows](https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/) for help. Ensure that you checked "PostgreSQL Server" and "Command Line Tools" during the installation. (Note: Take note of your postgres password and keep it private as you will need it later!)
+2. You will also need to have a MongoDB account. If you do not, visit [MongoDB](https://www.mongodb.com/cloud/atlas/register) to create a FREE account and download MongoDB Compass Desktop GUI. Then follow these steps: 
+  a. Create an Organization > Name Your Organization > Select Cloud Service: MongoDB Atlas > Create Organization
+  b. Create a project > Name Your Project > Next > Create Project
+  c. "Database Deployments" > Build a Database > Shared Plan (FREE) > Cloud Provider & Region: AWS and [your current region] > Name your Cluster > Create Cluster
+  d. "Security Quickstart"
+    - How would you like to authenticate your connection? Add a username and password > Create User -- Note: you will need these later
+    - Where would you like to connect from? My Local Environment > Add My Current IP Address > Finish and Close
 
 #### Installation Steps
 1. Download the ZIP: At the top right of the web version of Github, click on the green button "<> Code" > Download Zip > Double-click on the ZIP folder to uncompress it OR clone the repo with:
@@ -65,16 +69,10 @@ If you do not, visit [Node.js](https://nodejs.org/en/) and download the version 
   API_URI = "http:localhost:5000/api/v1/"
   JWT_SECRET = "your JWT secret"
   ```
-4. Create a FREE MongoDB account and download MongoDB Compass Desktop GUI. Follow the next steps: 
- - Create an Organization > Name Your Organization > Select Cloud Service: MongoDB Atlas > Create Organization
- - Create a project > Name Your Project > Next > Create Project
- - "Database Deployments" > Build a Database > Shared Plan (FREE) > Cloud Provider & Region: AWS and [your current region] > Name your Cluster > Create Cluster
- - "Security Quickstart"
-  1) How would you like to authenticate your connection? Add a username and password > Create User -- Note: you will need these later
-  2) Where woud you like to connect from? My Local Environment > Add My Current IP Address > Finish and Close
+4. Connect your MongoDB and Application
  - "Database Deployments" > Connect > Connect using MongoDB Compass
  - "Databases" > Collections > Add My Own Data > Create Database > Database name [your database name] and Collection name [your collection name] > Create
- - "Overview" > Connect > Connect using MongoDB Compass > Copy the connection string > Open up Compass App and paste the string in New Connection but replace "<password>" by the password you chose earlier in step 1 and replace "test" by your database name > Connect
+ - "Overview" > Connect > Connect using MongoDB Compass > Copy the connection string > Open up Compass App and paste the string in New Connection but replace "<password>" by the password you chose earlier in step 2d and replace "test" by your database name > Connect
  - "Overview" > Connect > Connect to your application > Copy the connection string > Add a MONGO_URI = [your connection string] environment variable to your .env file created above, remember to change the database name and password as above
 Note: if you encounter any issues later when connecting to your DB, verify that your current IP address is whitelisted in the Network Access Tab
 5. Run the frontend of the application using `npm run start` and the backend using `nodemon server.js`
