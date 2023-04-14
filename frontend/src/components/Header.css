@@ -5,6 +5,8 @@
   padding: 20px 0;
   border-bottom: 1px solid #e6e6e6;
   margin-bottom: 30px;
+  background-color: var(--primary-darkgreen);
+  color: var(--bg-light);
   /* width: 100%;
   position: fixed;
   top: 0;
@@ -16,37 +18,91 @@
   font-weight: 600;
   letter-spacing: 1px;
   margin-left: 20px;
-  color: var(--primary-tasman);
+  color: var(--bg-light);
 }
 
-.header ul {
+.nav__list {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-right: 20px;
 }
 
-.header ul li {
+.nav__list>li {
   margin-left: 30px;
 }
 
-.header ul li a {
-  display: flex;
-  align-items: center;
-  color: var(--primary-tasman);
+.nav__list a {
+  color: var(--bg-light);
   letter-spacing: 0.5px;
   font-weight: 600;
+  font-size: 16px;
 }
 
-.header ul li a:hover {
-  color: var(--primary-green);
+.nav__list a:hover {
+  color: var(--primary-lightblue);
 }
 
-.header button {
+.header .btn {
   background-color: transparent;
   border: transparent;
-  color: var(--primary-tasman);
+  color: var(--bg-light);
   font-size: 25px;
-  margin: 0;
-  padding: 0;
 }
+
+.header .btn:hover {
+  color: var(--primary-lightblue);
+}
+
+.dropdown__container {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown__button {
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--bg-light);
+  background-color: transparent;
+  width: 110px;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown__button:hover {
+  color: var(--primary-lightblue);
+}
+
+.dropdown__list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 180px;
+  text-align: left;
+  position: absolute;
+  z-index: 1;
+  color: #fff;
+  font-size: 14px;
+  background-color: var(--primary-darkgreen);
+  border-radius: 8px;
+  margin-top: 6px;
+  padding: 2px 6px 10px;
+  border: 1.5px solid var(--bg-light);
+  /* box-shadow: 2px 2px 0.5px 1px var(--primary-tasman); */
+}
+
+.dropdown__list li {
+  margin: 10px 0px 0px 0px;
+  padding: 4px 6px 4px;
+}
+
+.dropdown__list li:hover {
+  background-color: var(--primary-galactic);
+}
+
+/* .dropdown__list li:nth-child(-n+2) {
+  padding-left: 18px;
+} */

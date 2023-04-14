@@ -29,6 +29,8 @@ body {
   height: 100vh;
   background-color: var(--bg-light);
 }
+
+
 /* 
 a {
   text-decoration: none;
@@ -219,6 +221,7 @@ h3 {
     transform: rotate(360deg);
   }
 }
+
 /* 
 @media (max-width: 600px) {
   .form {

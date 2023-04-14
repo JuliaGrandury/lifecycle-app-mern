@@ -44,10 +44,6 @@ const itemSchema = mongoose.Schema(
         toRepair: {
             type: Boolean,
         },
-        // brand: {
-        //     type: String,
-        //     required: false
-        // }
     },
     {
         timestamps: true,

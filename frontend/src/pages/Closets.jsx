@@ -1,13 +1,14 @@
+import { IoAddCircle, IoSearchCircle } from 'react-icons/io5'
+import { useState } from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getItems, reset } from '../features/items/itemSlice'
 import ItemForm from '../components/ItemForm'
 import ItemComponent from '../components/ItemComponent'
+import FilterBar from '../components/FilterBar'
 import Spinner from '../components/Spinner'
 import styles from './Closets.module.css'
-import { IoAddCircle } from 'react-icons/io5'
-import { useState } from 'react'
 
 const Closets = () => {
   const navigate = useNavigate()
@@ -44,11 +45,17 @@ const Closets = () => {
   return (
     <>
       <section className={styles.closet__heading}>
-        <h1>Welcome to your closet {user && user.username}</h1>
-        <button className={styles.action__button} onClick={() => setShowForm(true)}><IoAddCircle /></button>
+        {/* <h1>Welcome to your closet {user && user.username}</h1> */}
+        <FilterBar />
+        <div>
+          <button className={styles.action__button}><IoSearchCircle /></button>
+          <button className={styles.action__button} onClick={() => setShowForm(true)}><IoAddCircle /></button>
+        </div>
       </section>
 
-      {showForm ? <ItemForm onCloseForm={closeItemForm}/> : <></>}
+
+
+      {showForm ? <ItemForm onCloseForm={closeItemForm} /> : <></>}
 
       <section className={styles.items__container}>
         {items.length > 0 ? (

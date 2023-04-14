@@ -1,41 +1,24 @@
 .closet__heading {
     display: flex;
     justify-content: space-between;
-    padding: 8px 20px;
+    padding: 8px 0px;
+    padding-right: 20px;
     color: var(--primary-galactic);
+    align-items: center;
 }
 
 .action__button {
-    background-color: transparent;
     border: transparent;
     color: var(--primary-galactic);
     font-size: 30px;
-    margin: 0;
-    padding: 0;
     transition: transform 80ms ease-in;
     cursor: pointer;
+    background-color: transparent;
 }
 
 .action__button:active {
     transform: scale(0.90);
 }
-
-.auth_button {
-    color: #fff;
-    background-color: var(--primary-tasman);
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 55px;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    border: 1px solid var(--primary-tasman);
-    outline: none;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-    cursor: pointer;
-}
-
 
 .items__container {
     padding: 15px;
@@ -43,15 +26,27 @@
 
 .item__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 }
 
+/* FILTER BAR STYLING */
+.filterbar__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 8px 15px;
+    gap: 10px;
+    align-items: center;
+}
+
+.filterbar__list button {
+    background-color: transparent;
+}
 
 
 /* ITEM COMPONENT STYLING */
 .item__card {
-    /* border: 2px solid var(--primary-tasman); */
     border-radius: 8px;
     padding: 14px 8px 10px;
     position: relative;
@@ -62,11 +57,10 @@
 
 .item__details {
     height: 100px;
-    /* background-color: purple; */
 }
 
 .item__card h2 {
-    margin: 0px 10px 0px 10px;
+    margin: 0px 25px 0px 10px;
     font-weight: 600;
 }
 
