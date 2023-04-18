@@ -55,8 +55,21 @@
     background-color: var(--primary-darkgreen);
 }
 
-.item__details {
+.item__header {
     height: 100px;
+}
+
+.item__details {
+    margin: 10px 25px 0px 10px;
+    display: flex;
+    align-items: top;
+    gap: 10px;
+}
+
+.item__details span {
+    height: 15px;
+    display: flex;
+    align-items: center;
 }
 
 .item__card h2 {

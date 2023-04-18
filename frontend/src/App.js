@@ -3,9 +3,10 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header'
 import Authentication from './pages/Authentication'
-import Closets from './pages/Closets'
+import MyCloset from './pages/MyCloset'
 import Statistics from './pages/Statistics'
 import Settings from './pages/Settings'
+import MyLists from './pages/MyLists'
 
 function App() {
   return (
@@ -16,8 +17,9 @@ function App() {
           <HeaderWrapper />
           <Routes>
             <Route path='/authentication' element={<Authentication />} />
-            <Route path='/' element={<Closets />} />
-            <Route path='/closets' element={<Closets />} />
+            <Route path='/' element={<MyCloset />} />
+            <Route path='/closets' element={<MyCloset />} />
+            <Route path='/mylists' element={<MyLists />} />
             <Route path='/statistics' element={<Statistics />} />
             <Route path='/settings' element={<Settings />} />
           </Routes>

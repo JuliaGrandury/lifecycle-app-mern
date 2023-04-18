@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import styles from './Statistics.module.css'
 
+const mostWorn = [{ rank: 1, name: 'Zara Men Puff Jacket', image: null, timesWorn: 3 },
+{ rank: 2, name: 'DVF Coral Design Dress', image: null, timesWorn: 15 }]
+
 const Statistics = () => {
 
   const navigate = useNavigate()
@@ -15,28 +18,46 @@ const Statistics = () => {
   }, [user, navigate])
 
   return (
-    <div>
+    <div className={styles.cards__container}>
       <div className={styles.overview__container}>
-        <div className={styles.single_stat}>Items in Closet: 176</div>
-        <div className={styles.single_stat}>Items out of Closet: 3</div>
-        <div className={styles.single_stat}>Items to Repair: 1</div>
+        <div className={styles.single_stat}>Items in Closet: <span>176</span></div>
+        <div className={styles.single_stat}>Items out of Closet: <span>3</span></div>
+        <div className={styles.single_stat}>Items to Repair: <span>2</span></div>
+        <div className={styles.single_stat}>You have worn <span>40%</span> of your closet this month</div>
+        <div className={styles.single_stat}>You have spent <span>100$</span> on your closet this month</div>
       </div>
 
-      <div className={styles.detail__container}>
-        <h3>Your 5 Most Worn Items</h3>
-      </div>
-
-      <div className={styles.detail__container}>
-        <h3>Your 5 Least Worn Items</h3>
+      <div className={styles.lists__container}>
+        <h4>Your 5 Most Worn Items</h4>
         <table>
           <tbody>
-            <tr></tr>
+            {mostWorn.map((item) => (
+              <tr key={`mostworn${item.rank}`}>
+                <td>{item.rank}.</td>
+                <td>{item.name}</td>
+                <td>image</td>
+                <td>Worn {item.timesWorn} times in the last month</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
 
-      <div>You wear 40% of your closet</div>
-      <div>You have spent 100$ on your closet this year</div>
+      <div className={styles.lists__container}>
+        <h4>Your 5 Least Worn Items</h4>
+        <table>
+          <tbody>
+            {mostWorn.map((item) => (
+              <tr key={`leastworn${item.rank}`}>
+                <td>{item.rank}.</td>
+                <td>{item.name}</td>
+                <td>image</td>
+                <td>Worn {item.timesWorn} times in the last month</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

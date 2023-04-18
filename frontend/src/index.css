@@ -22,6 +22,17 @@
   --primary-galactic: #1c4b46;
   --primary-darkgreen: #1b2f28;
   --primary-darkgrey: #202020;
+  --primary-orange: #AF4319;
+  --primary-blue: #129490;
+
+  /* --primary-teal: #129490;
+  --primary-green: #065143;
+  --primary-lightpink: #f4b8ed;
+  --primary-magenta: #f86ef7;
+  --primary-blue: #119DA4;
+  --primary-violet: #9067C6;
+  --primary-bronze: #AF4319;
+  --primary-darkred: #A3320B; */
 }
 
 body {

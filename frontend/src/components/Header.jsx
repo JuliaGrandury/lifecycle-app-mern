@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Fragment, useState } from 'react'
 import { logout, reset } from '../features/auth/authSlice'
 import './Header.css'
+import { toast } from 'react-toastify'
 
 const capitalizeFirst = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -26,6 +27,7 @@ function Header() {
 
     const navigateToCloset = (closet) => {
         console.log(`Navigate to closet ${closet}`)
+        toast('This feature is currently in development. Please check back at a later time.')
     }
 
     return (
@@ -42,8 +44,7 @@ function Header() {
                         </NavLink>
                         {showDropdown ? (
                             <ul className="dropdown__list" >
-                                <li onClick={() => navigate('/')}>My Packing Lists</li>
-                                <li onClick={() => navigate('/')}>My Wish List</li>
+                                <li onClick={() => navigate('/mylists')}>My Lists</li>
                                 {accessList && accessList.map((closet) => (
                                     <li key={closet} onClick={() => navigateToCloset(closet)}>{closet}'s Closet</li>
                                 ))}

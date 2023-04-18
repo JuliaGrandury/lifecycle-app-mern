@@ -1,4 +1,55 @@
+.cards__container {
+    background-color: pink;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
 .overview__container {
     display: flex;
-    gap: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.overview__container div {
+    border-radius: 8px;
+    padding: 12px 12px;
+    font-size: 16px;
+    width: 32%;
+    color: rgba(255, 255, 255, 0.744);
+    background-color: var(--primary-darkgreen);
+}
+
+.overview__container span {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+/* .single_stat:nth-last-child(n-2) {
+    width: 50%;
+} */
+
+.single_stat:nth-last-child(2) span {
+    color: var(--primary-blue);
+}
+
+.single_stat:nth-last-child(1) span {
+    color: var(--primary-orange);
+}
+
+.single_stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.lists__container {
+    width: 40%;
+    border-radius: 8px;
+    padding: 12px 12px;
+    background-color: #fff;
 }

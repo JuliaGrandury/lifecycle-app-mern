@@ -1,16 +1,18 @@
-import { IoAddCircle, IoSearchCircle } from 'react-icons/io5'
+import { IoAddCircle, IoSearchCircle, IoFilterCircle } from 'react-icons/io5'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getItems, reset } from '../features/items/itemSlice'
 import ItemForm from '../components/ItemForm'
-import ItemComponent from '../components/ItemComponent'
+import ItemCompSmall from '../components/ItemCompSmall'
 import FilterBar from '../components/FilterBar'
 import Spinner from '../components/Spinner'
 import styles from './Closets.module.css'
+import { toast } from 'react-toastify'
+import squiggle_arrow from '../assets/squiggle_arrow.png'
 
-const Closets = () => {
+const MyCloset = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -42,18 +44,24 @@ const Closets = () => {
     setShowForm(false)
   }
 
+  const handleFilter = () => {
+    toast('This feature is currently in development. Please check back at a later time.')
+  }
+
+  const handleSearch = () => {
+    toast('This feature is currently in development. Please check back at a later time.')
+  }
+
   return (
     <>
       <section className={styles.closet__heading}>
-        {/* <h1>Welcome to your closet {user && user.username}</h1> */}
         <FilterBar />
         <div>
-          <button className={styles.action__button}><IoSearchCircle /></button>
+          <button className={styles.action__button} onClick={() => handleFilter()}><IoFilterCircle /></button>
+          <button className={styles.action__button} onClick={() => handleSearch()}><IoSearchCircle /></button>
           <button className={styles.action__button} onClick={() => setShowForm(true)}><IoAddCircle /></button>
         </div>
       </section>
-
-
 
       {showForm ? <ItemForm onCloseForm={closeItemForm} /> : <></>}
 
@@ -61,13 +69,17 @@ const Closets = () => {
         {items.length > 0 ? (
           <div className={styles.item__grid}>
             {items.map((item) => (
-              <ItemComponent key={item._id} item={item} />
+              <ItemCompSmall key={item._id} item={item}/>
             ))}
           </div>
-        ) : (<h3>Your closet is empty</h3>)}
+        ) : (
+          <div style={{ height: '700px', display: 'flex', flexWrap: 'wrap', justifyContent: 'right', alignItems: 'center' }}>
+            <h3 style={{ color: 'var(--primary-galactic)', fontSize: '25px' }}>Your closet is empty. Add items here.</h3>
+            <img style={{ padding: '0px 60px 60px 30px' }} src={squiggle_arrow} alt="" />
+          </div>)}
       </section>
     </>
   )
 }
 
-export default Closets
+export default MyCloset
