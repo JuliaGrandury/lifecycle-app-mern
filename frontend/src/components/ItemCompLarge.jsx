@@ -24,6 +24,11 @@ function ItemCompLarge({ item }) {
                 </div>
             </div>
             <div className={styles.item__image}><img src={default_image} alt={item.name} /></div>
+            <div className={styles.interact__buttons}>
+                <button>Add to Favorites</button>
+                <button>Request to Borrow</button>
+                <button>Request a Swap</button>
+            </div>
             <button onClick={() => dispatch(deleteItem(item._id))} className={styles.close__button}><IoCloseCircle /></button>
         </div>
     )

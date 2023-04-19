@@ -19,7 +19,7 @@ function ItemCompSmall({ item }) {
             <div className={styles.item__header}>
                 <h2>{item.name}</h2>
                 <div className={styles.item__details}>
-                    <span>Size {item.size} , {item.brand ? item.brand : 'No Brand Indicated'}</span>
+                    <span>Size {item.size} {item.brand ? `, ${item.brand}` : ''}</span>
                     <span><ColorSphere color={item.color} /></span>
                 </div>
             </div>

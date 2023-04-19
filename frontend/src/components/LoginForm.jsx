@@ -33,6 +33,7 @@ const LoginForm = () => {
             <TextField className={styles.textfield} label="Password" type="password" color="success" focused name="password" onChange={handleFormChange} />
             <a href="#" id={styles.forgot__password}>Forget your password?</a>
             <button className={styles.auth_button} >Sign In</button>
+            <p>Demo Account: Username 'jessicawatson2010' and Password '210days'</p>
         </form>
     )
 }
