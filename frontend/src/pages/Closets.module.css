@@ -1,5 +1,6 @@
 .closet__heading {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     padding: 8px 0px;
     padding-right: 20px;
@@ -26,7 +27,7 @@
 
 .item__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 15px;
 }
 
@@ -42,6 +43,13 @@
 
 .filterbar__list button {
     background-color: transparent;
+}
+
+.closet__actions__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 
@@ -75,6 +83,7 @@
 .item__card h2 {
     margin: 0px 25px 0px 10px;
     font-weight: 600;
+    font-size: 16px;
 }
 
 .item__card p {
@@ -101,4 +110,27 @@
     border: none;
     font-size: 20px;
     color: var(--primary-tasman);
+}
+
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 1500px) {
+    .item__grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .item__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .item__card h2 {
+        font-size: 14px;
+    };
+}
+
+@media screen and (max-width: 600px) {
+    .item__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

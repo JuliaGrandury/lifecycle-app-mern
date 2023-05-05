@@ -13,7 +13,7 @@ const itemSchema = mongoose.Schema(
         },
         brand: {
             type: String,
-            required: [true, 'Please add a brand for the item'],
+            required: [false, 'Please add a brand for the item'],
         },
         color: {
             type: [String],

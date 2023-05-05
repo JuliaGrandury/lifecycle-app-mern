@@ -59,7 +59,11 @@
     letter-spacing: 1px;
 }
 
-p {
+form .title {
+    color: var(--primary-tasman);
+}
+
+.overlay__container p {
     font-size: 14px;
     font-weight: 100;
     line-height: 20px;
@@ -78,6 +82,21 @@ p {
     font-size: 14px;
     text-decoration: none;
     margin: 15px 0;
+}
+
+.demo__info {
+    background-color: #e8f4fd;
+    padding: 10px 10px;
+    border-radius: 5px;
+}
+
+.demo__info p {
+    font-size: 12px;
+    color: #333;
+}
+
+.demo__info p:first-of-type {
+    font-weight: 600;
 }
 
 .auth_button {
@@ -175,7 +194,6 @@ p {
 .authentication__container.right_panel_active .overlay_left {
     transform: translateX(20%);
 }
-
 
 
 /* --------MEDIA QUERIES FOR SMALL DEVICES (medium: tablets)-------- */

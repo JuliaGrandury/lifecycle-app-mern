@@ -1,4 +1,4 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import closetService from './closetService'
 
 const initialState = {
@@ -8,3 +8,13 @@ const initialState = {
     isLoading: false,
     message: '',
 }
+
+export const closetSlice = createSlice({
+    name: 'closet',
+    initialState,
+    reducers: {
+
+    }
+})
+
+export default closetSlice.reducer

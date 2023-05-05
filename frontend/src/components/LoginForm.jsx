@@ -1,41 +1,57 @@
-import { TextField } from '@mui/material'
-import styles from '../pages/Authentication.module.css'
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { login } from '../features/auth/authSlice'
-
+import { TextField } from "@mui/material";
+import styles from "../pages/Authentication.module.css";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../features/auth/authSlice";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+  const [loginData, setLoginData] = useState({
+    identifier: "",
+    password: "",
+  });
 
-    const dispatch = useDispatch()
-    const [loginData, setLoginData] = useState({
-        identifier: '',
-        password: '',
-    })
+  const handleFormChange = (event) => {
+    const editedField = event.target.getAttribute("name");
+    const editedValue = event.target.value;
+    const newData = { ...loginData };
+    newData[editedField] = editedValue;
+    setLoginData(newData);
+  };
 
-    const handleFormChange = (event) => {
-        const editedField = event.target.getAttribute("name");
-        const editedValue = event.target.value;
-        const newData = { ...loginData };
-        newData[editedField] = editedValue;
-        setLoginData(newData);
-    }
+  const handleLogin = (event) => {
+    event.preventDefault();
+    dispatch(login(loginData));
+  };
 
-    const handleLogin = (event) => {
-        event.preventDefault();
-        dispatch(login(loginData));
-    }
+  return (
+    <form className={styles.authentication__form} onSubmit={handleLogin}>
+      <h1 className={styles.title}>Sign In</h1>
+      <TextField
+        className={styles.textfield}
+        label="Email or Username"
+        color="success"
+        focused
+        name="identifier"
+        onChange={handleFormChange}
+      />
+      <TextField
+        className={styles.textfield}
+        label="Password"
+        type="password"
+        color="success"
+        focused
+        name="password"
+        onChange={handleFormChange}
+      />
+      {/* <a href="#" id={styles.forgot__password}>Forget your password?</a> */}
+      <button className={styles.auth_button}>Sign In</button>
+      <div className={styles.demo__info}>
+        <p>Demo Account Credentials</p>
+        <p>User: robbynaish and Password: 1111</p>
+      </div>
+    </form>
+  );
+};
 
-    return (
-        <form className={styles.authentication__form} onSubmit={handleLogin}>
-            <h1 className={styles.title}>Sign In</h1>
-            <TextField className={styles.textfield} label="Email or Username" color="success" focused name="identifier" onChange={handleFormChange} />
-            <TextField className={styles.textfield} label="Password" type="password" color="success" focused name="password" onChange={handleFormChange} />
-            <a href="#" id={styles.forgot__password}>Forget your password?</a>
-            <button className={styles.auth_button} >Sign In</button>
-            <p>Demo Account: Username 'jessicawatson2010' and Password '210days'</p>
-        </form>
-    )
-}
-
-export default LoginForm
+export default LoginForm;

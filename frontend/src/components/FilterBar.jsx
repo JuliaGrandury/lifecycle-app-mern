@@ -2,17 +2,10 @@ import Tag from './Tag'
 import { MdNavigateNext } from 'react-icons/md'
 import { useState } from 'react'
 import styles from '../pages/Closets.module.css'
+import allCategories from '../utils/allCategories'
 
-
-const categoryOptions = ['Tops', 'Bottoms', 'Dresses and Jumpsuits', 'Shoes', 'Accessories'];
-const subcategoryOptions = {
-    'Tops': ['Blouses', 'Shirts', 'Sweaters', 'Tank Tops', 'T-shirts', 'Sweatshirts', 'Coats & Jackets'],
-    'Bottoms': ['Jeans', 'Leggings', 'Pants', 'Shorts', 'Skirts', 'Sweatpants'],
-    'Dresses and Jumpsuits': ['Jumpsuits', 'Mini dresses', 'Midi dresses', 'Maxi dresses', 'Overalls'],
-    'Shoes': [],
-    'Accessories': ['Bags', 'Belts', 'Gloves', 'Hats', 'Jewelry', 'Scarves', 'Sunglasses']
-}
-
+const categoryOptions = allCategories.categories;
+const subcategoryOptions = allCategories.subcategories;
 
 const FilterBar = () => {
     const [category, setCategory] = useState();

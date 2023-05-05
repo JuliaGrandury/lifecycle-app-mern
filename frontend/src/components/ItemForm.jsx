@@ -4,14 +4,18 @@ import { useDispatch } from "react-redux"
 import { createItem } from '../features/items/itemSlice'
 import styles from './ItemForm.module.css'
 import { IoCloseCircle } from 'react-icons/io5'
+import allCategories from '../utils/allCategories'
 
 // don't need to update everytime component remounts
-const colorOptions = ['Beige', 'Black', 'Blue', 'Brown', 'Green', 'Grey', 'Magenta', 'Metallic', 'Multicolor', 'Neon', 'Orange', 'Pink', 'Print', 'Red', 'White', 'Yellow'];
-const categoryOptions = ['Tops', 'Bottoms', 'Dresses and Jumpsuits', 'Shoes', 'Accessories'];
-const seasonOptions = ['Fall', 'Winter', 'Spring', 'Summer'];
+const colorOptions = allCategories.colors;
+const categoryOptions = allCategories.categories;
+const subcategoryOptions = allCategories.subcategories;
+const sizes = allCategories.sizes;
+const seasonOptions = allCategories.seasons;
+
 
 const NewItemForm = ({ onCloseForm }) => {
-
+    
     const dispatch = useDispatch()
     const [newItem, setNewItem] = useState({
         name: '',
@@ -27,7 +31,6 @@ const NewItemForm = ({ onCloseForm }) => {
     const [subcategories, setSubcategories] = useState([]);
     const [sizeOptions, setSizeOptions] = useState([]);
 
-
     const handleFormChange = (event) => {
 
         const { name, value } = event.target;
@@ -36,25 +39,29 @@ const NewItemForm = ({ onCloseForm }) => {
         if (name === 'category') {
             switch (value) {
                 case "Tops":
-                    setSubcategories(['Blouses', 'Shirts', 'Sweaters', 'Tank Tops', 'T-shirts', 'Sweatshirts', 'Coats & Jackets']);
-                    setSizeOptions(['0', '2', '4', '6', '8', '10', '12', '14', 'P/XS', 'XS', 'XS/S', 'S', 'M', 'M/L', 'L', 'XL']);
+                    setSubcategories(subcategoryOptions[value]);
+                    setSizeOptions(sizes[value]);
                     break;
                 case "Bottoms":
-                    setSubcategories(['Jeans', 'Leggings', 'Pants', 'Shorts', 'Skirts', 'Sweatpants']);
+                    setSubcategories(subcategoryOptions[value]);
                     setSizeOptions(['0', '2', '4', '6', '8', '10', '12', '14', 'P/XS', 'XS', 'XS/S', 'S', 'M', 'M/L', 'L', 'XL']);
                     break;
                 case "Dresses and Jumpsuits":
-                    setSubcategories(['Jumpsuits', 'Mini dresses', 'Midi dresses', 'Maxi dresses', 'Overalls']);
+                    setSubcategories(subcategoryOptions[value]);
+                    setSizeOptions(['0', '2', '4', '6', '8', '10', '12', '14', 'P/XS', 'XS', 'XS/S', 'S', 'M', 'M/L', 'L', 'XL']);
+                    break;
+                case "Coats and Jackets": 
+                    setSubcategories(subcategoryOptions[value]);
                     setSizeOptions(['0', '2', '4', '6', '8', '10', '12', '14', 'P/XS', 'XS', 'XS/S', 'S', 'M', 'M/L', 'L', 'XL']);
                     break;
                 case "Shoes":
-                    setSubcategories([]);
+                    setSubcategories(subcategoryOptions[value]);
                     setSizeOptions([`Women's 6`, `Women's 6.5`, `Women's 7`, `Women's 7.5`, `Women's 8`, `Women's 8.5`, `Women's 9`, `Women's 9.5`, `Women's 10`, `Men's 7`,
                         `Men's 7.5`, `Men's 8`, `Men's 8.5`, `Men's 9`, `Men's 9.5`, `Men's 10`, `Men's 10.5`, `Men's 11`, `Men's 11.5`, `Men's 12`, `Men's 12.5`,
                         `Men's 13`, `Men's 13.5`, `Men's 14`, `Men's 14.5`, `Men's 15`]);
                     break;
                 case "Accessories":
-                    setSubcategories(['Bags', 'Belts', 'Gloves', 'Hats', 'Jewelry', 'Scarves', 'Sunglasses']);
+                    setSubcategories(subcategoryOptions[value]);
                     setSizeOptions([]);
                     break;
                 default:
@@ -114,7 +121,8 @@ const NewItemForm = ({ onCloseForm }) => {
         console.log(newItem)
 
         dispatch(createItem(newItem))
-        onResetForm();
+        // onResetForm()
+        // onCloseForm()
     }
 
     const onResetForm = (event) => {
@@ -161,7 +169,7 @@ const NewItemForm = ({ onCloseForm }) => {
                         </Select>
                     </FormControl>
 
-                    {subcategories && (
+                    
                         <FormControl className={styles.form__control}>
                             <InputLabel id="subcategory-select-label">Subcategory</InputLabel>
                             <Select labelId="subcategory-select-label" id="subcategory-select" name="subcategory" label="Subcategory" value={newItem.subcategory} onChange={handleFormChange}>
@@ -170,7 +178,7 @@ const NewItemForm = ({ onCloseForm }) => {
                                 ))}
                             </Select>
                         </FormControl>
-                    )}
+                    
 
                     <FormControl className={styles.form__control}>
                         <InputLabel id="size-select-label" >Size</InputLabel>
