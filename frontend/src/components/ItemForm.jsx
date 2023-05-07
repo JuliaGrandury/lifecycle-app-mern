@@ -73,7 +73,6 @@ const NewItemForm = ({ onCloseForm }) => {
   const onSubmit = (event) => {
     event.preventDefault()
     console.log(newItem)
-
     dispatch(createItem(newItem))
     // onResetForm()
     // onCloseForm()
@@ -95,12 +94,14 @@ const NewItemForm = ({ onCloseForm }) => {
   return (
     <div className={styles.newitem__container}>
       <form className={styles.newitem__form} onSubmit={onSubmit}>
+        
         <div className={`${styles.form__group} ${styles.form__heading}`}>
           <h3>Add an Item</h3>
           <button className={styles.close__button} onClick={() => onCloseForm()}>
             <IoCloseCircle />
           </button>
         </div>
+
         <div className={styles.form__group}>
           <FormControl className={styles.form__control}>
             <TextField name="name" label="Item Name" onChange={handleFormChange} />
@@ -192,7 +193,7 @@ const NewItemForm = ({ onCloseForm }) => {
           <button className={styles.action__button} type="submit">
             Add Item
           </button>
-          <button className={`${styles.action__button} ${styles.danger}`} onClick={onResetForm}>
+          <button className={`${styles.action__button} ${styles.danger}`} type="reset">
             Clear
           </button>
         </div>

@@ -20,10 +20,13 @@ const sizes = {
 }
 const seasons = ['Fall', 'Winter', 'Spring', 'Summer'];
 
+const filters = ["By Item Name (A-Z)", "By Item Name (Z-A)", "By Brand Name (A-Z)", "By Brand Name (Z-A)", "Newest to Oldest", "Oldest to Newest", "By Season"]
+
 module.exports = {
     colors,
     categories,
     subcategories,
     sizes,
-    seasons
+    seasons,
+    filters
 }

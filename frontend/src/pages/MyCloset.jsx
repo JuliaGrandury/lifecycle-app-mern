@@ -1,6 +1,5 @@
 import { IoAddCircle, IoSearchCircle, IoFilterCircle } from "react-icons/io5"
-import { useState } from "react"
-import { useEffect } from "react"
+import { useState, useEffect, Fragment } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { getItems, reset } from "../features/items/itemSlice"
@@ -11,6 +10,10 @@ import Spinner from "../components/Spinner"
 import styles from "./Closets.module.css"
 import { toast } from "react-toastify"
 import squiggle_arrow from "../assets/squiggle_arrow.png"
+import allCategories from "../utils/allCategories"
+
+//don't need to update everytime the component remounts
+const filters = allCategories.filters
 
 const MyCloset = () => {
   const navigate = useNavigate()
@@ -19,9 +22,9 @@ const MyCloset = () => {
   const { user } = useSelector((state) => state.auth)
   const { items, isLoading, isError, message } = useSelector((state) => state.items)
   const [showForm, setShowForm] = useState(false)
-  const [filterDropdown, setFilterDropdown] = useState(false)
+  const [selectedBtn, setSelectedBtn] = useState("")
   const [searchActive, setSearchActive] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
+  const [searchQuery, setSearchQuery] = useState("")
 
   useEffect(() => {
     if (isError) {
@@ -82,9 +85,18 @@ const MyCloset = () => {
           </li>
 
           <li>
-            <button className={styles.action__button} onClick={() => handleFilter()}>
-              <IoFilterCircle />
-            </button>
+            <div className={styles.actions__dropdown}>
+              <IoFilterCircle style={selectedBtn === "filter" ? { color: "var(--primary-tasman)" } : null} onClick={() => setSelectedBtn('filter')} />
+              <Fragment>
+                {selectedBtn === "filter" ? (
+                  <ul className={styles.dropdown__content}>
+                    {filters.map((option) => <li key={option}>{option}</li>)}
+                  </ul>
+                ) : (
+                  <></>
+                )}
+              </Fragment>
+            </div>
           </li>
 
           <li>

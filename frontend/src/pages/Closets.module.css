@@ -52,6 +52,37 @@
     gap: 8px;
 }
 
+/* CLOSET ACTION BUTTONS */
+.actions__dropdown {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown__content {
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    color: white;
+    padding: 10px 10px;
+    background-color: var(--primary-darkgreen);
+    border: 0.5px solid var(--primary-grey);
+    border-radius: 5px;
+    min-width: 200px;
+    z-index: 1;
+    font-size: 14px;
+}
+
+.dropdown__content li {
+    padding: 10px 12px;
+    border-radius: 5px;
+}
+
+.dropdown__content li:hover {
+    background-color: var(--primary-tasman);
+}
+
+
 
 /* ITEM COMPONENT STYLING */
 .item__card {
