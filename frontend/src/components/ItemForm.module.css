@@ -72,8 +72,11 @@
     transform: scale(0.90);
 }
 
-/* MODAL STYLING */
-.modal-overlay {
+
+/* ---------------------------------- */
+/* --------- MODAL STYLING ---------- */
+/* ---------------------------------- */
+.modal_overlay {
     /* change from position absolute to fixed so it would stay with scroll 
     but really should just disable scroll when the modal is open */
     position: fixed;

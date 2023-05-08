@@ -1,77 +1,140 @@
 .cards__container {
-    background-color: pink;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    gap: 20px;
+    gap: 18px;
 }
 
-.overview__container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
+/* --------------------- */
+/* CLOSET OVERVIEW STATS */
+/* --------------------- */
+.closet__overview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 18px;
 }
 
-
-.single_stat {
-    border-radius: 8px;
-    padding: 12px 12px;
-    font-size: 16px;
+.closet__card {
+    border-radius: 15px;
+    padding: 15px 0px;
+    font-size: 15px;
     color: rgba(255, 255, 255, 0.744);
     background-color: var(--primary-darkgreen);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
 }
 
-.single_stat span {
-    color: #fff;
-    font-size: 2rem;
+.closet__card span {
+    color: var(--primary-blue);
+    font-size: 1.8rem;
     font-weight: 600;
 }
 
-.single_stat:nth-last-child(2) span {
-    color: var(--primary-blue);
-}
-
-.single_stat:nth-last-child(1) span {
-    color: var(--primary-orange);
-}
-
-.details__button {
+.seedetails__button {
     display: flex;
     align-items: center;
     background-color: transparent;
-    color: green;
-    letter-spacing: 1px;
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin: 10px 0px;
+    font-family: 'Poppins', sans-serif;
 }
 
-.lists__container {
-    width: 40%;
-    border-radius: 8px;
-    padding: 12px 12px;
-    background-color: #fff;
-}
+/* --------------------- */
+/* HABIT STATS */
+/* --------------------- */
 
-.grid__stats {
-    background-color: green;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
-
-.flex__stats {
+.habit__overview {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+}
 
+.habit__card {
+    border-radius: 15px;
+    padding: 15px 0px;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.744);
+    background-color: var(--primary-darkgreen);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: calc(50% - 10px);
 }
 
 
-/* MEDIA QUERIES */
-@media screen and (max-width: 1024px) {
-    .lists__container {}
+/* --------------------- */
+/* ITEM STATS */
+/* --------------------- */
+
+.items__overview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.list__container {
+    border-radius: 15px;
+    padding: 15px 0px;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.744);
+    background-color: var(--primary-galactic);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 500px;
+}
+
+.list__container table {
+    border-spacing: 30px 15px;
+    width: 100%;
+}
+
+.list__container tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding: 8px 0px;
+}
+
+
+@media (max-width: 600px) {
+    .closet__overview {
+        grid-template-columns: 1fr;
+    }
+
+    .habit__overview {
+        flex-direction: column;
+    }
+
+    .list__container table {
+        font-size: 12px;
+    }
+
+    .item__image {
+        display: none;
+    }
+
+    .list__container {
+        min-width: 300px;
+    }
+}
+
+
+@media (max-width: 500px) {
+    .list__container {
+        min-width: 230px;
+    }
+
+    .item_times {
+        display: none;
+    }
+
+    .list__container tr {
+       justify-content: center;
+    }
 }
