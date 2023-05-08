@@ -98,7 +98,19 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
     padding: 8px 0px;
+}
+
+.item__image {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.item__image img {
+    display: block;
+    width: 100px;
+    object-fit: cover;
 }
 
 

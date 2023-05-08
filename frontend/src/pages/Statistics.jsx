@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import styles from "./Statistics.module.css"
 import { MdOutlineKeyboardArrowDown } from "react-icons/md"
+import default_image from "../assets/default_image.png"
 
 const mostWorn = [
   { rank: 1, name: "Zara Men Puff Jacket", image: null, timesWorn: 3 },
@@ -65,7 +66,9 @@ const Statistics = () => {
               {mostWorn.map((item) => (
                 <tr key={`mostworn${item.rank}`}>
                   <td>{item.name}</td>
-                  <td className={styles.item__image}>image</td>
+                  <td className={styles.item__image}>
+                    <img src={default_image} alt={item.name} />
+                  </td>
                   <td className={styles.item_times}>{item.timesWorn}x in last month</td>
                 </tr>
               ))}
@@ -80,7 +83,9 @@ const Statistics = () => {
               {mostWorn.map((item) => (
                 <tr key={`leastworn${item.rank}`}>
                   <td>{item.name}</td>
-                  <td className={styles.item__image}>image</td>
+                  <td className={styles.item__image}>
+                    <img src={default_image} alt={item.name} />
+                  </td>
                   <td className={styles.item_times}>{item.timesWorn}x in last month</td>
                 </tr>
               ))}
