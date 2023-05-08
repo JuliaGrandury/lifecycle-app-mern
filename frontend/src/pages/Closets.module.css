@@ -27,7 +27,7 @@
 .item__grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
+    gap: 18px;
 }
 
 /* FILTER BAR STYLING */
@@ -86,9 +86,9 @@
 }
 
 .search__input {
-    padding: 0px 5px;
+    padding: 0px 8px;
     height: 30px;
-    border-radius: 5px;
+    border-radius: 15px;
     border: 1.6px solid var(--primary-galactic);
     font-family: 'Poppins', sans-serif;
     color: var(--primary-galactic);
@@ -97,7 +97,7 @@
 
 /* ITEM COMPONENT STYLING */
 .item__card {
-    border-radius: 8px;
+    border-radius: 15px;
     padding: 14px 8px 10px;
     position: relative;
     font-size: 12px;
@@ -133,7 +133,7 @@
 }
 
 .item__image {
-    border-radius: 5px;
+    border-radius: 15px;
     overflow: hidden;
 }
 

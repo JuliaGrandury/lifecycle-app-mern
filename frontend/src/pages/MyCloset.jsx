@@ -53,10 +53,6 @@ const MyCloset = () => {
     return <Spinner />
   }
 
-  const closeItemForm = () => {
-    setShowForm(false)
-  }
-
   const handleFilter = () => {
     toast("This feature is currently in development. Please check back at a later time.")
   }
@@ -68,7 +64,6 @@ const MyCloset = () => {
   const submitSearch = (event) => {
     event.preventDefault()
     console.log(searchQuery)
-    // setSearchActive(false)
   }
 
   return (
@@ -121,13 +116,27 @@ const MyCloset = () => {
           </li>
         </ul>
       </section>
-      {selectedAction.add ? <ItemForm onCloseForm={closeItemForm} /> : <></>}
 
-      <section className={styles.items__container}>
+      {selectedAction.add ? <ItemForm onCloseForm={() => setSelectedAction({ add: false })} /> : <></>}
+
+      <div className={styles.items__container}>
         {isError ? (
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "400px" }}>
-            <h3 style={{ display: "flex", flexDirection: "column", textAlign: "center", fontSize: "20px", backgroundColor: "var(--primary-lightblue)", borderRadius: "5px", color: "#333", fontWeight: "400", padding: "50px 50px" }}>
-              <strong><GrTroubleshoot /> Uh oh, looks like someone fucked up.</strong>
+            <h3
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                textAlign: "center",
+                fontSize: "20px",
+                backgroundColor: "var(--primary-lightblue)",
+                borderRadius: "5px",
+                color: "#333",
+                fontWeight: "400",
+                padding: "50px 50px",
+              }}>
+              <strong>
+                <GrTroubleshoot /> Uh oh, looks like someone fucked up.
+              </strong>
               <span>Please refresh or try again later.</span>
             </h3>
           </div>
@@ -146,7 +155,7 @@ const MyCloset = () => {
             <img style={{ padding: "0px 60px 60px 30px" }} src={squiggle_arrow} alt="" />
           </div>
         )}
-      </section>
+      </div>
     </>
   )
 }

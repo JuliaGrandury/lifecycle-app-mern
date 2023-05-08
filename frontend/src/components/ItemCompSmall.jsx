@@ -27,6 +27,7 @@ function ItemCompSmall({ item }) {
   }
   const handleDeleteItem = (id) => {
     console.log(`Deleting item with id ${id}`)
+    dispatch(deleteItem(id))
   }
 
   return (
@@ -39,7 +40,9 @@ function ItemCompSmall({ item }) {
             Size {item.size} {item.brand ? `, ${item.brand}` : ""}
           </span>
           <span>
-            <ColorSphere color={item.color} />
+            {item.color.map((color) => (
+              <ColorSphere color={color} key={`${color}${item._id}`} />
+            ))}
           </span>
         </div>
       </div>
@@ -49,7 +52,7 @@ function ItemCompSmall({ item }) {
 
       <div className={`${styles.dropdown__container} ${styles.more__button}`}>
         <button className={styles.more__button}>
-          <CiCircleMore onClick={() => dropdownId === item._id ? setDropdownId(null) : setDropdownId(item._id)}/>
+          <CiCircleMore onClick={() => (dropdownId === item._id ? setDropdownId(null) : setDropdownId(item._id))} />
         </button>
         {dropdownId === item._id ? (
           <ul className={styles.dropdown__itemactions}>
@@ -59,7 +62,7 @@ function ItemCompSmall({ item }) {
             <li onClick={() => handleDuplicateItem(item.id)}>
               <HiOutlineDuplicate /> Duplicate
             </li>
-            <li onClick={() => handleDeleteItem(item.id)}>
+            <li onClick={() => handleDeleteItem(item._id)}>
               <AiOutlineDelete /> Delete
             </li>
           </ul>
@@ -67,9 +70,6 @@ function ItemCompSmall({ item }) {
           <></>
         )}
       </div>
-      {/* <button onClick={() => dispatch(deleteItem(item._id))} className={styles.close__button}>
-        <IoCloseCircle />
-      </button> */}
     </div>
   )
 }

@@ -23,6 +23,7 @@ const ColorSphere = ({ color }) => {
         height: '15px',
         width: '15px',
         borderRadius: '8px',
+        marginLeft: '-3px',
         backgroundColor: `${sphereColors[color]}`
     }
 

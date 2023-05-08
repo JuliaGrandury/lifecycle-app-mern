@@ -20,7 +20,7 @@ const Statistics = () => {
   }, [user, navigate]);
 
   return (
-    <div className={styles.cards__container}>
+    <section className={styles.cards__container}>
       {/* <div className={styles.overview__container}> */}
 
       <div className={styles.grid__stats}>
@@ -81,8 +81,8 @@ const Statistics = () => {
           </tbody>
         </table>
       </div>
-    </div>
-  );
+    </section>
+  )
 };
 
 export default Statistics;

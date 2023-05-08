@@ -15,7 +15,7 @@ const Tag = ({ label, color }) => {
         padding: '5px 12px',
         textAlign: 'center',
         fontSize: '13px',
-        borderRadius: '8px',
+        borderRadius: '15px',
         color: 'white',
         backgroundColor: `${tagColors[color]}`
     }

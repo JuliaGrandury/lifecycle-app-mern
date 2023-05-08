@@ -13,10 +13,10 @@ const Settings = () => {
   }, [user, navigate])
 
   return (
-    <div>
+    <section>
       This is {user.username}'s settings page
       {user.email}
-    </div>
+    </section>
   )
 }
 

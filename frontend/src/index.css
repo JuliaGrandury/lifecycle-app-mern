@@ -33,6 +33,16 @@ body {
   background-color: var(--bg-light);
 }
 
+.btn {
+  font-family: 'Poppins', sans-serif;
+  background-color: transparent;
+  border: transparent;
+}
+
+section {
+  margin-top: 90px;
+}
+
 .loadingSpinnerContainer {
   position: fixed;
   top: 0;

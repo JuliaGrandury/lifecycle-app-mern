@@ -1,6 +1,7 @@
 import { IoIosLogOut } from "react-icons/io"
 import { VscTriangleDown } from "react-icons/vsc"
 import { HiMenuAlt3 } from "react-icons/hi"
+import { IoIosCloseCircleOutline } from "react-icons/io"
 import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { Fragment, useState } from "react"
@@ -77,18 +78,37 @@ function Header() {
       </ul>
 
       <div className="hamburger">
-        <button onClick={() => setShowMenu(!showMenu)}>
+        <button onClick={() => setShowMenu(true)}>
           <HiMenuAlt3 />
         </button>
       </div>
-      <div className="mobile__menu">
-        <ul style={showMenu ? { display: "block" } : { display: "none" }}>
+      <div className={`mobile__menu ${showMenu ? "show" : ""}`}>
+        <ul>
           <li>
-            <NavLink to="/closets">My Closet</NavLink>
+            <button className="btn close__button" onClick={() => setShowMenu(false)}>
+              <IoIosCloseCircleOutline />
+            </button>
           </li>
-          <li>Statistics</li>
-          <li>Settings</li>
-          <li>Logout</li>
+          <li>
+            <NavLink to="/closets" onClick={() => setShowMenu(false)}>
+              My Closet
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/statistics" onClick={() => setShowMenu(false)}>
+              Statistics
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/settings" onClick={() => setShowMenu(false)}>
+              Settings
+            </NavLink>
+          </li>
+          <li>
+            <button className="btn logout_btn" onClick={onLogout}>
+              Logout
+            </button>
+          </li>
         </ul>
       </div>
     </header>
