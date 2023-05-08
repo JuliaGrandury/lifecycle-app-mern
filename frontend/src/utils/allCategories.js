@@ -1,4 +1,24 @@
 const colors = ['Beige', 'Black', 'Blue', 'Brown', 'Green', 'Grey', 'Magenta', 'Metallic', 'Multicolor', 'Neon', 'Orange', 'Pink', 'Print', 'Red', 'White', 'Yellow'];
+
+const colors2 = {
+  Beige: "#d0be95",
+  Black: "#000",
+  Blue: "#3372a9",
+  Brown: "#683f20",
+  Green: "#60882d",
+  Grey: "#838383",
+  Magenta: "#894fa5",
+  Metallic: "#e4cf74",
+  Multicolor: "",
+  Neon: "#e4ff3a",
+  Orange: "#ec8a4c",
+  Pink: "#e46eb5",
+  Print: "",
+  Red: "#e83223",
+  White: "#fff",
+  Yellow: "#f8dd57",
+}
+
 const categories = ['Tops', 'Bottoms', 'Dresses and Jumpsuits', 'Coats and Jackets', 'Shoes', 'Accessories'];
 const subcategories = {
     'Tops': ['Blouses', 'Shirts', 'Sweaters', 'Tank Tops', 'T-shirts', 'Sweatshirts'],
@@ -16,7 +36,7 @@ const sizes = {
     'Shoes': [`Women's 6`, `Women's 6.5`, `Women's 7`, `Women's 7.5`, `Women's 8`, `Women's 8.5`, `Women's 9`, `Women's 9.5`, `Women's 10`, `Men's 7`,
     `Men's 7.5`, `Men's 8`, `Men's 8.5`, `Men's 9`, `Men's 9.5`, `Men's 10`, `Men's 10.5`, `Men's 11`, `Men's 11.5`, `Men's 12`, `Men's 12.5`,
     `Men's 13`, `Men's 13.5`, `Men's 14`, `Men's 14.5`, `Men's 15`],
-    'Accessories': []
+    'Accessories': ['NA']
 }
 const seasons = ['Fall', 'Winter', 'Spring', 'Summer'];
 

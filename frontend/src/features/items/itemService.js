@@ -25,6 +25,7 @@ const getItems = async (token) => {
     return response.data
 }
 
+
 // Delete a closet item
 const deleteItem = async (itemId, token) => {
     const config = {

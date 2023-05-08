@@ -1,5 +1,6 @@
 import { IoAddCircle, IoSearchCircle, IoFilterCircle } from "react-icons/io5"
-import { useState, useEffect, Fragment } from "react"
+import { GrTroubleshoot } from "react-icons/gr"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { getItems, reset } from "../features/items/itemSlice"
@@ -22,9 +23,15 @@ const MyCloset = () => {
   const { user } = useSelector((state) => state.auth)
   const { items, isLoading, isError, message } = useSelector((state) => state.items)
   const [showForm, setShowForm] = useState(false)
-  const [selectedBtn, setSelectedBtn] = useState("")
-  const [searchActive, setSearchActive] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
+
+  const [selectedAction, setSelectedAction] = useState({
+    search: false,
+    filter: false,
+    add: false,
+  })
+
+  const [selectedBtn, setSelectedBtn] = useState("")
 
   useEffect(() => {
     if (isError) {
@@ -69,7 +76,7 @@ const MyCloset = () => {
       <section className={styles.closet__toolbar}>
         <FilterBar />
         <ul className={styles.closet__toolbar__right}>
-          {searchActive ? (
+          {selectedAction.search ? (
             <li>
               <form onSubmit={submitSearch}>
                 <input type="text" placeholder="Search" className={styles.search__input} value={searchQuery} onChange={handleSearch} />
@@ -79,18 +86,22 @@ const MyCloset = () => {
             <></>
           )}
           <li>
-            <button className={styles.action__button} onClick={() => setSearchActive(!searchActive)}>
+            {/* (prevState) => ({ ...prevState, search: !selectedAction.search }) */}
+            <button className={styles.action__button} onClick={() => setSelectedAction({ search: !selectedAction.search, filter: false, add: false })}>
               <IoSearchCircle />
             </button>
           </li>
 
           <li>
             <div className={styles.dropdown__container}>
-              <button className={styles.action__button} style={selectedBtn === "filter" ? { color: "var(--primary-galactic)" } : null} onClick={() => setSelectedBtn("filter")}>
+              <button
+                className={styles.action__button}
+                style={selectedAction.filter ? { color: "var(--primary-galactic)" } : null}
+                onClick={() => setSelectedAction({ search: false, filter: !selectedAction.filter, add: false })}>
                 <IoFilterCircle />
               </button>
               <div>
-                {selectedBtn === "filter" ? (
+                {selectedAction.filter ? (
                   <ul className={styles.dropdown__list}>
                     {filters.map((option) => (
                       <li key={option}>{option}</li>
@@ -104,17 +115,23 @@ const MyCloset = () => {
           </li>
 
           <li>
-            <button className={styles.action__button} onClick={() => setShowForm(true)}>
+            <button className={styles.action__button} onClick={() => setSelectedAction({ search: false, filter: false, add: !selectedAction.add })}>
               <IoAddCircle />
             </button>
           </li>
         </ul>
       </section>
-
-      {showForm ? <ItemForm onCloseForm={closeItemForm} /> : <></>}
+      {selectedAction.add ? <ItemForm onCloseForm={closeItemForm} /> : <></>}
 
       <section className={styles.items__container}>
-        {items.length > 0 ? (
+        {isError ? (
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "400px" }}>
+            <h3 style={{ display: "flex", flexDirection: "column", textAlign: "center", fontSize: "20px", backgroundColor: "var(--primary-lightblue)", borderRadius: "5px", color: "#333", fontWeight: "400", padding: "50px 50px" }}>
+              <strong><GrTroubleshoot /> Uh oh, looks like someone fucked up.</strong>
+              <span>Please refresh or try again later.</span>
+            </h3>
+          </div>
+        ) : items.length > 0 ? (
           <div className={styles.item__grid}>{items && items.map((item) => <ItemCompSmall key={item._id} item={item} />)}</div>
         ) : (
           <div

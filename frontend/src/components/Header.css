@@ -22,10 +22,8 @@
   align-items: center;
   justify-content: space-between;
   margin-right: 20px;
-}
-
-.nav__list>li {
-  margin-left: 30px;
+  gap: 35px;
+  height: 30px;
 }
 
 .nav__list a {
@@ -35,15 +33,12 @@
   font-size: 16px;
 }
 
-/* .nav__list a:hover {
-  color: var(--primary-lightblue);
-} */
-
 .header .btn {
   background-color: transparent;
   border: transparent;
   color: var(--bg-light);
-  font-size: 25px;
+  font-size: 20px;
+  margin-top: 5px;
 }
 
 .dropdown__button {
@@ -84,4 +79,31 @@
 
 .dropdown__list li:hover {
   background-color: var(--primary-darkgreen);
+}
+
+.hamburger {
+  display: none;
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+.mobile__menu {
+  position: absolute;
+  background-color: green;
+
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    background-color: pink;
+  }
+
+  .nav__list {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
 }
