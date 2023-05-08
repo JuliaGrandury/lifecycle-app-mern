@@ -1,11 +1,10 @@
-.closet__heading {
+.closet__toolbar {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 8px 0px;
-    padding-right: 20px;
-    color: var(--primary-galactic);
+    padding: 8px 20px 8px 0px;
     align-items: center;
+    gap: 10px;
 }
 
 .action__button {
@@ -36,36 +35,40 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 8px 15px;
+    padding: 0px 15px;
     gap: 10px;
-    align-items: center;
 }
 
 .filterbar__list button {
     background-color: transparent;
 }
 
-.closet__actions__list {
+
+/* CLOSET TOOLBAR RIGHT */
+.closet__toolbar__right {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    align-items: center;
     gap: 8px;
+    height: 30px;
 }
 
-/* CLOSET ACTION BUTTONS */
-.actions__dropdown {
+.closet__toolbar__right button {
+    padding-top: 5px;
+}
+
+.dropdown__container {
     cursor: pointer;
     position: relative;
     display: inline-block;
 }
 
-.dropdown__content {
+.dropdown__list {
     position: absolute;
-    top: 30px;
+    top: 40px;
     right: 0px;
     color: white;
     padding: 10px 10px;
-    background-color: var(--primary-darkgreen);
+    background-color: var(--primary-galactic);
     border: 0.5px solid var(--primary-grey);
     border-radius: 5px;
     min-width: 200px;
@@ -73,15 +76,23 @@
     font-size: 14px;
 }
 
-.dropdown__content li {
+.dropdown__list li {
     padding: 10px 12px;
     border-radius: 5px;
 }
 
-.dropdown__content li:hover {
-    background-color: var(--primary-tasman);
+.dropdown__list li:hover {
+    background-color: var(--primary-darkgreen);
 }
 
+.search__input {
+    padding: 0px 5px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1.6px solid var(--primary-galactic);
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-galactic);
+}
 
 
 /* ITEM COMPONENT STYLING */
@@ -155,9 +166,20 @@
     .item__grid {
         grid-template-columns: repeat(3, 1fr);
     }
+
     .item__card h2 {
         font-size: 14px;
-    };
+    }
+
+    .closet__toolbar {
+        justify-content: center;
+        padding-right: 0;
+    }
+
+    .filterbar__list {
+        justify-content: center;
+    }
+
 }
 
 @media screen and (max-width: 600px) {

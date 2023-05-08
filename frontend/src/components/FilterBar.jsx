@@ -32,34 +32,63 @@ const FilterBar = () => {
     }
 
     return (
-        <>
-            {!category && !subcategory ? (
-                <ul className={styles.filterbar__list}>
-                    {categoryOptions.map((option) => (
-                        <li key={option}><button onClick={() => onClickTag(option)}><Tag label={option} color={'galactic'} /></button></li>
-                    ))}
-                </ul>
-            ) : <></>}
+      <>
+        {!category && !subcategory ? (
+          <ul className={styles.filterbar__list}>
+            {categoryOptions.map((option) => (
+              <li key={option}>
+                <button onClick={() => onClickTag(option)}>
+                  <Tag label={option} color={"galactic"} />
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <></>
+        )}
 
-            {category && !subcategory ? (
-                <ul className={styles.filterbar__list}>
-                    <li><button onClick={() => onClickTag(category)}><Tag label={category} color={'tasman'} /></button></li>
-                    <li><MdNavigateNext /></li>
-                    {subcategoryOptions[category].map((option) => (
-                        <li key={option}><button onClick={() => onClickTag(option)}><Tag label={option} color={'galactic'} /></button></li>
-                    ))}
-                </ul>
-            ) : <></>}
+        {category && !subcategory ? (
+          <ul className={styles.filterbar__list}>
+            <li>
+              <button onClick={() => onClickTag(category)}>
+                <Tag label={category} color={"tasman"} />
+              </button>
+            </li>
+            <li>
+              <MdNavigateNext />
+            </li>
+            {subcategoryOptions[category].map((option) => (
+              <li key={option}>
+                <button onClick={() => onClickTag(option)}>
+                  <Tag label={option} color={"galactic"} />
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <></>
+        )}
 
-            {category && subcategory ? (
-                <ul className={styles.filterbar__list}>
-                    <li><button onClick={() => onClickTag(category)}><Tag label={category} color={'tasman'} /></button></li>
-                    <li><MdNavigateNext /></li>
-                    <li><button onClick={() => onClickTag(subcategory)}><Tag label={subcategory} color={'tasman'} /></button></li>
-                </ul>
-            ) : <></>}
-
-        </>
+        {category && subcategory ? (
+          <ul className={styles.filterbar__list}>
+            <li>
+              <button onClick={() => onClickTag(category)}>
+                <Tag label={category} color={"tasman"} />
+              </button>
+            </li>
+            <li>
+              <MdNavigateNext />
+            </li>
+            <li>
+              <button onClick={() => onClickTag(subcategory)}>
+                <Tag label={subcategory} color={"tasman"} />
+              </button>
+            </li>
+          </ul>
+        ) : (
+          <></>
+        )}
+      </>
     )
 }
 

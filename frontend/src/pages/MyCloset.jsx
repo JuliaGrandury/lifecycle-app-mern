@@ -66,13 +66,13 @@ const MyCloset = () => {
 
   return (
     <>
-      <section className={styles.closet__heading}>
+      <section className={styles.closet__toolbar}>
         <FilterBar />
-        <ul className={styles.closet__actions__list}>
+        <ul className={styles.closet__toolbar__right}>
           {searchActive ? (
             <li>
               <form onSubmit={submitSearch}>
-                <input type="text" value={searchQuery} onChange={handleSearch} />
+                <input type="text" placeholder="Search" className={styles.search__input} value={searchQuery} onChange={handleSearch} />
               </form>
             </li>
           ) : (
@@ -85,17 +85,21 @@ const MyCloset = () => {
           </li>
 
           <li>
-            <div className={styles.actions__dropdown}>
-              <IoFilterCircle style={selectedBtn === "filter" ? { color: "var(--primary-tasman)" } : null} onClick={() => setSelectedBtn('filter')} />
-              <Fragment>
+            <div className={styles.dropdown__container}>
+              <button className={styles.action__button} style={selectedBtn === "filter" ? { color: "var(--primary-galactic)" } : null} onClick={() => setSelectedBtn("filter")}>
+                <IoFilterCircle />
+              </button>
+              <div>
                 {selectedBtn === "filter" ? (
-                  <ul className={styles.dropdown__content}>
-                    {filters.map((option) => <li key={option}>{option}</li>)}
+                  <ul className={styles.dropdown__list}>
+                    {filters.map((option) => (
+                      <li key={option}>{option}</li>
+                    ))}
                   </ul>
                 ) : (
                   <></>
                 )}
-              </Fragment>
+              </div>
             </div>
           </li>
 
