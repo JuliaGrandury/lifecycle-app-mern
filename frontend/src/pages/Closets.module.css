@@ -105,6 +105,10 @@
     background-color: var(--primary-darkgreen);
 }
 
+.item__card:hover{
+        background-color: var(--primary-galactic);
+}
+
 .item__header {
     height: 100px;
 }

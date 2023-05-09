@@ -4,6 +4,7 @@ import { useSelector } from "react-redux"
 import styles from "./Statistics.module.css"
 import { MdOutlineKeyboardArrowDown } from "react-icons/md"
 import default_image from "../assets/default_image.png"
+import { toast } from "react-toastify"
 
 const mostWorn = [
   { rank: 1, name: "Zara Men Puff Jacket", image: null, timesWorn: 3 },
@@ -17,6 +18,10 @@ const Statistics = () => {
   const navigate = useNavigate()
   const { user } = useSelector((state) => state.auth)
 
+  const handleSeeDetails = () => {
+    toast('This feature is currently in development.')
+  }
+
   useEffect(() => {
     if (!user) {
       navigate("/authentication")
@@ -28,21 +33,21 @@ const Statistics = () => {
       <div className={styles.closet__overview}>
         <div className={styles.closet__card}>
           <span>176</span> Items in Closet
-          <button className={styles.seedetails__button}>
+          <button className={styles.seedetails__button} onClick={handleSeeDetails}>
             See Details
             <MdOutlineKeyboardArrowDown />
           </button>
         </div>
         <div className={styles.closet__card}>
           <span>3</span> Items out of Closet
-          <button className={styles.seedetails__button}>
+          <button className={styles.seedetails__button} onClick={handleSeeDetails}>
             See Details
             <MdOutlineKeyboardArrowDown />
           </button>
         </div>
         <div className={styles.closet__card}>
           <span>2</span> Items to Repair
-          <button className={styles.seedetails__button}>
+          <button className={styles.seedetails__button} onClick={handleSeeDetails}>
             See Details
             <MdOutlineKeyboardArrowDown />
           </button>
