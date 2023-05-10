@@ -164,18 +164,23 @@
     left: calc(50% - (800px / 2));
     height: 700px;
     width: 700px;
+    font-size: 13px;
 }
 
 .expanded__card .item__image {
     margin: auto;
-    width: 80%;
+    width: 70%;
 }
 
 .item__moredetails table {
     border-collapse: separate;
     border-spacing: 10px;
-    width: 100%;
-    margin: 0px 0px 20px;
+    width: 80%;
+    margin: 0px 10% 20px;
+}
+
+.item__moredetails table tr td:nth-child(2) {
+    text-align: right;
 }
 
 .largecard__actions {
@@ -183,7 +188,7 @@
     flex-direction: row;
     justify-content: center;
     gap: 18px;
-    margin-bottom: 10px;
+    margin: 18px 0px 18px;
 }
 
 .largecard__actions button {

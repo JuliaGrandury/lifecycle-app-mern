@@ -68,11 +68,11 @@ function ItemCompLarge({ item, onClose }) {
                 </tr>
                 <tr>
                   <td>Times Worn</td>
-                  <td>{item.datesWorn.length}</td>
+                  <td>{item.datesWorn && item.datesWorn.length}</td>
                 </tr>
                 <tr>
                   <td>Value</td>
-                  <td>{item.value === 100 ? "Sentimental" : item.value}</td>
+                  <td>{item.value}</td>
                 </tr>
                 <tr>
                   <td>Washing Instructions</td>

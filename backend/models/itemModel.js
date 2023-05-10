@@ -23,7 +23,7 @@ const itemSchema = mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ['Tops', 'Bottoms', 'Dresses and Jumpsuits', 'Coats and Jackets', 'Shoes', 'Accessories'],
+      enum: ["Tops", "Bottoms", "Dresses and Jumpsuits", "Coats and Jackets", "Shoes", "Accessories"],
       required: [true, "Please add a category for the item"],
     },
     subcategory: {
@@ -48,6 +48,7 @@ const itemSchema = mongoose.Schema(
     datesWorn: {
       type: [Date],
       required: [false],
+      default: [],
     },
     value: {
       type: Number,
@@ -57,8 +58,8 @@ const itemSchema = mongoose.Schema(
     washInstructions: {
       type: String,
       required: false,
-      default: 'No instructions specified'
-    }
+      default: "No instructions specified",
+    },
   },
   {
     timestamps: true,

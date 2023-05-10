@@ -130,7 +130,11 @@ const MyCloset = () => {
       </section>
 
       {/* NEW ITEM FORM WHICH SHOULD BE TURNED INTO A MODAL WITH OVERLAY */}
-      {selectedAction.add ? <ItemForm onCloseForm={() => setSelectedAction({ add: false })} /> : <></>}
+      {selectedAction.add && (
+        <div className={styles.overlay}>
+          <ItemForm onCloseForm={() => setSelectedAction({ add: false })} />
+        </div>
+      )}
 
       <div className={styles.items__container}>
         {isError ? (
