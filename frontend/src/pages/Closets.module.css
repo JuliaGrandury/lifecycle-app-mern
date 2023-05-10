@@ -103,18 +103,24 @@
     font-size: 12px;
     color: #fff;
     background-color: var(--primary-darkgreen);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.item__card:hover{
-        background-color: var(--primary-galactic);
+.item__card:hover {
+    background-color: var(--primary-galactic);
 }
 
 .item__header {
-    height: 100px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .item__details {
-    margin: 10px 25px 0px 10px;
+    margin: 10px 10px 25px 10px;
     display: flex;
     align-items: top;
     gap: 10px;
@@ -146,6 +152,63 @@
     width: 100%;
     object-fit: cover;
 }
+
+/* ---------------------------------- */
+/* OPEN ITEM CARD LARGE STYLING */
+/* ---------------------------------- */
+.expanded__card {
+    z-index: 5;
+    background-color: var(--primary-galactic);
+    position: fixed;
+    top: calc(50% - (700px / 2));
+    left: calc(50% - (800px / 2));
+    height: 700px;
+    width: 700px;
+}
+
+.expanded__card .item__image {
+    margin: auto;
+    width: 80%;
+}
+
+.item__moredetails table {
+    border-collapse: separate;
+    border-spacing: 10px;
+    width: 100%;
+    margin: 0px 0px 20px;
+}
+
+.largecard__actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 10px;
+}
+
+.largecard__actions button {
+    color: white;
+    height: 30px;
+    width: fit-content;
+    min-width: 100px;
+    padding: 5px 12px;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 15px;
+}
+
+.largecard__actions button:nth-child(1) {
+    background-color: var(--primary-green);
+}
+
+.largecard__actions button:nth-child(2) {
+    background-color: var(--primary-blue);
+}
+
+.largecard__actions button:nth-child(3) {
+    background-color: var(--primary-orange);
+}
+
 
 /* ---------------------------------- */
 /* ITEM CARD ACTIONS DROPDOWN STYLING */
@@ -182,6 +245,47 @@
 
 .dropdown__itemactions li:hover {
     background-color: var(--primary-darkgreen);
+}
+
+
+/* ---------------------------------- */
+/* ERROR & NO ITEMS DIV STYLING */
+/* ---------------------------------- */
+.error__div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+}
+
+.error__div h3 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 20px;
+    background-color: var(--primary-lightblue);
+    border-radius: 5px;
+    color: #333;
+    font-weight: 400;
+    padding: 50px 50px;
+}
+
+.emptycloset__div {
+    height: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: right;
+    align-items: center;
+}
+
+.emptycloset__div h3 {
+    color: var(--primary-galactic);
+    font-size: 25px;
+}
+
+.emptycloset__div img {
+    padding: 0px 60px 60px 30px;
+    margin-right: 40px;
 }
 
 

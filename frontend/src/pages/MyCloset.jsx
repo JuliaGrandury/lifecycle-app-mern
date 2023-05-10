@@ -3,13 +3,14 @@ import { GrTroubleshoot } from "react-icons/gr"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { getItems, reset } from "../features/items/itemSlice"
+import { toast } from "react-toastify"
+import { getItems } from "../features/items/itemSlice"
 import ItemForm from "../components/ItemForm"
 import ItemCompSmall from "../components/ItemCompSmall"
+import ItemCompLarge from "../components/ItemCompLarge"
 import FilterBar from "../components/FilterBar"
 import Spinner from "../components/Spinner"
 import styles from "./Closets.module.css"
-import { toast } from "react-toastify"
 import squiggle_arrow from "../assets/squiggle_arrow.png"
 import allCategories from "../utils/allCategories"
 
@@ -22,7 +23,6 @@ const MyCloset = () => {
 
   const { user } = useSelector((state) => state.auth)
   const { items, isLoading, isError, message } = useSelector((state) => state.items)
-  const [showForm, setShowForm] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
 
   const [selectedAction, setSelectedAction] = useState({
@@ -30,8 +30,6 @@ const MyCloset = () => {
     filter: false,
     add: false,
   })
-
-  const [selectedBtn, setSelectedBtn] = useState("")
 
   useEffect(() => {
     if (isError) {
@@ -53,40 +51,54 @@ const MyCloset = () => {
     return <Spinner />
   }
 
-  const handleFilter = () => {
+  const handleFilter = (filter) => {
+    console.log(`The selected filter is ${filter}`)
     toast("This feature is currently in development. Please check back at a later time.")
   }
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value)
+    toast("This feature is currently in development. Please check back at a later time.")
   }
 
   const submitSearch = (event) => {
     event.preventDefault()
     console.log(searchQuery)
+    toast("This feature is currently in development. Please check back at a later time.")
   }
+
+  // const handleLargeCardVisiblity = (eltClicked, id) => {
+  //   if (eltClicked !== "editItem" || eltClicked !== "duplicateItem" || eltClicked !== "deleteItem") {
+  //     if (openCardId) {
+  //       setOpenCardId(null)
+  //     } else {
+  //       setOpenCardId(id)
+  //     }
+  //   }
+  // }
 
   return (
     <>
       <section className={styles.closet__toolbar}>
+        {/* CATEGORY FILTER SELECTION */}
         <FilterBar />
+
+        {/* SEARCH INPUT */}
         <ul className={styles.closet__toolbar__right}>
-          {selectedAction.search ? (
+          {selectedAction.search && (
             <li>
               <form onSubmit={submitSearch}>
                 <input type="text" placeholder="Search" className={styles.search__input} value={searchQuery} onChange={handleSearch} />
               </form>
             </li>
-          ) : (
-            <></>
           )}
           <li>
-            {/* (prevState) => ({ ...prevState, search: !selectedAction.search }) */}
             <button className={styles.action__button} onClick={() => setSelectedAction({ search: !selectedAction.search, filter: false, add: false })}>
               <IoSearchCircle />
             </button>
           </li>
 
+          {/* SORTING FILTER SELECTION */}
           <li>
             <div className={styles.dropdown__container}>
               <button
@@ -96,14 +108,14 @@ const MyCloset = () => {
                 <IoFilterCircle />
               </button>
               <div>
-                {selectedAction.filter ? (
+                {selectedAction.filter && (
                   <ul className={styles.dropdown__list}>
                     {filters.map((option) => (
-                      <li key={option}>{option}</li>
+                      <li key={option} onClick={() => handleFilter(option)}>
+                        {option}
+                      </li>
                     ))}
                   </ul>
-                ) : (
-                  <></>
                 )}
               </div>
             </div>
@@ -117,23 +129,13 @@ const MyCloset = () => {
         </ul>
       </section>
 
+      {/* NEW ITEM FORM WHICH SHOULD BE TURNED INTO A MODAL WITH OVERLAY */}
       {selectedAction.add ? <ItemForm onCloseForm={() => setSelectedAction({ add: false })} /> : <></>}
 
       <div className={styles.items__container}>
         {isError ? (
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "400px" }}>
-            <h3
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                textAlign: "center",
-                fontSize: "20px",
-                backgroundColor: "var(--primary-lightblue)",
-                borderRadius: "5px",
-                color: "#333",
-                fontWeight: "400",
-                padding: "50px 50px",
-              }}>
+          <div className={styles.error__div}>
+            <h3>
               <strong>
                 <GrTroubleshoot /> Uh oh, looks like someone fucked up.
               </strong>
@@ -141,18 +143,19 @@ const MyCloset = () => {
             </h3>
           </div>
         ) : items.length > 0 ? (
-          <div className={styles.item__grid}>{items && items.map((item) => <ItemCompSmall key={item._id} item={item} />)}</div>
+          <div className={styles.item__grid}>
+            {items &&
+              items.map((item) => (
+                <>
+                  {/* <ItemCompSmall key={`small${item._id}`} item={item} /> */}
+                  <ItemCompLarge key={`large${item._id}`} item={item} />
+                </>
+              ))}
+          </div>
         ) : (
-          <div
-            style={{
-              height: "700px",
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "right",
-              alignItems: "center",
-            }}>
-            <h3 style={{ color: "var(--primary-galactic)", fontSize: "25px" }}>Your closet is empty. Add items here.</h3>
-            <img style={{ padding: "0px 60px 60px 30px" }} src={squiggle_arrow} alt="" />
+          <div className={styles.emptycloset__div}>
+            <h3>Your closet is empty. Add items here.</h3>
+            <img src={squiggle_arrow} alt="Arrow pointing to the Add An Item Form" />
           </div>
         )}
       </div>

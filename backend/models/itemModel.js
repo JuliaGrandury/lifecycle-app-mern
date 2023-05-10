@@ -49,6 +49,16 @@ const itemSchema = mongoose.Schema(
       type: [Date],
       required: [false],
     },
+    value: {
+      type: Number,
+      required: [false],
+      default: 0,
+    },
+    washInstructions: {
+      type: String,
+      required: false,
+      default: 'No instructions specified'
+    }
   },
   {
     timestamps: true,

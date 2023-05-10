@@ -1,38 +1,15 @@
+// hook and library imports
 import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { deleteItem } from "../features/items/itemSlice"
-import styles from "../pages/Closets.module.css"
+
+// in app imports
 import default_image from "../assets/default_image.png"
-import { IoCloseCircle } from "react-icons/io5"
-import { CiCircleMore } from "react-icons/ci"
-import { AiOutlineDelete } from "react-icons/ai"
-import { FiEdit3 } from "react-icons/fi"
-import { HiOutlineDuplicate } from "react-icons/hi"
 import ColorSphere from "./ColorSphere"
+import styles from "../pages/Closets.module.css"
 
 function ItemCompSmall({ item }) {
-  const dispatch = useDispatch()
-  const [dropdownId, setDropdownId] = useState(null)
-
-  const openDetailedCard = (id) => {
-    console.log(`Opening Detailed Card for item ${id}`)
-    alert(`Opening Detailed Card for item ${id}`)
-  }
-
-  const handleEditItem = (id) => {
-    console.log(`Editing item with id ${id}`)
-  }
-  const handleDuplicateItem = (id) => {
-    console.log(`Duplicating item with id ${id}`)
-  }
-  const handleDeleteItem = (id) => {
-    console.log(`Deleting item with id ${id}`)
-    dispatch(deleteItem(id))
-  }
 
   return (
-    <div className={styles.item__card} onDoubleClick={() => openDetailedCard(item._id)}>
-      {/* <div className={styles.item__date}>{new Date(item.createdAt).toLocaleString('en-US')}</div> */}
+    <div className={styles.item__card}>
       <div className={styles.item__header}>
         <h2>{item.name}</h2>
         <div className={styles.item__details}>
@@ -48,27 +25,6 @@ function ItemCompSmall({ item }) {
       </div>
       <div className={styles.item__image}>
         <img src={default_image} alt={item.name} />
-      </div>
-
-      <div className={`${styles.dropdown__container} ${styles.more__button}`}>
-        <button className={styles.more__button}>
-          <CiCircleMore onClick={() => (dropdownId === item._id ? setDropdownId(null) : setDropdownId(item._id))} />
-        </button>
-        {dropdownId === item._id ? (
-          <ul className={styles.dropdown__itemactions}>
-            <li onClick={() => handleEditItem(item.id)}>
-              <FiEdit3 /> Edit
-            </li>
-            <li onClick={() => handleDuplicateItem(item.id)}>
-              <HiOutlineDuplicate /> Duplicate
-            </li>
-            <li onClick={() => handleDeleteItem(item._id)}>
-              <AiOutlineDelete /> Delete
-            </li>
-          </ul>
-        ) : (
-          <></>
-        )}
       </div>
     </div>
   )
