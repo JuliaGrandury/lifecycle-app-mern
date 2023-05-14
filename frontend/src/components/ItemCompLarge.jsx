@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import { motion } from "framer-motion"
 
 // in app imports
-import { deleteItem } from "../features/items/itemSlice"
+import { deleteItem, createItem } from "../features/items/itemSlice"
 import default_image from "../assets/default_image.png"
 import ColorSphere from "./ColorSphere"
 import styles from "../pages/Closets.module.css"
@@ -17,8 +17,8 @@ function ItemCompLarge({ item, onClose }) {
   const handleEditItem = (id) => {
     console.log(`Editing item with id ${id}`)
   }
-  const handleDuplicateItem = (id) => {
-    console.log(`Duplicating item with id ${id}`)
+  const handleDuplicateItem = (item) => {
+    dispatch(createItem(item))
   }
   const handleDeleteItem = (id) => {
     console.log(`Deleting item with id ${id}`)
@@ -86,7 +86,7 @@ function ItemCompLarge({ item, onClose }) {
                 <button className="btn" id="editItem" onClick={() => handleEditItem(item.id)}>
                   Edit
                 </button>
-                <button className="btn" id="duplicateItem" onClick={() => handleDuplicateItem(item.id)}>
+                <button className="btn" id="duplicateItem" onClick={() => handleDuplicateItem(item)}>
                   Duplicate
                 </button>
                 <button className="btn" id="deleteItem" onClick={() => handleDeleteItem(item._id)}>

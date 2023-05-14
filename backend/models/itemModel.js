@@ -60,6 +60,10 @@ const itemSchema = mongoose.Schema(
       required: false,
       default: "No instructions specified",
     },
+    location: { //to note if it's in storage, your closet, friends closet, suitcase, etc.
+      type: String,
+      required: false,
+    }
   },
   {
     timestamps: true,

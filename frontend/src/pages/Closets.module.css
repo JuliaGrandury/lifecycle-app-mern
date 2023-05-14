@@ -161,7 +161,7 @@
     background-color: var(--primary-galactic);
     position: fixed;
     top: calc(50% - (700px / 2));
-    left: calc(50% - (800px / 2));
+    left: calc(50% - (700px / 2));
     height: 700px;
     width: 700px;
     font-size: 13px;
@@ -194,8 +194,8 @@
 .largecard__actions button {
     color: white;
     height: 30px;
-    width: fit-content;
-    min-width: 100px;
+    /* width: fit-content;
+    min-width: 100px; */
     padding: 5px 12px;
     text-align: center;
     font-size: 13px;
@@ -332,9 +332,36 @@
 
 }
 
+
+@media screen and (max-width: 600px) {
+    .expanded__card {
+        top: calc(50% - (700px / 2));
+        left: 0;
+        height: 700px;
+        width: 100%;
+        font-size: 13px;
+    }
+}
+
 @media screen and (max-width: 600px) {
     .item__grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* NOTICE THAT THIS ONE IS FOR SCREEN WITH MIN-WIDTH NOT MAX-WIDTH */
+@media screen and (min-width: 400px) {
+    .largecard__actions button {
+        width: fit-content;
+        min-width: 100px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .largecard__actions button {
+        width: fit-content;
+        min-width: 70px;
+        font-size: 12px;
     }
 }
 
