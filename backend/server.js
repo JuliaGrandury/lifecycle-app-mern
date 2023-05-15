@@ -18,14 +18,10 @@ app.use("/api/v1/items", require("./routes/itemRoutes"))
 app.use("/api/v1/users", require("./routes/userRoutes"))
 
 // serve the frontend in production
-if (process.env.NODE_ENV === "production") {
   app.use(express.static(publicPath))
   app.get("*", (req, res) => {
     res.sendFile(path.join(publicPath, "index.html"))
   })
-} else {
-  app.get("/", (req, res) => res.send("Please set environment to production"))
-}
 
 // // serve the frontend in production
 // if (process.env.NODE_ENV === 'production') {

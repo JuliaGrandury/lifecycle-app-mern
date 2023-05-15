@@ -1,4 +1,4 @@
-FROM node:14-slim
+FROM --platform=linux/amd64 node:14-slim
 WORKDIR /usr/src
 
 COPY backend/ ./backend
@@ -12,5 +12,6 @@ ENV NODE_ENV = production
 
 EXPOSE 80
 EXPOSE 443
+EXPOSE 5000
 
 CMD ["npm", "run", "prod"]
