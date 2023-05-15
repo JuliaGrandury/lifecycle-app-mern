@@ -12,7 +12,7 @@
     <a href="https://github.com/JuliaGrandury/lifecycle-app-mern"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/JuliaGrandury/lifecycle-app-mern">View Demo</a>
+    <a href="https://lifecycle-386721.uk.r.appspot.com">View Demo</a>
     ·
     <a href="https://github.com/JuliaGrandury/lifecycle-app-mern/issues">Report Bug</a>
     ·
@@ -24,6 +24,13 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project & Demo
+
+[Deployed and hosted on GCP with Docker and Kubernetes](https://lifecycle-386721.uk.r.appspot.com)
+
+<br/>
+
+
+<br/>
 
 The 2.5 trillion clothing industry has a huge problem with pollution, waste, and human rights abuses. It is one of the most detrimental industries in the world but also one we have agency to interfere with as consumers. This app is for the many of us that care about our planet and hope to see us all move towards a more sustainable and fair world or for those who simply would like to avoid breaking the bank while still expressing themselves through fashion.
 
