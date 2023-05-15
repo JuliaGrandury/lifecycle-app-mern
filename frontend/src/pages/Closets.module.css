@@ -215,7 +215,7 @@
 }
 
 .overlay {
-    position: absolute;
+    position: fixed;
     z-index: 3;
     top: 0;
     right: 0;

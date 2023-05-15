@@ -1,4 +1,4 @@
-.modal-overlay {
+.modal__overlay {
     /* change from position absolute to fixed so it would stay with scroll but really
     should just disable scroll when the modal is open */
     position: fixed;

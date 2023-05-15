@@ -41,19 +41,12 @@ const MyCloset = () => {
       navigate("/authentication")
     }
 
-    if (selectedAction.add) {
-      console.log("add is selected")
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "" // restore default scrolling
-    }
-
     dispatch(getItems())
 
     return () => {
       dispatch(reset())
     }
-  }, [user, navigate, isError, message, dispatch, selectedAction])
+  }, [user, navigate, isError, message, dispatch])
 
   if (isLoading) {
     return <Spinner />

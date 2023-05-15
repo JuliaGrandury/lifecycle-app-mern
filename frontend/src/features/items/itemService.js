@@ -15,11 +15,12 @@ const createItem = async (itemData, token) => {
 
 
 // Get user items
-const getItems = async (token) => {
+const getItems = async (token, filter) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`,
         },
+        params: filter,
     }
     const response = await axios.get(API_URL, config)
     return response.data
