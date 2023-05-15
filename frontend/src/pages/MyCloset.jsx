@@ -4,9 +4,9 @@ import { useState, useEffect, Fragment } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { toast } from "react-toastify"
-import { getItems } from "../features/items/itemSlice"
+import { getItems, reset } from "../features/items/itemSlice"
 import ItemForm from "../components/ItemForm"
-import ItemCompSmall from "../components/ItemCompSmall"
+// import ItemCompSmall from "../components/ItemCompSmall"
 import ItemCompLarge from "../components/ItemCompLarge"
 import FilterBar from "../components/FilterBar"
 import Spinner from "../components/Spinner"
@@ -41,12 +41,19 @@ const MyCloset = () => {
       navigate("/authentication")
     }
 
+    if (selectedAction.add) {
+      console.log("add is selected")
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "" // restore default scrolling
+    }
+
     dispatch(getItems())
 
-    // return () => {
-    //   dispatch(reset())
-    // }
-  }, [user, navigate, isError, message, dispatch])
+    return () => {
+      dispatch(reset())
+    }
+  }, [user, navigate, isError, message, dispatch, selectedAction])
 
   if (isLoading) {
     return <Spinner />
@@ -67,16 +74,6 @@ const MyCloset = () => {
     console.log(searchQuery)
     toast("This feature is currently in development. Please check back at a later time.")
   }
-
-  // const handleLargeCardVisiblity = (eltClicked, id) => {
-  //   if (eltClicked !== "editItem" || eltClicked !== "duplicateItem" || eltClicked !== "deleteItem") {
-  //     if (openCardId) {
-  //       setOpenCardId(null)
-  //     } else {
-  //       setOpenCardId(id)
-  //     }
-  //   }
-  // }
 
   return (
     <>

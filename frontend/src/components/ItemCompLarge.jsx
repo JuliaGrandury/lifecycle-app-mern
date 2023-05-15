@@ -1,5 +1,5 @@
 // hook and library imports
-import { useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { motion } from "framer-motion"
 
@@ -24,6 +24,15 @@ function ItemCompLarge({ item, onClose }) {
     console.log(`Deleting item with id ${id}`)
     dispatch(deleteItem(id))
   }
+
+  // useEffect(() => {
+  //   if (onClose) {
+  //     document.body.style.overflow = ""
+  //   } else {
+  //     console.log("ItemCompLarge is Open")
+  //     document.body.style.overflow = "hidden"
+  //   }
+  // }, [onClose])
 
   return (
     <>

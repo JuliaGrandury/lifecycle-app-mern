@@ -1,5 +1,5 @@
 .newitem__container {
-    /* margin: max(calc(15vh), 70px) auto 10px; */
+    margin: 70px auto 10px;
     padding: 10px;
     border-radius: 5px;
     width: 50%;
@@ -30,10 +30,6 @@
     flex-grow: 1;
 }
 
-.form__control:nth-child(4) {
-    background-color: brown;
-}
-
 .form__control:nth-last-child(1) {
     display: flex;
     flex-direction: row;
@@ -41,10 +37,15 @@
     width: fit-content;
 }
 
+/* to display color and colorsphere side by side and inline block */
+.colorOption__div {
+    display: inline-block;
+    margin-right: 4px;
+}
+
 .washInstructions {
     width: 100%;
 }
-
 
 .form__heading {
     margin-top: 40px;
@@ -102,11 +103,15 @@
 @media screen and (max-width: 1024px) {
     .newitem__container {
         width: 100vw;
-        height:100vh;
-        margin: auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .newitem__container {
+        margin: 48px auto 30px;
+        width: 100vw;
+        overflow-y: auto;
+        max-height: 92vh;
     }
 
-    .form__control {
-        font-size: 14px;
-    }
 }

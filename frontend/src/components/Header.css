@@ -160,4 +160,13 @@
     display: block;
   }
 
+  .header {
+    padding: 10px 0;
+  }
+
+  .header .logo a {
+    font-size: 14px;
+    margin-left: 18px;
+  }
+
 }

@@ -38,11 +38,6 @@ const NewItemForm = ({ onCloseForm }) => {
     const { name, value } = event.target
     const data = { ...newItem }
     data[name] = value
-    // if (name === "color") {
-    //   data[name].push(value)
-    // } else {
-    //   data[name] = value
-    // }
     setNewItem(data)
   }
 
@@ -93,12 +88,11 @@ const NewItemForm = ({ onCloseForm }) => {
     formRef.current.reset()
   }
 
-  const dynamicValue = (15 * window.innerHeight) / 100 // Calculate the dynamic value based on 15vh
-  // Calculate the maximum value
-  const maxValue = Math.max(dynamicValue, 10)
+  // should probably use useEffect with event listeners for resizing later
+  const smallWindow = window.innerWidth < 700
 
   return (
-    <div className={styles.newitem__container} style={{ margin: `${maxValue}px auto 10px` }}>
+    <div className={styles.newitem__container}>
       <form className={styles.newitem__form} onSubmit={onSubmit} ref={formRef}>
         <div className={`${styles.form__group} ${styles.form__heading}`}>
           <h3>Add an Item</h3>
@@ -109,37 +103,31 @@ const NewItemForm = ({ onCloseForm }) => {
 
         <div className={styles.form__group}>
           <FormControl className={styles.form__control}>
-            <TextField name="name" label="Item Name" onChange={handleFormChange} />
+            <TextField name="name" label="Item Name" onChange={handleFormChange} size={smallWindow ? "small" : "normal"} />
           </FormControl>
           <FormControl className={styles.form__control}>
-            <TextField name="brand" label="Item Brand" onChange={handleFormChange} />
-          </FormControl>
-
-          <FormControl className={styles.form__control}>
-            <TextField name="value" label="Value" onChange={handleFormChange} />
+            <TextField name="brand" label="Item Brand" onChange={handleFormChange} size={smallWindow ? "small" : "normal"} />
           </FormControl>
 
           <FormControl className={styles.form__control}>
+            <TextField name="value" label="Value" onChange={handleFormChange} size={smallWindow ? "small" : "normal"} />
+          </FormControl>
+
+          <FormControl className={styles.form__control} size={smallWindow ? "small" : "normal"}>
             <InputLabel id="color-select-label">Color</InputLabel>
-            <Select
-              labelId="color-select-label"
-              id="color-select"
-              name="color"
-              label="Color"
-              multiple
-              value={newItem.color}
-              onChange={handleFormChange}
-            >
+            <Select labelId="color-select-label" id="color-select" name="color" label="Color" multiple value={newItem.color} onChange={handleFormChange}>
               {colorOptions.map((color) => (
                 <MenuItem key={color} value={color}>
-                  <ColorSphere color={color} />
-                  {color}
+                  <div className={styles.colorOption__div}>
+                    <ColorSphere color={color} />
+                  </div>
+                  <span>{color}</span>
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
 
-          <FormControl className={styles.form__control}>
+          <FormControl className={styles.form__control} size={smallWindow ? "small" : "normal"}>
             <InputLabel id="category-select-label">Category</InputLabel>
             <Select labelId="category-select-label" id="category-select" name="category" label="Category" value={newItem.category} onChange={handleFormChange}>
               {categoryOptions.map((category) => (
@@ -150,7 +138,7 @@ const NewItemForm = ({ onCloseForm }) => {
             </Select>
           </FormControl>
 
-          <FormControl className={styles.form__control}>
+          <FormControl className={styles.form__control} size={smallWindow ? "small" : "normal"}>
             <InputLabel id="subcategory-select-label">Subcategory</InputLabel>
             <Select labelId="subcategory-select-label" id="subcategory-select" name="subcategory" label="Subcategory" value={newItem.subcategory} onChange={handleFormChange}>
               {newItem.category &&
@@ -162,7 +150,7 @@ const NewItemForm = ({ onCloseForm }) => {
             </Select>
           </FormControl>
 
-          <FormControl className={styles.form__control}>
+          <FormControl className={styles.form__control} size={smallWindow ? "small" : "normal"}>
             <InputLabel id="size-select-label">Size</InputLabel>
             <Select labelId="size-select-label" id="size-select" name="size" label="Size" value={newItem.size} onChange={handleFormChange}>
               {newItem.category &&
@@ -175,7 +163,7 @@ const NewItemForm = ({ onCloseForm }) => {
           </FormControl>
 
           {/* SEASONS CHECKBOXES START HERE */}
-          <FormControl className={styles.form__control}>
+          <FormControl className={styles.form__control} size={smallWindow ? "small" : "normal"}>
             <InputLabel id="season-select-label">Season</InputLabel>
             <Select
               labelId="season-select-label"
@@ -196,7 +184,7 @@ const NewItemForm = ({ onCloseForm }) => {
             </Select>
           </FormControl>
 
-          <FormControl className={`${styles.form__control} ${styles.washInstructions}`}>
+          <FormControl className={`${styles.form__control} ${styles.washInstructions}`} size={smallWindow ? "small" : "normal"}>
             <TextField name="washInstructions" label="Wash Instructions" multiline rows={2} onChange={handleFormChange} />
           </FormControl>
 
@@ -211,10 +199,10 @@ const NewItemForm = ({ onCloseForm }) => {
         </div>
 
         <div className={styles.form__group}>
-          <button className={`${styles.btn} ${styles.newitem__btn}`} type="submit">
+          <button className={`${styles.btn} ${styles.newitem__btn}`} type="submit" size={smallWindow ? "small" : "normal"}>
             Add Item
           </button>
-          <button className={`${styles.btn} ${styles.newitem__btn}`} type="reset" onClick={handleFormReset}>
+          <button className={`${styles.btn} ${styles.newitem__btn}`} type="reset" onClick={handleFormReset} size={smallWindow ? "small" : "normal"}>
             Clear
           </button>
         </div>
