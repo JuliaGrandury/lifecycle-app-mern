@@ -1,10 +1,11 @@
 import { TextField, Select, MenuItem, InputLabel, FormControl, FormControlLabel, Switch, Checkbox } from "@mui/material"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useDispatch } from "react-redux"
 import { createItem } from "../features/items/itemSlice"
 import styles from "./ItemForm.module.css"
 import { IoCloseCircle } from "react-icons/io5"
 import allCategories from "../utils/allCategories"
+import ColorSphere from "./ColorSphere"
 
 // don't need to update everytime component remounts
 const colorOptions = allCategories.colors
@@ -13,24 +14,35 @@ const subcategoryOptions = allCategories.subcategories
 const sizeOptions = allCategories.sizes
 const seasonOptions = allCategories.seasons
 
+const initialFormState = {
+  name: "",
+  brand: "",
+  color: [],
+  category: "",
+  subcategory: "",
+  size: "",
+  season: [],
+  inCloset: true,
+  toRepair: false,
+  datesWorn: [],
+  value: null,
+  washInstructions: null,
+}
+
 const NewItemForm = ({ onCloseForm }) => {
   const dispatch = useDispatch()
-  const [newItem, setNewItem] = useState({
-    name: "",
-    brand: "",
-    color: "",
-    category: "",
-    subcategory: "",
-    size: "",
-    season: [],
-    inCloset: true,
-    toRepair: false,
-  })
+  const [newItem, setNewItem] = useState(initialFormState)
+  const formRef = useRef(null)
 
   const handleFormChange = (event) => {
     const { name, value } = event.target
     const data = { ...newItem }
     data[name] = value
+    // if (name === "color") {
+    //   data[name].push(value)
+    // } else {
+    //   data[name] = value
+    // }
     setNewItem(data)
   }
 
@@ -74,27 +86,20 @@ const NewItemForm = ({ onCloseForm }) => {
     event.preventDefault()
     console.log(newItem)
     dispatch(createItem(newItem))
-    // onResetForm()
-    // onCloseForm()
   }
 
-  const onResetForm = (event) => {
-    setNewItem({
-      name: "",
-      color: "",
-      category: "",
-      subcategory: "",
-      size: "",
-      season: [],
-      inCloset: true,
-      toRepair: false,
-    })
+  const handleFormReset = () => {
+    setNewItem(initialFormState)
+    formRef.current.reset()
   }
+
+  const dynamicValue = (15 * window.innerHeight) / 100 // Calculate the dynamic value based on 15vh
+  // Calculate the maximum value
+  const maxValue = Math.max(dynamicValue, 10)
 
   return (
-    <div className={styles.newitem__container}>
-      <form className={styles.newitem__form} onSubmit={onSubmit}>
-        
+    <div className={styles.newitem__container} style={{ margin: `${maxValue}px auto 10px` }}>
+      <form className={styles.newitem__form} onSubmit={onSubmit} ref={formRef}>
         <div className={`${styles.form__group} ${styles.form__heading}`}>
           <h3>Add an Item</h3>
           <button className={styles.close__button} onClick={() => onCloseForm()}>
@@ -111,10 +116,23 @@ const NewItemForm = ({ onCloseForm }) => {
           </FormControl>
 
           <FormControl className={styles.form__control}>
+            <TextField name="value" label="Value" onChange={handleFormChange} />
+          </FormControl>
+
+          <FormControl className={styles.form__control}>
             <InputLabel id="color-select-label">Color</InputLabel>
-            <Select labelId="color-select-label" id="color-select" name="color" label="Color" value={newItem.color} onChange={handleFormChange}>
+            <Select
+              labelId="color-select-label"
+              id="color-select"
+              name="color"
+              label="Color"
+              multiple
+              value={newItem.color}
+              onChange={handleFormChange}
+            >
               {colorOptions.map((color) => (
                 <MenuItem key={color} value={color}>
+                  <ColorSphere color={color} />
                   {color}
                 </MenuItem>
               ))}
@@ -178,10 +196,13 @@ const NewItemForm = ({ onCloseForm }) => {
             </Select>
           </FormControl>
 
+          <FormControl className={`${styles.form__control} ${styles.washInstructions}`}>
+            <TextField name="washInstructions" label="Wash Instructions" multiline rows={2} onChange={handleFormChange} />
+          </FormControl>
+
           <FormControl className={styles.form__control}>
             <FormControlLabel control={<Switch name="inCloset" checked={newItem.inCloset} color="success" onChange={handleSwitchChange} />} label="In Closet" />
-          </FormControl>
-          <FormControl className={styles.form__control}>
+
             <FormControlLabel control={<Switch name="toRepair" checked={newItem.toRepair} color="success" onChange={handleSwitchChange} />} label="To Repair" />
           </FormControl>
 
@@ -190,10 +211,10 @@ const NewItemForm = ({ onCloseForm }) => {
         </div>
 
         <div className={styles.form__group}>
-          <button className={styles.action__button} type="submit">
+          <button className={`${styles.btn} ${styles.newitem__btn}`} type="submit">
             Add Item
           </button>
-          <button className={`${styles.action__button} ${styles.danger}`} type="reset">
+          <button className={`${styles.btn} ${styles.newitem__btn}`} type="reset" onClick={handleFormReset}>
             Clear
           </button>
         </div>
