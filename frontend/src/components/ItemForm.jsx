@@ -27,6 +27,7 @@ const initialFormState = {
   datesWorn: [],
   value: null,
   washInstructions: null,
+  location: null,
 }
 
 const NewItemForm = ({ onCloseForm }) => {

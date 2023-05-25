@@ -4,7 +4,7 @@ import { useState, useEffect, Fragment } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { toast } from "react-toastify"
-import { getItems, reset } from "../features/items/itemSlice"
+import { getItems, reset, updateFilter } from "../features/items/itemSlice"
 import ItemForm from "../components/ItemForm"
 // import ItemCompSmall from "../components/ItemCompSmall"
 import ItemCompLarge from "../components/ItemCompLarge"
@@ -16,7 +16,6 @@ import allCategories from "../utils/allCategories"
 
 //don't need to update everytime the component remounts
 const filters = allCategories.filters
-// const filterObject = { category: "Bottoms", subcategory: "" }
 
 const MyCloset = () => {
   const navigate = useNavigate()
@@ -53,20 +52,17 @@ const MyCloset = () => {
     return <Spinner />
   }
 
-  const handleFilter = (filter) => {
-    console.log(`The selected filter is ${filter}`)
-    toast("This feature is currently in development. Please check back at a later time.")
+  const handleFilter = (sortValue) => {
+    dispatch(updateFilter({ ...filterObject, sort: sortValue }))
   }
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value)
-    toast("This feature is currently in development. Please check back at a later time.")
   }
 
   const submitSearch = (event) => {
     event.preventDefault()
-    console.log(searchQuery)
-    toast("This feature is currently in development. Please check back at a later time.")
+    dispatch(updateFilter({ ...filterObject, search: searchQuery }))
   }
 
   return (
@@ -102,9 +98,9 @@ const MyCloset = () => {
               <div>
                 {selectedAction.filter && (
                   <ul className={styles.dropdown__list}>
-                    {filters.map((option) => (
-                      <li key={option} onClick={() => handleFilter(option)}>
-                        {option}
+                    {Object.entries(filters).map(([label, value]) => (
+                      <li key={label} onClick={() => handleFilter(value)}>
+                        {label}
                       </li>
                     ))}
                   </ul>

@@ -79,7 +79,7 @@ itemSchema.path("subcategory").validate(function (value) {
   } else if (this.category === "Dresses and Jumpsuits") {
     return ["Jumpsuits", "Mini dresses", "Midi dresses", "Maxi dresses", "Overalls"].includes(value)
   } else if (this.category === "Shoes") {
-    return [null].includes(value)
+    return ["Boots", "Heels", "Sandals", "Sneakers"].includes(value)
   } else if (this.category === "Accessories") {
     return ["Bags", "Belts", "Gloves", "Hats", "Jewelry", "Scarves", "Sunglasses"].includes(value)
   }

@@ -17,6 +17,13 @@ const getItems = asyncHandler(async (req, res) => {
     filter.subcategory = req.query.subcategory
   }
 
+  // Apply search based on the search query parameter
+  const searchQuery = req.query.search
+  if (searchQuery) {
+    // Perform search based on searchQuery and update filter accordingly
+    filter.$or = [{ name: { $regex: searchQuery, $options: "i" } }, { brand: { $regex: searchQuery, $options: "i" } }]
+  }
+
   // Apply sorting based on the sort query parameter
   const sortQuery = req.query.sort
   const sortOptions = {}
@@ -63,6 +70,7 @@ const setItem = asyncHandler(async (req, res) => {
     datesWorn: req.body.datesWorn,
     value: req.body.value,
     washInstructions: req.body.washInstructions,
+    location: req.body.location,
   })
   res.status(200).json(item)
 })

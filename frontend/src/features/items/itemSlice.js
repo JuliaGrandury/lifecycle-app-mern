@@ -5,7 +5,9 @@ const initialState = {
   items: [],
   filterObject: {
     category: null,
-    subcategory: null
+    subcategory: null,
+    search: null,
+    sort: null,
   },
   isError: false,
   isSuccess: false,
