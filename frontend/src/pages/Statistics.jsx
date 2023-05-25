@@ -1,8 +1,8 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
-import styles from "./Statistics.module.css"
+import { useDispatch, useSelector } from "react-redux"
 import { MdOutlineKeyboardArrowDown } from "react-icons/md"
+import styles from "./Statistics.module.css"
 import default_image from "../assets/default_image.png"
 import { toast } from "react-toastify"
 
@@ -16,17 +16,26 @@ const mostWorn = [
 
 const Statistics = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const { user } = useSelector((state) => state.auth)
+  // const { topFive, isLoading, isError, message } = useSelector((state) => state.topFive)
 
   const handleSeeDetails = () => {
-    toast('This feature is currently in development.')
+    toast("This feature is currently in development.")
   }
 
   useEffect(() => {
+    // if (isError) {
+    //   console.log(message)
+    // }
+
     if (!user) {
       navigate("/authentication")
     }
-  }, [user, navigate])
+
+    // dispatch(getTopFive())
+  }, [user, navigate, dispatch])
 
   return (
     <section className={styles.cards__container}>
@@ -68,15 +77,16 @@ const Statistics = () => {
           <h4>Your Most Worn Items</h4>
           <table>
             <tbody>
-              {mostWorn.map((item) => (
-                <tr key={`mostworn${item.rank}`}>
-                  <td>{item.name}</td>
-                  <td className={styles.item__image}>
-                    <img src={default_image} alt={item.name} />
-                  </td>
-                  <td className={styles.item_times}>{item.timesWorn}x in last month</td>
-                </tr>
-              ))}
+              {mostWorn &&
+                mostWorn.map((item) => (
+                  <tr key={`mostworn${item.rank}`}>
+                    <td>{item.name}</td>
+                    <td className={styles.item__image}>
+                      <img src={default_image} alt={item.name} />
+                    </td>
+                    <td className={styles.item_times}>{item.timesWorn}x in last month</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

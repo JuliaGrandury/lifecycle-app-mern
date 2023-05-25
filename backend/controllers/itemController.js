@@ -7,7 +7,36 @@ const User = require("../models/userModel")
 // @route GET /api/v1/items
 // @acces Private
 const getItems = asyncHandler(async (req, res) => {
-  const items = await Item.find({ user: req.user.id })
+  const filter = { user: req.user.id }
+
+  // Apply filter based on category and subcategory query parameters
+  if (req.query.category) {
+    filter.category = req.query.category
+  }
+  if (req.query.subcategory) {
+    filter.subcategory = req.query.subcategory
+  }
+
+  // Apply sorting based on the sort query parameter
+  const sortQuery = req.query.sort
+  const sortOptions = {}
+  if (sortQuery === "name") {
+    sortOptions.name = 1 // Sort by name in ascending order
+  } else if (sortQuery === "-name") {
+    sortOptions.name = -1 // Sort by name in descending order
+  } else if (sortQuery === "brand") {
+    sortOptions.brand = 1 // Sort by price in ascending order
+  } else if (sortQuery === "-brand") {
+    sortOptions.brand = -1 // Sort by price in descending order
+  } else if (sortQuery === "createdAt") {
+    sortOptions.createdAt = 1 // Sort by createdAt in ascending order
+  } else if (sortQuery === "-createdAt") {
+    sortOptions.createdAt = -1 // Sort by createdAt in descending order (default)
+  }
+
+  console.log(`From itemController: ${filter.category} and ${filter.subcategory}`)
+
+  const items = await Item.find(filter).sort(sortOptions)
   res.status(200).json(items)
 })
 

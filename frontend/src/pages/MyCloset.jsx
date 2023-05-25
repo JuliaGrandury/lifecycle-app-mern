@@ -16,13 +16,14 @@ import allCategories from "../utils/allCategories"
 
 //don't need to update everytime the component remounts
 const filters = allCategories.filters
+// const filterObject = { category: "Bottoms", subcategory: "" }
 
 const MyCloset = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const { user } = useSelector((state) => state.auth)
-  const { items, isLoading, isError, message } = useSelector((state) => state.items)
+  const { items, isLoading, isError, message, filterObject } = useSelector((state) => state.items)
   const [searchQuery, setSearchQuery] = useState("")
 
   const [selectedAction, setSelectedAction] = useState({
@@ -41,12 +42,12 @@ const MyCloset = () => {
       navigate("/authentication")
     }
 
-    dispatch(getItems())
+    dispatch(getItems(filterObject))
 
     return () => {
       dispatch(reset())
     }
-  }, [user, navigate, isError, message, dispatch])
+  }, [user, navigate, isError, message, dispatch, filterObject])
 
   if (isLoading) {
     return <Spinner />
@@ -151,6 +152,10 @@ const MyCloset = () => {
                   <ItemCompLarge item={item} />
                 </Fragment>
               ))}
+          </div>
+        ) : filterObject ? (
+          <div style={{ color: "grey", textAlign: "center", marginTop: "10%" }}>
+            <h3 style={{ fontWeight: 400 }}>No items corresponding to this search.</h3>
           </div>
         ) : (
           <div className={styles.emptycloset__div}>
