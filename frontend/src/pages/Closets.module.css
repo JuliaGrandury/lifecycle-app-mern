@@ -1,6 +1,6 @@
 .closet__toolbar {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
     justify-content: space-between;
     padding: 8px 20px 8px 0px;
     align-items: center;
@@ -113,6 +113,7 @@
 }
 
 .item__header {
+    position: relative;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -151,6 +152,19 @@
     display: block;
     width: 100%;
     object-fit: cover;
+}
+
+.location__tag {
+    position: absolute;
+    top: 65px;
+    right: 5px;
+    width: fit-content;
+    border: 1px solid var(--bg-light);
+    transform: rotate(90deg);
+    transform-origin: top right;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 10px;
 }
 
 /* ---------------------------------- */

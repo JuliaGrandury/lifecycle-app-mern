@@ -54,6 +54,7 @@ const MyCloset = () => {
 
   const handleFilter = (sortValue) => {
     dispatch(updateFilter({ ...filterObject, sort: sortValue }))
+    setSelectedAction({ ...selectedAction, filter: false })
   }
 
   const handleSearch = (event) => {
