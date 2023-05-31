@@ -1,7 +1,6 @@
 const asyncHandler = require("express-async-handler")
 
 const Item = require("../models/itemModel")
-const User = require("../models/userModel")
 
 // @desc Get items of specific user
 // @route GET /api/v1/items
@@ -40,8 +39,6 @@ const getItems = asyncHandler(async (req, res) => {
   } else if (sortQuery === "-createdAt") {
     sortOptions.createdAt = -1 // Sort by createdAt in descending order (default)
   }
-
-  console.log(`From itemController: ${filter.category} and ${filter.subcategory}`)
 
   const items = await Item.find(filter).sort(sortOptions)
   res.status(200).json(items)
@@ -125,9 +122,60 @@ const deleteItem = asyncHandler(async (req, res) => {
   res.status(200).json({ id: req.params.id })
 })
 
+// @desc Get closet statistics
+// @route GET /api/v1/statistics
+// @acces Private
+const getStatistics = asyncHandler(async (req, res) => {
+  const totalItemsNum = await Item.countDocuments({ user: req.user.id })
+  const outOfClosetNum = await Item.countDocuments({ user: req.user.id, inCloset: false })
+  const toRepairNum = await Item.countDocuments({ user: req.user.id, toRepair: true })
+
+  const lastMonthSpending = await Item.aggregate([
+    {
+      $match: {
+        user: req.user.id,
+        createdAt: {
+          $gte: new Date(new Date().setMonth(new Date().getMonth() - 1)),
+        },
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        totalValue: { $sum: "$value" },
+      },
+    },
+  ])
+
+  const mostWorn = await Item.aggregate([
+    {
+      $addFields: {
+        datesWornSize: { $size: "$datesWorn" },
+      },
+    },
+    {
+      $sort: { datesWornSize: -1 }, // Sort in descending order (most to least) based on datesWornSize
+    },
+  ])
+
+  const leastWorn = await Item.aggregate([
+    {
+      $addFields: {
+        datesWornSize: { $size: "$datesWorn" },
+      },
+    },
+    {
+      $sort: { datesWornSize: 1 }, // Sort in ascending order (least to most) based on datesWornSize
+    },
+  ])
+
+  res.status(200).json({ totalItemsNum, outOfClosetNum, toRepairNum, lastMonthSpending, mostWorn, leastWorn })
+})
+
 module.exports = {
   getItems,
   setItem,
   updateItem,
   deleteItem,
+  getStatistics,
 }

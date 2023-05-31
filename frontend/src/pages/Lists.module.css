@@ -1,0 +1,16 @@
+.table {
+    width: 100%;
+    border-radius: 10px;
+    padding: 15px 15px;
+    background-color: pink;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+.thead {
+    text-align: center;
+}
+
+.td {
+    width: fit-content;
+}

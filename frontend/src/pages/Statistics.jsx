@@ -19,7 +19,9 @@ const Statistics = () => {
   const dispatch = useDispatch()
 
   const { user } = useSelector((state) => state.auth)
-  // const { topFive, isLoading, isError, message } = useSelector((state) => state.topFive)
+  const {statistics} = useSelector((state)=> state.statistics)
+
+  // totalItemsNum, outOfClosetNum, toRepairNum, lastMonthSpending, mostWorn, leastWorn
 
   const handleSeeDetails = () => {
     toast("This feature is currently in development.")
@@ -65,10 +67,10 @@ const Statistics = () => {
 
       <div className={styles.habit__overview}>
         <div className={styles.habit__card}>
-          You have worn <span>40%</span> of your closet this month
+          You have worn <span style={{ color: "red" }}>40%</span> of your closet this month
         </div>
         <div className={styles.habit__card}>
-          You have spent <span>100$</span> on your closet this month
+          You have spent <span style={{ color: "purple" }}>100$</span> on your closet this month
         </div>
       </div>
 

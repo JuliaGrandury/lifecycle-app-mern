@@ -18,9 +18,9 @@ const accessList = ["Lucy435", "Marco2000", "ClaireMarie"]
 function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { user } = useSelector((state) => state.auth)
   const [showDropdown, setShowDropdown] = useState()
   const [showMenu, setShowMenu] = useState(false)
+  const [selectedDisplay, setSelectedDisplay] = useState({ label: "My Closet", path: "/closets" })
 
   const onLogout = () => {
     dispatch(logout())
@@ -36,24 +36,54 @@ function Header() {
   return (
     <header className="header">
       <div className="logo">
-        <Link to="/">LifeCycle</Link>
+        <Link to="/dashboard">LifeCycle</Link>
       </div>
       <ul className="nav__list">
+        <li>
+          <NavLink to="/dashboard">Dashboard</NavLink>
+        </li>
         {/* DROPDOWN BELOW CLOSET NAME */}
         <li>
           <div className="dropdown__container">
-            <NavLink to="/closets">
+            <NavLink to={selectedDisplay.path}>
               <button className="dropdown__button" onClick={() => setShowDropdown(!showDropdown)}>
-                My Closet
+                {selectedDisplay.label}
                 <VscTriangleDown style={{ marginLeft: "8px" }} />
               </button>
             </NavLink>
             {showDropdown ? (
               <ul className="dropdown__list">
-                <li onClick={() => navigate("/mylists")}>My Lists</li>
+                <li
+                  onClick={() => {
+                    navigate("/closets")
+                    setSelectedDisplay({ label: "My Closet", path: "/closets" })
+                    setShowDropdown(!showDropdown)
+                  }}>
+                  My Closet
+                </li>
+                <li
+                  onClick={() => {
+                    navigate("/mylists")
+                    setSelectedDisplay({ label: "My Lists", path: "/mylists" })
+                    setShowDropdown(!showDropdown)
+                  }}>
+                  My Lists
+                </li>
+                {/* <li
+                  onClick={() => {
+                    navigate("/")
+                    setShowDropdown(!showDropdown)
+                  }}>
+                  My Outfits
+                </li> */}
                 {accessList &&
                   accessList.map((closet) => (
-                    <li key={closet} onClick={() => navigateToCloset(closet)}>
+                    <li
+                      key={closet}
+                      onClick={() => {
+                        navigateToCloset(closet)
+                        setShowDropdown(!showDropdown)
+                      }}>
                       {closet}'s Closet
                     </li>
                   ))}
@@ -63,13 +93,9 @@ function Header() {
             )}
           </div>
         </li>
-
-        <li>
-          <NavLink to="/statistics">Statistics</NavLink>
-        </li>
-        <li>
+        {/* <li>
           <NavLink to="/settings">Settings</NavLink>
-        </li>
+        </li> */}
         <li>
           <button className="btn" onClick={onLogout}>
             <IoIosLogOut />
@@ -95,15 +121,15 @@ function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/statistics" onClick={() => setShowMenu(false)}>
-              Statistics
+            <NavLink to="/dashboard" onClick={() => setShowMenu(false)}>
+              Dashboard
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to="/settings" onClick={() => setShowMenu(false)}>
               Settings
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <button className="btn logout_btn" onClick={onLogout}>
               Logout
