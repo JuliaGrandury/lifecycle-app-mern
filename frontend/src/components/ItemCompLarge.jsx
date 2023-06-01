@@ -45,7 +45,7 @@ function ItemCompLarge({ item, onClose }) {
         onClick={() => setIsOpen(!isOpen)}>
         <motion.div className={styles.item__header}>
           <motion.h2 layout="position">{item.name}</motion.h2>
-          {console.log(item.location)}
+          {/* {console.log(item.location)} */}
           {item.location && <div className={styles.location__tag}>{item.location}</div>}
           <div className={styles.item__details}>
             <span>

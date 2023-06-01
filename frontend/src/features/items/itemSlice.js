@@ -3,6 +3,7 @@ import itemService from "./itemService"
 
 const initialState = {
   items: [],
+  statistics: {},
   filterObject: {
     category: null,
     subcategory: null,
@@ -42,6 +43,17 @@ export const deleteItem = createAsyncThunk("items/delete", async (id, thunkAPI) 
   try {
     const token = thunkAPI.getState().auth.user.token
     return await itemService.deleteItem(id, token)
+  } catch (error) {
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+// Get closet statistics
+export const getStatistics = createAsyncThunk("items/statistics", async (_, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token
+    return await itemService.getStatistics(token)
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
     return thunkAPI.rejectWithValue(message)
@@ -97,6 +109,19 @@ export const itemSlice = createSlice({
         state.items = state.items.filter((item) => item._id !== action.payload.id)
       })
       .addCase(deleteItem.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(getStatistics.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getStatistics.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.statistics = action.payload
+      })
+      .addCase(getStatistics.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

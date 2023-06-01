@@ -15,13 +15,14 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use("/api/v1/items", require("./routes/itemRoutes"))
+app.use("/api/v1/lists", require("./routes/listRoutes"))
 app.use("/api/v1/users", require("./routes/userRoutes"))
 
 // serve the frontend in production
-app.use(express.static(publicPath))
-app.get("*", (req, res) => {
-  res.sendFile(path.join(publicPath, "index.html"))
-})
+// app.use(express.static(publicPath))
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(publicPath, "index.html"))
+// })
 
 // // serve the frontend in production
 // if (process.env.NODE_ENV === 'production') {

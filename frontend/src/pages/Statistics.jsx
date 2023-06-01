@@ -5,23 +5,14 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md"
 import styles from "./Statistics.module.css"
 import default_image from "../assets/default_image.png"
 import { toast } from "react-toastify"
-
-const mostWorn = [
-  { rank: 1, name: "Zara Men Puff Jacket", image: null, timesWorn: 3 },
-  { rank: 2, name: "DVF Coral Design Dress", image: null, timesWorn: 15 },
-  { rank: 3, name: "DVF Coral Design Dress", image: null, timesWorn: 15 },
-  { rank: 4, name: "DVF Coral Design Dress", image: null, timesWorn: 15 },
-  { rank: 5, name: "DVF Coral Design Dress", image: null, timesWorn: 15 },
-]
+import { getStatistics } from "../features/items/itemSlice"
 
 const Statistics = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const { user } = useSelector((state) => state.auth)
-  const {statistics} = useSelector((state)=> state.statistics)
-
-  // totalItemsNum, outOfClosetNum, toRepairNum, lastMonthSpending, mostWorn, leastWorn
+  const { totalItemsNum, outOfClosetNum, toRepairNum, lastMonthSpending, mostWorn, leastWorn } = useSelector((state) => state.items.statistics)
 
   const handleSeeDetails = () => {
     toast("This feature is currently in development.")
@@ -36,7 +27,7 @@ const Statistics = () => {
       navigate("/authentication")
     }
 
-    // dispatch(getTopFive())
+    dispatch(getStatistics())
   }, [user, navigate, dispatch])
 
   return (
@@ -81,12 +72,12 @@ const Statistics = () => {
             <tbody>
               {mostWorn &&
                 mostWorn.map((item) => (
-                  <tr key={`mostworn${item.rank}`}>
+                  <tr key={`mostworn${item.name}`}>
                     <td>{item.name}</td>
                     <td className={styles.item__image}>
                       <img src={default_image} alt={item.name} />
                     </td>
-                    <td className={styles.item_times}>{item.timesWorn}x in last month</td>
+                    <td className={styles.item_times}>{item.datesWorn.length}x in last month</td>
                   </tr>
                 ))}
             </tbody>
@@ -97,15 +88,16 @@ const Statistics = () => {
           <h4>Your Least Worn Items</h4>
           <table>
             <tbody>
-              {mostWorn.map((item) => (
-                <tr key={`leastworn${item.rank}`}>
-                  <td>{item.name}</td>
-                  <td className={styles.item__image}>
-                    <img src={default_image} alt={item.name} />
-                  </td>
-                  <td className={styles.item_times}>{item.timesWorn}x in last month</td>
-                </tr>
-              ))}
+              {leastWorn &&
+                leastWorn.map((item) => (
+                  <tr key={`leastworn${item.name}`}>
+                    <td>{item.name}</td>
+                    <td className={styles.item__image}>
+                      <img src={default_image} alt={item.name} />
+                    </td>
+                    <td className={styles.item_times}>{item.datesWorn.lengt}x in last month</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
