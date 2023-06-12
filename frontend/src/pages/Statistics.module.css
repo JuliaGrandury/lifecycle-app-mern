@@ -107,6 +107,15 @@
     padding: 8px 0px;
 }
 
+.list__container tr td:first-child,
+td:last-child {
+    width: 30%;
+}
+
+.list__container tr td:last-child {
+    text-align: right;
+}
+
 .item__image {
     border-radius: 15px;
     overflow: hidden;
@@ -129,7 +138,7 @@
     }
 
     .list__container table {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .item__image {
@@ -147,9 +156,14 @@
         min-width: 230px;
     }
 
-    .item_times {
-        display: none;
+    .list__container tr td:first-child,
+    td:last-child {
+        width: 50%;
     }
+
+    /* .item_times {
+        display: none;
+    } */
 
     .list__container tr {
         justify-content: center;

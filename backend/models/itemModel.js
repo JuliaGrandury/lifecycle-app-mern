@@ -60,6 +60,18 @@ const itemSchema = mongoose.Schema(
       required: false,
       default: "No instructions specified",
     },
+    url: {
+      type: String,
+      required: false,
+      validate: {
+        validator: function (value) {
+          // regular expression to validate URL
+          const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/
+          return urlRegex.test(value)
+        },
+        message: "Invalid URL",
+      },
+    },
     location: {
       //to note if it's in storage, your closet, friends closet, suitcase, etc.
       type: mongoose.Schema.Types.ObjectId,

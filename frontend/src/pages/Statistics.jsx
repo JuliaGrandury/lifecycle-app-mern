@@ -96,7 +96,7 @@ const Statistics = () => {
                     <td className={styles.item__image}>
                       <img src={default_image} alt={item.name} />
                     </td>
-                    <td className={styles.item_times}>{item.datesWorn.lengt}x in last month</td>
+                    <td className={styles.item_times}>{item.datesWorn.length}x in last month</td>
                   </tr>
                 ))}
             </tbody>

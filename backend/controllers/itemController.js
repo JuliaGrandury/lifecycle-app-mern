@@ -139,6 +139,7 @@ const getStatistics = asyncHandler(async (req, res) => {
 
   //convert to mongoose ObjectId for following aggregation pipelines
   const userId = new mongoose.Types.ObjectId(req.user.id)
+
   let lastMonthSpending = await Item.aggregate([
     {
       $match: {
@@ -163,25 +164,28 @@ const getStatistics = asyncHandler(async (req, res) => {
   ])
   lastMonthSpending = lastMonthSpending.length > 0 ? lastMonthSpending[0]["monthlySum"] : null
 
-  // const mostWorn = await Item.aggregate([
-  //   {
-  //     $match: {
-  //       user: req.user.id,
-  //     },
-  //   },
-  //   {
-  //     $addFields: {
-  //       datesWornSize: { $size: "$datesWorn" },
-  //     },
-  //   },
-  //   {
-  //     $sort: { datesWornSize: -1 },
-  //   },
-  // ]).limit(5)
-
-  const mostWorn = await Item.find({ user: req.user.id }).limit(1)
+  const mostWorn = await Item.aggregate([
+    {
+      $match: {
+        user: userId,
+      },
+    },
+    {
+      $addFields: {
+        datesWornSize: { $size: "$datesWorn" },
+      },
+    },
+    {
+      $sort: { datesWornSize: -1 }, // Sort in descending order (most to least) based on datesWornSize
+    },
+  ]).limit(5)
 
   const leastWorn = await Item.aggregate([
+    {
+      $match: {
+        user: userId,
+      },
+    },
     {
       $addFields: {
         datesWornSize: { $size: "$datesWorn" },

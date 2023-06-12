@@ -45,13 +45,13 @@ function ItemCompLarge({ item, onClose }) {
         onClick={() => setIsOpen(!isOpen)}>
         <motion.div className={styles.item__header}>
           <motion.h2 layout="position">{item.name}</motion.h2>
-          {item.location && <div className={styles.location__tag}>{item.location.name}</div>}
           <div className={styles.item__details}>
             <span>
               Size {item.size} {item.brand ? `, ${item.brand}` : ""}
             </span>
             <span>{item.color && item.color.map((color) => <ColorSphere color={color} key={`${color}${item._id}`} />)}</span>
           </div>
+          {item.location && <div className={styles.location__tag}>{item.location.name}</div>}
         </motion.div>
         <div className={styles.item__image}>
           <img src={default_image} alt={item.name} />

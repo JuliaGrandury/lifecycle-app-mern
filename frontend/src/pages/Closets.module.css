@@ -27,7 +27,7 @@
 .item__grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 18px;
+    gap: 8px;
 }
 
 /* FILTER BAR STYLING */
@@ -113,6 +113,7 @@
 }
 
 .item__header {
+    padding: 10px 0px 8px;
     position: relative;
     height: auto;
     display: flex;
