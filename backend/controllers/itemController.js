@@ -40,7 +40,7 @@ const getItems = asyncHandler(async (req, res) => {
     sortOptions.createdAt = -1 // Sort by createdAt in descending order (default)
   }
 
-  const items = await Item.find(filter).sort(sortOptions)
+  const items = await Item.find(filter).sort(sortOptions).populate({ path: "location", select: "name" })
   res.status(200).json(items)
 })
 
@@ -130,7 +130,10 @@ const getStatistics = asyncHandler(async (req, res) => {
   const outOfClosetNum = await Item.countDocuments({ user: req.user.id, inCloset: false })
   const toRepairNum = await Item.countDocuments({ user: req.user.id, toRepair: true })
 
-  console.log(req.user.id)
+  const wornItems = await Item.countDocuments({
+    user: req.user.id,
+    $expr: { $gt: [{ $size: "$datesWorn" }, 0] },
+  })
 
   const lastMonthSpending = await Item.aggregate([
     {
@@ -148,22 +151,42 @@ const getStatistics = asyncHandler(async (req, res) => {
       },
     },
   ])
+  // const lastMonth = new Date()
+  // lastMonth.setMonth(lastMonth.getMonth() - 1)
 
-  const mostWorn = await Item.aggregate([
-    {
-      $match: {
-        user: req.user.id,
-      },
-    },
-    {
-      $addFields: {
-        datesWornSize: { $size: "$datesWorn" },
-      },
-    },
-    {
-      $sort: { datesWornSize: -1 },
-    },
-  ]).limit(5)
+  // const result = await Item.aggregate([
+  //   {
+  //     $match: {
+  //       user: req.user.id,
+  //       createdAt: { $gte: lastMonth },
+  //     },
+  //   },
+  //   {
+  //     $group: {
+  //       _id: null,
+  //       totalValue: { $sum: "$value" },
+  //     },
+  //   },
+  // ])
+  // const lastMonthSpending = result.length > 0 ? result[0].totalValue : 0
+
+  // const mostWorn = await Item.aggregate([
+  //   {
+  //     $match: {
+  //       user: req.user.id,
+  //     },
+  //   },
+  //   {
+  //     $addFields: {
+  //       datesWornSize: { $size: "$datesWorn" },
+  //     },
+  //   },
+  //   {
+  //     $sort: { datesWornSize: -1 },
+  //   },
+  // ]).limit(5)
+
+  const mostWorn = await Item.find({ user: req.user.id })
 
   const leastWorn = await Item.aggregate([
     {
@@ -176,7 +199,7 @@ const getStatistics = asyncHandler(async (req, res) => {
     },
   ]).limit(5)
 
-  res.status(200).json({ totalItemsNum, outOfClosetNum, toRepairNum, lastMonthSpending, mostWorn, leastWorn })
+  res.status(200).json({ totalItemsNum, outOfClosetNum, toRepairNum, wornItems, lastMonthSpending, mostWorn, leastWorn })
 })
 
 module.exports = {

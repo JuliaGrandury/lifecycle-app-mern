@@ -116,13 +116,18 @@ function Header() {
             </button>
           </li>
           <li>
+            <NavLink to="/dashboard" onClick={() => setShowMenu(false)}>
+              Dashboard
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="/closets" onClick={() => setShowMenu(false)}>
               My Closet
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard" onClick={() => setShowMenu(false)}>
-              Dashboard
+            <NavLink to="/mylists" onClick={() => setShowMenu(false)}>
+              My Lists
             </NavLink>
           </li>
           {/* <li>

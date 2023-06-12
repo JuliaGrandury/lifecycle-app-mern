@@ -1,11 +1,12 @@
 import { TextField, Select, MenuItem, InputLabel, FormControl, FormControlLabel, Switch, Checkbox } from "@mui/material"
-import { useState, useRef } from "react"
-import { useDispatch } from "react-redux"
+import { useState, useRef, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { createItem } from "../features/items/itemSlice"
 import styles from "./ItemForm.module.css"
 import { IoCloseCircle } from "react-icons/io5"
 import allCategories from "../utils/allCategories"
 import ColorSphere from "./ColorSphere"
+import { getLocations } from "../features/locations/locationSlice"
 
 // don't need to update everytime component remounts
 const colorOptions = allCategories.colors
@@ -27,13 +28,22 @@ const initialFormState = {
   datesWorn: [],
   value: null,
   washInstructions: null,
-  location: null,
+  location: "",
 }
 
 const NewItemForm = ({ onCloseForm }) => {
   const dispatch = useDispatch()
   const [newItem, setNewItem] = useState(initialFormState)
   const formRef = useRef(null)
+
+  const { locations, isLoading, isError, message } = useSelector((state) => state.locations)
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message)
+    }
+    dispatch(getLocations())
+  }, [isError, message, dispatch])
 
   const handleFormChange = (event) => {
     const { name, value } = event.target
@@ -182,6 +192,18 @@ const NewItemForm = ({ onCloseForm }) => {
                   <FormControlLabel control={<Checkbox checked={newItem.season.includes(option)} />} label={option} />
                 </MenuItem>
               ))}
+            </Select>
+          </FormControl>
+
+          <FormControl className={styles.form__control} size={smallWindow ? "small" : "normal"}>
+            <InputLabel id="location-select-label">Location</InputLabel>
+            <Select labelId="location-select-label" id="location-select" name="location" label="Location" value={newItem.location} onChange={handleFormChange}>
+              {locations &&
+                locations.map((location) => (
+                  <MenuItem key={location._id} value={location._id}>
+                    {location.name}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
 

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-// import allCategories from "../../frontend/src/utils/allCategories"
+const Location = require("../models/locationModel")
 
 const itemSchema = mongoose.Schema(
   {

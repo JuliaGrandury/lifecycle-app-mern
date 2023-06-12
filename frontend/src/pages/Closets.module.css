@@ -156,9 +156,10 @@
 
 .location__tag {
     position: absolute;
-    top: 65px;
+    top: 70px;
     right: 5px;
     width: fit-content;
+    max-width: auto;
     border: 1px solid var(--bg-light);
     transform: rotate(90deg);
     transform-origin: top right;

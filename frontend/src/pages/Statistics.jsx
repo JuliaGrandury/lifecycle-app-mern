@@ -12,7 +12,8 @@ const Statistics = () => {
   const dispatch = useDispatch()
 
   const { user } = useSelector((state) => state.auth)
-  const { totalItemsNum, outOfClosetNum, toRepairNum, lastMonthSpending, mostWorn, leastWorn } = useSelector((state) => state.items.statistics)
+  const { totalItemsNum, outOfClosetNum, toRepairNum, wornItems, lastMonthSpending, mostWorn, leastWorn } = useSelector((state) => state.items.statistics)
+  const wornPercentage = Math.floor((wornItems / totalItemsNum) * 100)
 
   const handleSeeDetails = () => {
     toast("This feature is currently in development.")
@@ -34,21 +35,21 @@ const Statistics = () => {
     <section className={styles.cards__container}>
       <div className={styles.closet__overview}>
         <div className={styles.closet__card}>
-          <span>176</span> Items in Closet
+          <span>{totalItemsNum}</span> Items in Closet
           <button className={styles.seedetails__button} onClick={handleSeeDetails}>
             See Details
             <MdOutlineKeyboardArrowDown />
           </button>
         </div>
         <div className={styles.closet__card}>
-          <span>3</span> Items out of Closet
+          <span>{outOfClosetNum}</span> Items out of Closet
           <button className={styles.seedetails__button} onClick={handleSeeDetails}>
             See Details
             <MdOutlineKeyboardArrowDown />
           </button>
         </div>
         <div className={styles.closet__card}>
-          <span>2</span> Items to Repair
+          <span>{toRepairNum}</span> Items to Repair
           <button className={styles.seedetails__button} onClick={handleSeeDetails}>
             See Details
             <MdOutlineKeyboardArrowDown />
@@ -58,10 +59,10 @@ const Statistics = () => {
 
       <div className={styles.habit__overview}>
         <div className={styles.habit__card}>
-          You have worn <span style={{ color: "red" }}>40%</span> of your closet this month
+          You have worn <span style={wornPercentage > 80 ? { color: "green" } : { color: "orange" }}>{wornPercentage}%</span> of your closet this month
         </div>
         <div className={styles.habit__card}>
-          You have spent <span style={{ color: "purple" }}>100$</span> on your closet this month
+          You have spent <span style={{ color: "purple" }}>{lastMonthSpending}$</span> on your closet this month
         </div>
       </div>
 

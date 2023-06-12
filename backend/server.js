@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use("/api/v1/items", require("./routes/itemRoutes"))
 app.use("/api/v1/lists", require("./routes/listRoutes"))
+app.use("/api/v1/locations", require("./routes/locationRoutes"))
 app.use("/api/v1/users", require("./routes/userRoutes"))
 
 // serve the frontend in production

@@ -63,6 +63,11 @@
     flex-basis: calc(50% - 10px);
 }
 
+.habit__card span {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
 
 /* --------------------- */
 /* ITEM STATS */
@@ -147,6 +152,6 @@
     }
 
     .list__container tr {
-       justify-content: center;
+        justify-content: center;
     }
 }

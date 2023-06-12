@@ -63,6 +63,7 @@
 .dropdown__list {
   position: absolute;
   top: 50px;
+  right: 8px;
   color: white;
   padding: 10px 10px;
   background-color: var(--primary-galactic);
