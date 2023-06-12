@@ -13,6 +13,7 @@ import Spinner from "../components/Spinner"
 import styles from "./Closets.module.css"
 import squiggle_arrow from "../assets/squiggle_arrow.png"
 import allCategories from "../utils/allCategories"
+import Autocomplete from "@mui/material/Autocomplete"
 
 //don't need to update everytime the component remounts
 const filters = allCategories.filters
@@ -66,6 +67,10 @@ const MyCloset = () => {
     dispatch(updateFilter({ ...filterObject, search: searchQuery }))
   }
 
+  const handleShare = (event) => {
+    toast("Fear not, our developers were alerted and this feature is being fixed")
+  }
+
   return (
     <>
       <section className={styles.closet__toolbar}>
@@ -110,14 +115,23 @@ const MyCloset = () => {
             </div>
           </li>
 
+          {/* SHARE CLOSET WITH OTHERS */}
           <li>
-            <button className={styles.action__button} onClick={() => setSelectedAction({ search: false, filter: false, add: !selectedAction.add, share: false })}>
-              <IoAddCircle />
-            </button>
+            <div className={styles.dropdown__container}>
+              <button className={styles.action__button} onClick={() => setSelectedAction({ search: false, filter: false, add: !selectedAction.add, share: false })}>
+                <IoAddCircle />
+              </button>
+              {/* <div>{selectedAction.share && <Autocomplete />}</div> */}
+            </div>
           </li>
 
           <li>
-            <button className={styles.action__button} onClick={() => setSelectedAction({ search: false, filter: false, add: false, share: !selectedAction.share })}>
+            <button
+              className={styles.action__button}
+              onClick={() => {
+                setSelectedAction({ search: false, filter: false, add: false, share: !selectedAction.share })
+                handleShare()
+              }}>
               <IoPeopleCircleSharp />
             </button>
           </li>

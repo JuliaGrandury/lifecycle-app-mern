@@ -25,12 +25,21 @@
   --primary-orange: #AF4319;
   --primary-blue: #129490;
   --primary-teal: #006D77;
+
+  /* NEW COLOR PALETTE AS OF 06/12 */
+  --bg-black: #000000;
+  --primary-grey: #3b3b3b;
+  --primary-tealtwo: #6ad7a6;
+  --primary-green: #6ed563;
+  --primary-darkgreentwo: #3e594b;
+  --primary-orangetwo: #f6c187;
+  --primary-rust: #db512f;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
   height: 100vh;
-  background-color: var(--bg-light);
+  background-color: var(--bg-black);
 }
 
 .btn {

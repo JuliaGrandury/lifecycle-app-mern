@@ -1,16 +1,37 @@
-.table {
+.list__table {
     width: 100%;
-    border-radius: 10px;
-    padding: 15px 15px;
-    background-color: pink;
-    border-collapse: separate;
-    border-spacing: 0 15px;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #222427;
+    border-collapse: collapse;
+    /* border-spacing: 3px; */
+    color: #ffffff;
+    font-family: Poppins, sans-serif;
+    font-weight: 300;
+    font-size: 15px;
 }
 
-.thead {
-    text-align: center;
+.list__table tr {
+    border-radius: 18px;
 }
 
-.td {
-    width: fit-content;
+.list__table tr:hover {
+    color: var(--primary-tealtwo);
+}
+
+.list__table tr .selected {
+    background-color: blue;
+    text-decoration: underline;
+    text-decoration-color: var(--primary-tealtwo);
+}
+
+.list__table tr td {
+    padding: 20px;
+}
+
+.division {
+    margin: 10px 0px;
+    background-color: var(--primary-grey);
+    height: 1.5px;
+    width: 100%;
 }

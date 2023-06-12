@@ -1,5 +1,6 @@
 import { IoIosLogOut } from "react-icons/io"
-import { VscTriangleDown } from "react-icons/vsc"
+import { CiSettings } from "react-icons/ci"
+import { MdKeyboardArrowDown } from "react-icons/md"
 import { HiMenuAlt3 } from "react-icons/hi"
 import { IoIosCloseCircleOutline } from "react-icons/io"
 import { Link, NavLink, useNavigate } from "react-router-dom"
@@ -48,7 +49,7 @@ function Header() {
             <NavLink to={selectedDisplay.path}>
               <button className="dropdown__button" onClick={() => setShowDropdown(!showDropdown)}>
                 {selectedDisplay.label}
-                <VscTriangleDown style={{ marginLeft: "8px" }} />
+                <MdKeyboardArrowDown style={{ marginLeft: "8px" }} />
               </button>
             </NavLink>
             {showDropdown ? (
@@ -99,6 +100,7 @@ function Header() {
         <li>
           <button className="btn" onClick={onLogout}>
             <IoIosLogOut />
+            {/* <CiSettings /> */}
           </button>
         </li>
       </ul>
