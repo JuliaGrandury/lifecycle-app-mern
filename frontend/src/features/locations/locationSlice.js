@@ -1,44 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
 const initialState = {
-  locations: [
-    {
-      _id: "64862e5d96f44cad1ca7f370",
-      user: "64371b297653765fef40f61c",
-      name: "Sky Condo",
-      __v: 0,
-    },
-    {
-      _id: "64862fa79b142743b8d68e36",
-      user: "64371b297653765fef40f61c",
-      name: "The Villager",
-      __v: 0,
-    },
-    {
-      _id: "6486310c7d1464807c0820d2",
-      user: "64371b297653765fef40f61c",
-      name: "6 Niamogue",
-      __v: 0,
-    },
-    {
-      _id: "6486410c63496e9aaae35270",
-      user: "64371b297653765fef40f61c",
-      name: "8 Niamogue",
-      __v: 0,
-    },
-    {
-      _id: "648730bec97046198e4037c6",
-      user: "64371b297653765fef40f61c",
-      name: "125 Millionaire's Lane",
-      __v: 0,
-    },
-    {
-      _id: "648730ccc97046198e4037cb",
-      user: "64371b297653765fef40f61c",
-      name: "None",
-      __v: 0,
-    },
-  ],
+  locations: [],
   isError: false,
   isSuccess: false,
   isLoading: false,

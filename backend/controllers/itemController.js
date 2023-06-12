@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler")
 
 const Item = require("../models/itemModel")
 
+const mongoose = require("mongoose")
+
 // @desc Get items of specific user
 // @route GET /api/v1/items
 // @acces Private
@@ -135,10 +137,12 @@ const getStatistics = asyncHandler(async (req, res) => {
     $expr: { $gt: [{ $size: "$datesWorn" }, 0] },
   })
 
-  const lastMonthSpending = await Item.aggregate([
+  //convert to mongoose ObjectId for following aggregation pipelines
+  const userId = new mongoose.Types.ObjectId(req.user.id)
+  let lastMonthSpending = await Item.aggregate([
     {
       $match: {
-        user: req.user.id,
+        user: userId,
         createdAt: {
           $gte: new Date(new Date().setMonth(new Date().getMonth() - 1)),
         },
@@ -147,28 +151,17 @@ const getStatistics = asyncHandler(async (req, res) => {
     {
       $group: {
         _id: null,
-        totalValue: { $sum: "$value" },
+        monthlySum: { $sum: "$value" },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        monthlySum: 1,
       },
     },
   ])
-  // const lastMonth = new Date()
-  // lastMonth.setMonth(lastMonth.getMonth() - 1)
-
-  // const result = await Item.aggregate([
-  //   {
-  //     $match: {
-  //       user: req.user.id,
-  //       createdAt: { $gte: lastMonth },
-  //     },
-  //   },
-  //   {
-  //     $group: {
-  //       _id: null,
-  //       totalValue: { $sum: "$value" },
-  //     },
-  //   },
-  // ])
-  // const lastMonthSpending = result.length > 0 ? result[0].totalValue : 0
+  lastMonthSpending = lastMonthSpending.length > 0 ? lastMonthSpending[0]["monthlySum"] : null
 
   // const mostWorn = await Item.aggregate([
   //   {
@@ -186,7 +179,7 @@ const getStatistics = asyncHandler(async (req, res) => {
   //   },
   // ]).limit(5)
 
-  const mostWorn = await Item.find({ user: req.user.id })
+  const mostWorn = await Item.find({ user: req.user.id }).limit(1)
 
   const leastWorn = await Item.aggregate([
     {

@@ -121,7 +121,7 @@ const NewItemForm = ({ onCloseForm }) => {
           </FormControl>
 
           <FormControl className={styles.form__control}>
-            <TextField name="value" label="Value" onChange={handleFormChange} size={smallWindow ? "small" : "normal"} />
+            <TextField name="value" label="Value" type="number" onChange={handleFormChange} size={smallWindow ? "small" : "normal"} />
           </FormControl>
 
           <FormControl className={styles.form__control} size={smallWindow ? "small" : "normal"}>

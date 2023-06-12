@@ -110,7 +110,7 @@
     .newitem__container {
         margin: 48px auto 30px;
         width: 100vw;
-        overflow-y: auto;
+        /* overflow-y: auto; */
         max-height: 92vh;
     }
 

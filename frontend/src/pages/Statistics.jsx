@@ -62,7 +62,7 @@ const Statistics = () => {
           You have worn <span style={wornPercentage > 80 ? { color: "green" } : { color: "orange" }}>{wornPercentage}%</span> of your closet this month
         </div>
         <div className={styles.habit__card}>
-          You have spent <span style={{ color: "purple" }}>{lastMonthSpending}$</span> on your closet this month
+          You have spent <span style={{ color: "purple" }}>${lastMonthSpending}</span> on your closet this month
         </div>
       </div>
 
@@ -73,7 +73,7 @@ const Statistics = () => {
             <tbody>
               {mostWorn &&
                 mostWorn.map((item) => (
-                  <tr key={`mostworn${item.name}`}>
+                  <tr key={item._id}>
                     <td>{item.name}</td>
                     <td className={styles.item__image}>
                       <img src={default_image} alt={item.name} />
@@ -91,7 +91,7 @@ const Statistics = () => {
             <tbody>
               {leastWorn &&
                 leastWorn.map((item) => (
-                  <tr key={`leastworn${item.name}`}>
+                  <tr key={item._id}>
                     <td>{item.name}</td>
                     <td className={styles.item__image}>
                       <img src={default_image} alt={item.name} />
