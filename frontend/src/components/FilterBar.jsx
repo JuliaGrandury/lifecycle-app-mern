@@ -36,7 +36,7 @@ const FilterBar = () => {
           {categoryOptions.map((option) => (
             <li key={option}>
               <button onClick={() => onClickTag(option)}>
-                <Tag label={option} color={"galactic"} />
+                <Tag label={option} color={"var(--primary-blue)"} />
               </button>
             </li>
           ))}
@@ -49,16 +49,16 @@ const FilterBar = () => {
         <ul className={styles.filterbar__list}>
           <li>
             <button onClick={() => onClickTag(filterObject.category)}>
-              <Tag label={filterObject.category} color={"tasman"} />
+              <Tag label={filterObject.category} color={"var(--primary-green)"} />
             </button>
           </li>
-          <li>
-            <MdNavigateNext />
+          <li style={{ paddingTop: "6px" }}>
+            <MdNavigateNext color={"var(--primary-green)"} />
           </li>
           {subcategoryOptions[filterObject.category]?.map((option) => (
             <li key={option}>
               <button onClick={() => onClickTag(option)}>
-                <Tag label={option} color={"galactic"} />
+                <Tag label={option} color={"var(--primary-blue)"} />
               </button>
             </li>
           ))}
@@ -69,15 +69,15 @@ const FilterBar = () => {
         <ul className={styles.filterbar__list}>
           <li>
             <button onClick={() => onClickTag(filterObject.category)}>
-              <Tag label={filterObject.category} color={"tasman"} />
+              <Tag label={filterObject.category} color={"var(--primary-green)"} />
             </button>
           </li>
-          <li>
-            <MdNavigateNext />
+          <li style={{ paddingTop: "6px" }}>
+            <MdNavigateNext color={"var(--primary-green)"} />
           </li>
           <li>
             <button onClick={() => onClickTag(filterObject.subcategory)}>
-              <Tag label={filterObject.subcategory} color={"tasman"} />
+              <Tag label={filterObject.subcategory} color={"var(--primary-green)"} />
             </button>
           </li>
         </ul>

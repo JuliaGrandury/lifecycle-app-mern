@@ -1,4 +1,6 @@
-import { IoAddCircle, IoSearchCircle, IoFilterCircle, IoPeopleCircleSharp } from "react-icons/io5"
+import { IoIosAddCircleOutline } from "react-icons/io"
+import { IoSearchCircleOutline, IoFilterCircleOutline, IoPeopleCircleOutline } from "react-icons/io5"
+
 import { GrTroubleshoot } from "react-icons/gr"
 import { useState, useEffect, Fragment } from "react"
 import { useNavigate } from "react-router-dom"
@@ -7,7 +9,7 @@ import { toast } from "react-toastify"
 import { getItems, reset, updateFilter } from "../features/items/itemSlice"
 import ItemForm from "../components/ItemForm"
 // import ItemCompSmall from "../components/ItemCompSmall"
-import ItemCompLarge from "../components/ItemCompLarge"
+import ItemCardGrid from "./ItemCardGrid"
 import FilterBar from "../components/FilterBar"
 import Spinner from "../components/Spinner"
 import styles from "./Closets.module.css"
@@ -88,7 +90,7 @@ const MyCloset = () => {
           )}
           <li>
             <button className={styles.action__button} onClick={() => setSelectedAction({ search: !selectedAction.search, filter: false, add: false, share: false })}>
-              <IoSearchCircle />
+              <IoSearchCircleOutline />
             </button>
           </li>
 
@@ -99,7 +101,7 @@ const MyCloset = () => {
                 className={styles.action__button}
                 style={selectedAction.filter ? { color: "var(--primary-galactic)" } : null}
                 onClick={() => setSelectedAction({ search: false, filter: !selectedAction.filter, add: false, share: false })}>
-                <IoFilterCircle />
+                <IoFilterCircleOutline />
               </button>
               <div>
                 {selectedAction.filter && (
@@ -119,7 +121,7 @@ const MyCloset = () => {
           <li>
             <div className={styles.dropdown__container}>
               <button className={styles.action__button} onClick={() => setSelectedAction({ search: false, filter: false, add: !selectedAction.add, share: false })}>
-                <IoAddCircle />
+                <IoIosAddCircleOutline />
               </button>
               {/* <div>{selectedAction.share && <Autocomplete />}</div> */}
             </div>
@@ -132,7 +134,7 @@ const MyCloset = () => {
                 setSelectedAction({ search: false, filter: false, add: false, share: !selectedAction.share })
                 handleShare()
               }}>
-              <IoPeopleCircleSharp />
+              <IoPeopleCircleOutline />
             </button>
           </li>
         </ul>
@@ -156,14 +158,7 @@ const MyCloset = () => {
             </h3>
           </div>
         ) : items.length > 0 ? (
-          <div className={styles.item__grid}>
-            {items &&
-              items.map((item) => (
-                <Fragment key={`large${item._id}`}>
-                  <ItemCompLarge item={item} />
-                </Fragment>
-              ))}
-          </div>
+          <ItemCardGrid items={items} />
         ) : filterObject ? (
           <div style={{ color: "grey", textAlign: "center", marginTop: "10%" }}>
             <h3 style={{ fontWeight: 400 }}>No items corresponding to this search.</h3>

@@ -8,7 +8,7 @@
 }
 
 .action__button {
-    color: var(--primary-galactic);
+    color: var(--primary-blue);
     font-size: 30px;
     transition: transform 80ms ease-in;
     cursor: pointer;
@@ -35,7 +35,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 0px 15px;
+    padding: 15px 15px;
     gap: 10px;
 }
 
@@ -43,6 +43,14 @@
     background-color: transparent;
 }
 
+/* FILTER BAR TAGS STYLING */
+/* .tag {
+    font-family: "Poppins, sans-serif";
+    height: 30px;
+    width: fit-content;
+    border-radius: 15px;
+    color: var(--primary-blue)
+} */
 
 /* CLOSET TOOLBAR RIGHT */
 .closet__toolbar__right {
@@ -102,14 +110,16 @@
     position: relative;
     font-size: 12px;
     color: #fff;
-    background-color: var(--primary-galactic);
+    /* background-color: var(--primary-galactic); */
+    background-color: var(--primary-black);
+    border: 1px solid var(--primary-grey);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .item__card:hover {
-    background-color: var(--primary-galactic);
+    background-color: var(--bg-grey);
 }
 
 .item__header {
@@ -180,7 +190,8 @@
 /* ---------------------------------- */
 .expanded__card {
     z-index: 5;
-    background-color: var(--primary-galactic);
+    background-color: var(--bg-black);
+    /* border: 1px solid var(--primary-blue); */
     position: fixed;
     top: calc(50% - (700px / 2));
     left: calc(50% - (700px / 2));
@@ -243,7 +254,7 @@
     right: 0;
     height: 100vh;
     width: 100vw;
-    background-color: rgba(27, 47, 40, 0.6);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 

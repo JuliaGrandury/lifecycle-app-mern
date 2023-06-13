@@ -6,6 +6,7 @@ import styles from "./Statistics.module.css"
 import default_image from "../assets/default_image.png"
 import { toast } from "react-toastify"
 import { getStatistics } from "../features/items/itemSlice"
+import Spinner from "../components/Spinner"
 
 const Statistics = () => {
   const navigate = useNavigate()
@@ -13,16 +14,19 @@ const Statistics = () => {
 
   const { user } = useSelector((state) => state.auth)
   const { totalItemsNum, outOfClosetNum, toRepairNum, wornItems, lastMonthSpending, mostWorn, leastWorn } = useSelector((state) => state.items.statistics)
+  const { isLoading, isError, message } = useSelector((state) => state.items)
+
   const wornPercentage = Math.floor((wornItems / totalItemsNum) * 100)
+  const userBudget = 100
 
   const handleSeeDetails = () => {
     toast("This feature is currently in development.")
   }
 
   useEffect(() => {
-    // if (isError) {
-    //   console.log(message)
-    // }
+    if (isError) {
+      console.log(message)
+    }
 
     if (!user) {
       navigate("/authentication")
@@ -30,6 +34,10 @@ const Statistics = () => {
 
     dispatch(getStatistics())
   }, [user, navigate, dispatch])
+
+  if (isLoading) {
+    return <Spinner />
+  }
 
   return (
     <section className={styles.cards__container}>
@@ -62,13 +70,13 @@ const Statistics = () => {
           You have worn <span style={wornPercentage > 80 ? { color: "green" } : { color: "orange" }}>{wornPercentage}%</span> of your closet this month
         </div>
         <div className={styles.habit__card}>
-          You have spent <span style={{ color: "purple" }}>${lastMonthSpending}</span> on your closet this month
+          You have spent <span style={lastMonthSpending > userBudget ? { color: "var(--primary-rust)" } : { color: "green" }}>${lastMonthSpending}</span> on your closet this month
         </div>
       </div>
 
       <div className={styles.items__overview}>
         <div className={styles.list__container}>
-          <h4>Your Most Worn Items</h4>
+          <h4>Your Most Worn Items This Month</h4>
           <table>
             <tbody>
               {mostWorn &&
@@ -86,7 +94,7 @@ const Statistics = () => {
         </div>
 
         <div className={styles.list__container}>
-          <h4>Your Least Worn Items</h4>
+          <h4>Your Least Worn Items This Month</h4>
           <table>
             <tbody>
               {leastWorn &&

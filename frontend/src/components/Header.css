@@ -3,8 +3,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 25px 0;
-  /* border-bottom: 1px solid #e6e6e6; */
-  /* background-color: var(--primary-galactic); */
   background-color: var(--bg-black);
   color: var(--bg-light);
   position: fixed;
@@ -14,11 +12,10 @@
 }
 
 .header .logo a {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 600;
   letter-spacing: 1px;
   margin-left: 20px;
-  /* color: var(--bg-light); */
   background: linear-gradient(45deg, #6ed563, #129490);
   background-clip: text;
   -webkit-background-clip: text;
@@ -27,11 +24,12 @@
 
 .nav__list {
   display: flex;
-  align-items: center;
+  align-items: middle;
   justify-content: space-between;
   margin-right: 20px;
   gap: 40px;
   height: 30px;
+  padding-top: 5px;
 }
 
 .nav__list a {
@@ -39,12 +37,12 @@
   letter-spacing: 0.7px;
   font-weight: 300;
   font-size: 15px;
+  margin-right: 12px;
 }
 
 .header .btn {
   color: var(--bg-light);
   font-size: 20px;
-  margin-top: 5px;
 }
 
 .dropdown__button {
@@ -71,7 +69,6 @@
   right: 8px;
   color: white;
   padding: 10px 10px;
-  /* background-color: var(--primary-galactic); */
   background-color: var(--bg-black);
   border: 0.5px solid var(--primary-grey);
   border-radius: 5px;
@@ -81,12 +78,11 @@
 }
 
 .dropdown__list li {
-  padding: 10px 12px;
+  padding: 12px 12px;
   border-radius: 5px;
 }
 
 .dropdown__list li:hover {
-  /* background-color: var(--primary-darkgreen); */
   color: var(--primary-tealtwo);
 }
 
@@ -101,13 +97,13 @@
   border: transparent;
   color: white;
   font-size: 20px;
+
 }
 
 .mobile__menu {
-  /* display: none; */
   position: fixed;
   top: 0px;
-  background-color: var(--primary-galactic);
+  background-color: var(--bg-black);
   width: 100%;
   height: 100vh;
   text-align: center;
@@ -130,9 +126,14 @@
 }
 
 .mobile__menu a {
-  font-size: 16px;
-  font-weight: 600;
-  color: white;
+  color: var(--bg-light);
+  letter-spacing: 0.7px;
+  font-weight: 300;
+  font-size: 15px;
+}
+
+.mobile__menu a:hover {
+  color: var(--primary-blue);
 }
 
 .mobile__menu .btn {
@@ -169,11 +170,11 @@
   }
 
   .header {
-    padding: 10px 0;
+    padding: 12px 0;
   }
 
   .header .logo a {
-    font-size: 14px;
+    font-size: 16px;
     margin-left: 18px;
   }
 

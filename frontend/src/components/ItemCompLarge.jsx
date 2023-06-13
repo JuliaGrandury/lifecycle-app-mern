@@ -3,6 +3,11 @@ import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { motion } from "framer-motion"
 
+import { CiEdit } from "react-icons/ci"
+import { HiOutlineDocumentDuplicate } from "react-icons/hi"
+import { AiOutlineDelete } from "react-icons/ai"
+import { CgFolderAdd } from "react-icons/cg"
+
 // in app imports
 import { deleteItem, createItem } from "../features/items/itemSlice"
 import default_image from "../assets/default_image.png"
@@ -23,6 +28,11 @@ function ItemCompLarge({ item, onClose }) {
   const handleDeleteItem = (id) => {
     console.log(`Deleting item with id ${id}`)
     dispatch(deleteItem(id))
+  }
+
+  const handleAddItemToList = (id) => {
+    console.log(`Adding item ${id} to List`)
+    //dispatch(addItemToList(id))
   }
 
   // useEffect(() => {
@@ -90,13 +100,19 @@ function ItemCompLarge({ item, onClose }) {
             {isOwner ? (
               <div className={styles.largecard__actions}>
                 <button className="btn" id="editItem" onClick={() => handleEditItem(item.id)}>
-                  Edit
+                  <CiEdit /> Edit
                 </button>
                 <button className="btn" id="duplicateItem" onClick={() => handleDuplicateItem(item)}>
+                  <HiOutlineDocumentDuplicate />
                   Duplicate
                 </button>
                 <button className="btn" id="deleteItem" onClick={() => handleDeleteItem(item._id)}>
+                  <AiOutlineDelete />
                   Delete
+                </button>
+                <button className="btn" id="addItemToList" onClick={() => handleAddItemToList(item._id)}>
+                  <CgFolderAdd />
+                  Add to List
                 </button>
               </div>
             ) : (
