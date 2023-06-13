@@ -49,10 +49,10 @@ function ItemCompLarge({ item, onClose }) {
             <span>
               Size {item.size} {item.brand ? `, ${item.brand}` : ""}
             </span>
-            <span>{item.color && item.color.map((color) => <ColorSphere color={color} key={`${color}${item._id}`} />)}</span>
+            <span className={styles.colors__span}>{item.color && item.color.map((color) => <ColorSphere color={color} key={`${color}${item._id}`} />)}</span>
           </div>
-          {item.location && <div className={styles.location__tag}>{item.location.name}</div>}
         </motion.div>
+        {item.location && <div className={styles.location__tag}>{item.location.name}</div>}
         <div className={styles.item__image}>
           <img src={default_image} alt={item.name} />
         </div>

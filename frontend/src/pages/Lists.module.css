@@ -11,18 +11,18 @@
     font-size: 15px;
 }
 
-.list__table tr {
-    border-radius: 18px;
+.list__table td {
+    border-radius: 8px;
+    padding: 8px;
 }
 
 .list__table tr:hover {
     color: var(--primary-tealtwo);
 }
 
-.list__table tr .selected {
-    background-color: blue;
-    text-decoration: underline;
-    text-decoration-color: var(--primary-tealtwo);
+.list__table .selected {
+    color: var(--primary-tealtwo);
+    /* border: 1px solid var(--primary-tealtwo); */
 }
 
 .list__table tr td {

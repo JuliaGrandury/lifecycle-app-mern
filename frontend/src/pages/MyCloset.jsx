@@ -150,7 +150,7 @@ const MyCloset = () => {
           <div className={styles.error__div}>
             <h3>
               <strong>
-                <GrTroubleshoot /> Uh oh, looks like someone fucked up.
+                <GrTroubleshoot /> Uh oh, looks like there's a problem.
               </strong>
               <span>Please refresh or try again later.</span>
             </h3>

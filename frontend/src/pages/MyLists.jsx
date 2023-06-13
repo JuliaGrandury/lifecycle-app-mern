@@ -29,7 +29,7 @@ const MyLists = () => {
       <table className={styles.list__table}>
         <tbody>
           {lists.map((list) => (
-            <tr key={list.listname} className={list.id === selected ? "selected" : ""} onClick={() => setSelected(list)}>
+            <tr key={list.listname} className={selected && list._id === selected._id ? `${styles.selected}` : ""} onClick={() => setSelected(list)}>
               <td>{list.listname}</td>
               <td>{list.description}</td>
               <td>{list.public ? "Public" : "Private"}</td>
@@ -50,7 +50,7 @@ const MyLists = () => {
         ) : (
           <div className={styles.items__container}>
             <h5 style={{ color: "orange" }}>Selected list is {selected.listname}</h5>
-            {selected.length > 0 ? (
+            {selected.items.length > 0 ? (
               <div className={styles.item__grid}>
                 {selected.items.map((item) => (
                   <Fragment key={`large${item._id}`}>
