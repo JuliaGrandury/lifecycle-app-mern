@@ -1,7 +1,6 @@
-import { IoIosLogOut } from "react-icons/io"
 import { CiSettings } from "react-icons/ci"
 import { MdKeyboardArrowDown } from "react-icons/md"
-import { HiMenuAlt3 } from "react-icons/hi"
+import { IoMenuOutline } from "react-icons/io5"
 import { IoIosCloseCircleOutline } from "react-icons/io"
 import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
@@ -10,10 +9,6 @@ import { logout, reset } from "../features/auth/authSlice"
 import "./Header.css"
 import { toast } from "react-toastify"
 
-const capitalizeFirst = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
-
 const accessList = ["Lucy435", "Marco2000", "ClaireMarie"]
 
 function Header() {
@@ -21,6 +16,7 @@ function Header() {
   const dispatch = useDispatch()
   const [showDropdown, setShowDropdown] = useState()
   const [showMenu, setShowMenu] = useState(false)
+  const [showSettings, setShowSettings] = useState()
   const [selectedDisplay, setSelectedDisplay] = useState({ label: "My Closet", path: "/closets" })
 
   const onLogout = () => {
@@ -94,20 +90,21 @@ function Header() {
             )}
           </div>
         </li>
-        {/* <li>
-          <NavLink to="/settings">Settings</NavLink>
-        </li> */}
         <li>
           <button className="btn" onClick={onLogout}>
-            <IoIosLogOut />
-            {/* <CiSettings /> */}
+            {/* <IoIosLogOut /> */}
+            <CiSettings />
+
+            {/* <li>
+          <NavLink to="/settings">Settings</NavLink>
+        </li> */}
           </button>
         </li>
       </ul>
 
       <div className="hamburger">
         <button onClick={() => setShowMenu(true)}>
-          <HiMenuAlt3 />
+          <IoMenuOutline style={{ color: "#6ed563" }} />
         </button>
       </div>
       <div className={`mobile__menu ${showMenu ? "show" : ""}`}>
@@ -132,11 +129,11 @@ function Header() {
               My Lists
             </NavLink>
           </li>
-          {/* <li>
+          <li>
             <NavLink to="/settings" onClick={() => setShowMenu(false)}>
               Settings
             </NavLink>
-          </li> */}
+          </li>
           <li>
             <button className="btn logout_btn" onClick={onLogout}>
               Logout
