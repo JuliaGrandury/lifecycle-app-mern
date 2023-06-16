@@ -76,7 +76,7 @@
     right: 0px;
     color: white;
     padding: 10px 10px;
-    background-color: var(--primary-galactic);
+    background-color: var(--bg-black);
     border: 0.5px solid var(--primary-grey);
     border-radius: 5px;
     min-width: 200px;
@@ -90,16 +90,18 @@
 }
 
 .dropdown__list li:hover {
-    background-color: var(--primary-darkgreen);
+    border: 0.5px solid var(--primary-blue);
+    color: var(--primary-blue);
 }
 
 .search__input {
     padding: 0px 8px;
     height: 30px;
     border-radius: 15px;
-    border: 1.6px solid var(--primary-galactic);
+    border: 1.6px solid var(--primary-blue);
+    background-color: var(--bg-black);
     font-family: 'Poppins', sans-serif;
-    color: var(--primary-galactic);
+    color: var(--bg-light);
 }
 
 
@@ -110,7 +112,6 @@
     position: relative;
     font-size: 12px;
     color: #fff;
-    /* background-color: var(--primary-galactic); */
     background-color: var(--primary-black);
     border: 1px solid var(--primary-grey);
     display: flex;
@@ -118,9 +119,9 @@
     justify-content: space-between;
 }
 
-.item__card:hover {
+/* .item__card:hover {
     background-color: var(--bg-grey);
-}
+} */
 
 .item__header {
     padding: 10px 0px 8px;
@@ -217,35 +218,26 @@
 }
 
 .largecard__actions {
+    width: fit-content;
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 18px;
-    margin: 18px 0px 18px;
+    margin: 18px auto 18px;
+    border-radius: 15px;
+    background-color: var(--primary-grey);
 }
 
 .largecard__actions button {
     color: white;
     height: 30px;
-    /* width: fit-content;
-    min-width: 100px; */
-    padding: 5px 12px;
     text-align: center;
     font-size: 13px;
-    border-radius: 15px;
-}
-
-.largecard__actions button:nth-child(1) {
-    background-color: var(--primary-green);
-}
-
-.largecard__actions button:nth-child(2) {
+    border-radius: 18px;
+    /* background-color: var(--bg-black); */
     background-color: var(--primary-blue);
 }
 
-.largecard__actions button:nth-child(3) {
-    background-color: var(--primary-orange);
-}
 
 .overlay {
     position: fixed;
@@ -255,44 +247,6 @@
     height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.6);
-}
-
-
-/* ---------------------------------- */
-/* ITEM CARD ACTIONS DROPDOWN STYLING */
-/* ---------------------------------- */
-.item__card .more__button {
-    position: absolute;
-    top: 9px;
-    right: 10px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-size: 19px;
-    color: var(--primary-tasman);
-}
-
-.dropdown__itemactions {
-    position: absolute;
-    top: 35px;
-    left: -30px;
-    color: white;
-    padding: 8px 8px;
-    background-color: var(--primary-galactic);
-    border: 0.5px solid var(--primary-grey);
-    border-radius: 5px;
-    min-width: 125px;
-    z-index: 1;
-    font-size: 14px;
-}
-
-.dropdown__itemactions li {
-    padding: 5px 5px;
-    border-radius: 5px;
-}
-
-.dropdown__itemactions li:hover {
-    background-color: var(--primary-darkgreen);
 }
 
 
@@ -386,7 +340,7 @@
 @media screen and (min-width: 400px) {
     .largecard__actions button {
         width: fit-content;
-        min-width: 100px;
+        min-width: 30px;
     }
 }
 

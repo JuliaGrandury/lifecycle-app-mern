@@ -47,11 +47,23 @@ const getStatistics = async (token) => {
   return response.data
 }
 
+// Get closet statistics
+const getListItems = async (listId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  const response = await axios.get(`api/v1/lists/${listId}/items`, config)
+  return response.data
+}
+
 const itemService = {
   createItem,
   getItems,
   deleteItem,
   getStatistics,
+  getListItems
 }
 
 export default itemService

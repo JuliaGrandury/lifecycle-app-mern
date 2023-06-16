@@ -7,6 +7,7 @@ import { CiEdit } from "react-icons/ci"
 import { HiOutlineDocumentDuplicate } from "react-icons/hi"
 import { AiOutlineDelete } from "react-icons/ai"
 import { CgFolderAdd } from "react-icons/cg"
+import { FaHandHoldingHeart } from "react-icons/fa"
 
 // in app imports
 import { deleteItem, createItem } from "../features/items/itemSlice"
@@ -33,6 +34,10 @@ function ItemCompLarge({ item, onClose }) {
   const handleAddItemToList = (id) => {
     console.log(`Adding item ${id} to List`)
     //dispatch(addItemToList(id))
+  }
+
+  const handleBorrowRequest = (id) => {
+    console.log(`User requested to borrow item ${id}`)
   }
 
   // useEffect(() => {
@@ -99,26 +104,25 @@ function ItemCompLarge({ item, onClose }) {
 
             {isOwner ? (
               <div className={styles.largecard__actions}>
-                <button className="btn" id="editItem" onClick={() => handleEditItem(item.id)}>
-                  <CiEdit /> Edit
+                <button className="btn" id="editItem" onClick={() => handleEditItem(item._id)}>
+                  <CiEdit />
                 </button>
                 <button className="btn" id="duplicateItem" onClick={() => handleDuplicateItem(item)}>
                   <HiOutlineDocumentDuplicate />
-                  Duplicate
                 </button>
                 <button className="btn" id="deleteItem" onClick={() => handleDeleteItem(item._id)}>
                   <AiOutlineDelete />
-                  Delete
                 </button>
                 <button className="btn" id="addItemToList" onClick={() => handleAddItemToList(item._id)}>
                   <CgFolderAdd />
-                  Add to List
                 </button>
               </div>
             ) : (
               <div className={styles.largecard__actions}>
                 <button className="btn">Add to Favorites</button>
-                <button className="btn">Request to Borrow</button>
+                <button className="btn" onClick={() => handleBorrowRequest(item._id)}>
+                  <FaHandHoldingHeart />
+                </button>
                 <button className="btn">Request to Swap</button>
               </div>
             )}

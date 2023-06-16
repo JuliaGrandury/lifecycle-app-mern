@@ -2,6 +2,7 @@ import { useState, useEffect, Fragment } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { getLists } from "../features/lists/listSlice"
+import { getListItems } from "../features/items/itemSlice"
 import ItemCardGrid from "./ItemCardGrid"
 import styles from "./Lists.module.css"
 import { format } from "date-fns"
@@ -12,6 +13,7 @@ const MyLists = () => {
 
   const { user } = useSelector((state) => state.auth)
   const { lists, isLoading, isError, message } = useSelector((state) => state.lists)
+  const { items, itemsLoading, itemsError, itemsMessage } = useSelector((state) => state.items)
   const [selected, setSelected] = useState(null)
 
   useEffect(() => {
@@ -24,9 +26,10 @@ const MyLists = () => {
     dispatch(getLists())
   }, [user, navigate, isError, message, dispatch])
 
-  const getListItems = (itemIds) => {
-    const listitems = []
-    return listitems
+  const handleListSelection = (listId) => {
+    console.log(`List id is ${listId}`)
+    setSelected(listId)
+    dispatch(getListItems(listId))
   }
 
   return (
@@ -34,7 +37,7 @@ const MyLists = () => {
       <table className={styles.list__table}>
         <tbody>
           {lists.map((list) => (
-            <tr key={list.listname} className={selected && list._id === selected._id ? `${styles.selected}` : ""} onClick={() => setSelected(list)}>
+            <tr key={list.listname} className={selected && list._id === selected._id ? `${styles.selected}` : ""} onClick={() => handleListSelection(list._id)}>
               <td>{list.listname}</td>
               <td>{list.description}</td>
               <td>{list.public ? "Public" : "Private"}</td>
@@ -54,14 +57,23 @@ const MyLists = () => {
           </div>
         ) : (
           <div className={styles.items__container}>
-            {selected.items.length > 0 ? (
-              <ItemCardGrid items={selected.items} />
+            {items.length > 0 ? (
+              <ItemCardGrid items={items} />
             ) : (
               <div style={{ color: "var(--primary-grey)", textAlign: "center", marginTop: "10%", fontSize: "25px" }}>
                 <h5 style={{ fontWeight: "400" }}>There are no items in your list.</h5>
               </div>
             )}
           </div>
+          // <div className={styles.items__container}>
+          //   {selected.items.length > 0 ? (
+          //     <ItemCardGrid items={selected.items} />
+          //   ) : (
+          //     <div style={{ color: "var(--primary-grey)", textAlign: "center", marginTop: "10%", fontSize: "25px" }}>
+          //       <h5 style={{ fontWeight: "400" }}>There are no items in your list.</h5>
+          //     </div>
+          //   )}
+          // </div>
         )}
       </div>
     </section>

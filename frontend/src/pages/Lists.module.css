@@ -20,11 +20,12 @@
 }
 
 .list__table tr:hover {
-    background-color: var(--primary-grey);
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
 }
 
 .list__table .selected {
-    background-color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
 }
 
 .list__table td {

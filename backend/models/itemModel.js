@@ -23,7 +23,7 @@ const itemSchema = mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ["Tops", "Bottoms", "Dresses and Jumpsuits", "Coats and Jackets", "Shoes", "Accessories"],
+      enum: ["Tops", "Bottoms", "Dresses and Jumpsuits", "Coats and Jackets", "Shoes", "Swimwear", "Accessories"],
       required: [true, "Please add a category for the item"],
     },
     subcategory: {
@@ -95,7 +95,9 @@ itemSchema.path("subcategory").validate(function (value) {
   } else if (this.category === "Shoes") {
     return ["Boots", "Heels", "Sandals", "Sneakers"].includes(value)
   } else if (this.category === "Accessories") {
-    return ["Bags", "Belts", "Gloves", "Hats", "Jewelry", "Scarves", "Sunglasses"].includes(value)
+    return ["Bags", "Belts", "Blankets", "Gloves", "Hats", "Jewelry", "Scarves", "Sunglasses", "Towels"].includes(value)
+  } else if (this.category === "Books") {
+    return [""]
   }
   return true
 })

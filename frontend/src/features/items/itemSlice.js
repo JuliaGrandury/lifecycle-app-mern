@@ -60,6 +60,17 @@ export const getStatistics = createAsyncThunk("items/statistics", async (_, thun
   }
 })
 
+// Get list items
+export const getListItems = createAsyncThunk("lists/items", async (listId, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token
+    return await itemService.getListItems(listId, token)
+  } catch (error) {
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
 export const itemSlice = createSlice({
   name: "items",
   initialState,
@@ -122,6 +133,19 @@ export const itemSlice = createSlice({
         state.statistics = action.payload
       })
       .addCase(getStatistics.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(getListItems.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getListItems.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.items = action.payload
+      })
+      .addCase(getListItems.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

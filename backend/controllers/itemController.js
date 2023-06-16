@@ -1,7 +1,5 @@
 const asyncHandler = require("express-async-handler")
-
 const Item = require("../models/itemModel")
-
 const mongoose = require("mongoose")
 
 // @desc Get items of specific user
@@ -204,5 +202,5 @@ module.exports = {
   setItem,
   updateItem,
   deleteItem,
-  getStatistics,
+  getStatistics
 }

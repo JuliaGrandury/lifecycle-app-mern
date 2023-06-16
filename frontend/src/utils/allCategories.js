@@ -19,14 +19,15 @@ const colors2 = {
   Yellow: "#f8dd57",
 }
 
-const categories = ["Tops", "Bottoms", "Dresses and Jumpsuits", "Coats and Jackets", "Shoes", "Accessories"]
+const categories = ["Tops", "Bottoms", "Dresses and Jumpsuits", "Coats and Jackets", "Shoes", "Swimwear", "Accessories"]
 const subcategories = {
   Tops: ["Blouses", "Shirts", "Sweaters", "Tank Tops", "T-shirts", "Sweatshirts"],
   Bottoms: ["Jeans", "Leggings", "Pants", "Shorts", "Skirts", "Sweatpants"],
   "Dresses and Jumpsuits": ["Jumpsuits", "Mini dresses", "Midi dresses", "Maxi dresses", "Overalls"],
   "Coats and Jackets": ["Blazers", "Coats", "Vests", "Jackets"],
   Shoes: ["Boots", "Heels", "Sandals", "Sneakers"],
-  Accessories: ["Bags", "Belts", "Gloves", "Hats", "Jewelry", "Scarves", "Sunglasses"],
+  Swimwear: ["Bikinis", "One Pieces", "Rash Guards", "Board Shorts", "Wetsuits"],
+  Accessories: ["Bags", "Belts", "Blankets", "Gloves", "Hats", "Jewelry", "Scarves", "Sunglasses", "Towels"],
 }
 const sizes = {
   Tops: ["0", "2", "4", "6", "8", "10", "12", "14", "P/XS", "XS", "XS/S", "S", "M", "M/L", "L", "XL"],
@@ -61,6 +62,7 @@ const sizes = {
     `Men's 14.5`,
     `Men's 15`,
   ],
+  Swimwear: ["0", "2", "4", "6", "8", "10", "12", "14", "P/XS", "XS", "XS/S", "S", "M", "M/L", "L", "XL"],
   Accessories: ["NA"],
 }
 const seasons = ["Fall", "Winter", "Spring", "Summer"]
