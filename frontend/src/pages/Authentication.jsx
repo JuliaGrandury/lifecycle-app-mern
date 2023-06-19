@@ -1,26 +1,25 @@
-import styles from './Authentication.module.css'
-import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import { reset } from '../features/auth/authSlice'
-import LoginForm from '../components/LoginForm'
-import RegisterForm from '../components/RegisterForm'
-import Spinner from '../components/Spinner'
+import styles from "./Authentication.module.css"
+import { useState, useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import { reset } from "../features/auth/authSlice"
+import LoginForm from "../components/Auth/LoginForm"
+import RegisterForm from "../components/Auth/RegisterForm"
+import Spinner from "../components/Shared/Spinner"
 
 const Authentication = () => {
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
-  const [rightPanelActive, setRightPanelActive] = useState(false);
+  const [rightPanelActive, setRightPanelActive] = useState(false)
 
   useEffect(() => {
     if (isError) {
       toast.error(message)
     }
     if (isSuccess || user) {
-      navigate('/closets')
+      navigate("/closets")
     }
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
@@ -46,12 +45,16 @@ const Authentication = () => {
             <div className={styles.overlay_left_top}>
               <h1 className={styles.title}>Welcome Back!</h1>
               <p>The earth thanks you for your efforts.</p>
-              <button className={styles.auth_button} id={styles.sign_in__button} onClick={() => setRightPanelActive(false)}>Sign In</button>
+              <button className={styles.auth_button} id={styles.sign_in__button} onClick={() => setRightPanelActive(false)}>
+                Sign In
+              </button>
             </div>
             <div className={styles.overlay_right_bottom}>
               <h1 className={styles.title}>Hey friend,</h1>
               <p>Create an account and join our community of sustainable fashion lovers!</p>
-              <button className={styles.auth_button} id={styles.sign_up__button} onClick={() => setRightPanelActive(true)}>Sign Up</button>
+              <button className={styles.auth_button} id={styles.sign_up__button} onClick={() => setRightPanelActive(true)}>
+                Sign Up
+              </button>
             </div>
           </div>
         </div>

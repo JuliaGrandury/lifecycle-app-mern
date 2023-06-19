@@ -10,15 +10,18 @@ import { CgFolderAdd } from "react-icons/cg"
 import { FaHandHoldingHeart } from "react-icons/fa"
 
 // in app imports
+import styles from "../pages/Closets.module.css"
 import { deleteItem, createItem } from "../features/items/itemSlice"
 import default_image from "../assets/default_image.png"
-import ColorSphere from "./ColorSphere"
-import styles from "../pages/Closets.module.css"
+import ColorSphere from "./Shared/ColorSphere"
+import Modal from "./Modal"
 
 function ItemCompLarge({ item, onClose }) {
   const dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false)
   const [isOwner, setIsOwner] = useState(true)
+  const [showListDropdown, setShowListDropdown] = useState()
+  const [openDeleteModal, setOpenDeleteModal] = useState()
 
   const handleEditItem = (id) => {
     console.log(`Editing item with id ${id}`)
@@ -26,9 +29,13 @@ function ItemCompLarge({ item, onClose }) {
   const handleDuplicateItem = (item) => {
     dispatch(createItem(item))
   }
-  const handleDeleteItem = (id) => {
+
+  const handleDeleteItem = () => {
+    alert("Wanting to delete item")
+  }
+  const handleConfirmDelete = (id) => {
     console.log(`Deleting item with id ${id}`)
-    dispatch(deleteItem(id))
+    // dispatch(deleteItem(id))
   }
 
   const handleAddItemToList = (id) => {
@@ -40,23 +47,36 @@ function ItemCompLarge({ item, onClose }) {
     console.log(`User requested to borrow item ${id}`)
   }
 
-  // useEffect(() => {
-  //   if (onClose) {
-  //     document.body.style.overflow = ""
-  //   } else {
-  //     console.log("ItemCompLarge is Open")
-  //     document.body.style.overflow = "hidden"
-  //   }
-  // }, [onClose])
+  useEffect(() => {
+    const handleClickOutsideCard = (event) => {
+      if (!event.target.closest(".modal-content")) {
+        setIsOpen(false)
+      }
+    }
+    if (isOpen) {
+      window.addEventListener("click", handleClickOutsideCard)
+    }
+
+    return () => {
+      window.removeEventListener("click", handleClickOutsideCard)
+    }
+  }, [isOpen])
+
+  const handleButtonClick = (event) => {
+    event.stopPropagation() // Prevent event propagation
+    console.log(`A button was clicked`)
+    // Handle button click logic
+  }
 
   return (
     <>
       {isOpen && <div className={styles.overlay}></div>}
+
       <motion.div
         transition={{ layout: { duration: 1, type: "spring" } }}
         layout
         style={{ borderRadius: "1rem" }}
-        className={isOpen ? `${styles.item__card} ${styles.expanded__card}` : `${styles.item__card}`}
+        className={isOpen ? `${styles.item__card} ${styles.expanded__card} modal-content` : `${styles.item__card} modal-content`}
         onClick={() => setIsOpen(!isOpen)}>
         <motion.div className={styles.item__header}>
           <motion.h2 layout="position">{item.name}</motion.h2>
@@ -113,8 +133,14 @@ function ItemCompLarge({ item, onClose }) {
                 <button className="btn" id="deleteItem" onClick={() => handleDeleteItem(item._id)}>
                   <AiOutlineDelete />
                 </button>
-                <button className="btn" id="addItemToList" onClick={() => handleAddItemToList(item._id)}>
+                <button className="btn" id="addItemToList" onClick={() => setShowListDropdown(!showListDropdown)}>
                   <CgFolderAdd />
+                  {/* handleAddItemToList(item._id) */}
+                  {showListDropdown && (
+                    <ul className="dropdown__list">
+                      <li style={{ color: "#db512f" }}>Hello</li>
+                    </ul>
+                  )}
                 </button>
               </div>
             ) : (

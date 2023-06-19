@@ -27,7 +27,7 @@
   align-items: middle;
   justify-content: space-between;
   margin-right: 20px;
-  gap: 40px;
+  gap: 50px;
   height: 30px;
   padding-top: 5px;
 }
@@ -52,7 +52,7 @@
   font-size: 15px;
   color: var(--bg-light);
   background-color: transparent;
-  width: 110px;
+  width: 100px;
   display: flex;
   align-items: center;
 }

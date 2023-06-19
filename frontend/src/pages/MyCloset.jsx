@@ -7,15 +7,20 @@ import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { toast } from "react-toastify"
 import { getItems, reset, updateFilter } from "../features/items/itemSlice"
+// import { getAllUsernames } from "../features/closet/closetSlice"
 import ItemForm from "../components/ItemForm"
 // import ItemCompSmall from "../components/ItemCompSmall"
 import ItemCardGrid from "./ItemCardGrid"
 import FilterBar from "../components/FilterBar"
-import Spinner from "../components/Spinner"
+import Spinner from "../components/Shared/Spinner"
 import styles from "./Closets.module.css"
-import squiggle_arrow from "../assets/squiggle_arrow.png"
 import allCategories from "../utils/allCategories"
+
 import Autocomplete from "@mui/material/Autocomplete"
+import TextField from "@mui/material/TextField"
+import CircularProgress from "@mui/material/CircularProgress"
+
+import { getAllUsernames } from "../features/closet/closetSlice"
 
 //don't need to update everytime the component remounts
 const filters = allCategories.filters
@@ -26,8 +31,12 @@ const MyCloset = () => {
 
   const { user } = useSelector((state) => state.auth)
   const { items, isLoading, isError, message, filterObject } = useSelector((state) => state.items)
-  const [searchQuery, setSearchQuery] = useState("")
+  const { usernames } = useSelector((state) => state.closet)
+  const { followers } = useSelector((state) => state.closet)
 
+  const options = ["The Godfather", "Pulp Fiction"]
+
+  const [searchQuery, setSearchQuery] = useState("")
   const [selectedAction, setSelectedAction] = useState({
     search: false,
     filter: false,
@@ -70,7 +79,8 @@ const MyCloset = () => {
   }
 
   const handleShare = (event) => {
-    toast("Fear not, our developers were alerted and this feature is being fixed")
+    dispatch(getAllUsernames())
+    // toast("Fear not, our developers were alerted and this feature is being fixed")
   }
 
   return (
@@ -123,7 +133,39 @@ const MyCloset = () => {
               <button className={styles.action__button} onClick={() => setSelectedAction({ search: false, filter: false, add: !selectedAction.add, share: false })}>
                 <IoIosAddCircleOutline />
               </button>
-              {/* <div>{selectedAction.share && <Autocomplete />}</div> */}
+              {selectedAction.share && (
+                <ul className="dropdown__list">
+                  <li>
+                    <Autocomplete
+                      multiple
+                      id="tags-outlined"
+                      options={options}
+                      sx={{ width: 300, backgroundColor: "white" }}
+                      getOptionLabel={(option) => option}
+                      filterSelectedOptions
+                      renderInput={(params) => <TextField {...params} placeholder="Add by Username" />}
+                    />
+                    {/* <Autocomplete
+                      disablePortal
+                      id="combo-box-demo"
+                      options={options}
+                      sx={{ width: 300, backgroundColor: "white" }}
+                      renderInput={(params) => <TextField {...params} label="+ Add by username" />}
+                    /> */}
+                  </li>
+                  <h4>Current Followers</h4>
+                  {followers.length > 0 ? (
+                    followers.map((user) => (
+                      <li>
+                        {user}
+                        <button>x</button>
+                      </li>
+                    ))
+                  ) : (
+                    <li>No followers.</li>
+                  )}
+                </ul>
+              )}
             </div>
           </li>
 
@@ -165,8 +207,7 @@ const MyCloset = () => {
           </div>
         ) : (
           <div className={styles.emptycloset__div}>
-            <h3>Your closet is empty. Add items here.</h3>
-            <img src={squiggle_arrow} alt="Arrow pointing to the Add An Item Form" />
+            <h3>Your closet is empty. Add items.</h3>
           </div>
         )}
       </div>

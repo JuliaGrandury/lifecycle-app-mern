@@ -9,15 +9,17 @@ import { logout, reset } from "../features/auth/authSlice"
 import "./Header.css"
 import { toast } from "react-toastify"
 
-const accessList = ["Lucy435", "Marco2000", "ClaireMarie"]
 
 function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [showDropdown, setShowDropdown] = useState()
-  const [showMenu, setShowMenu] = useState(false)
-  const [showSettings, setShowSettings] = useState()
+  const [showClosetsDropdown, setShowClosetsDropdown] = useState()
+  const [showSettingsDropdown, setShowSettingsDropdown] = useState()
+
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [selectedDisplay, setSelectedDisplay] = useState({ label: "My Closet", path: "/closets" })
+
+  const { following } = useSelector((state) => state.closet)
 
   const onLogout = () => {
     dispatch(logout())
@@ -30,31 +32,35 @@ function Header() {
     toast("This feature is currently in development. Please check back at a later time.")
   }
 
+  const openAccountModal = () => {}
+
   return (
     <header className="header">
       <div className="logo">
         <Link to="/dashboard">LifeCycle</Link>
       </div>
       <ul className="nav__list">
+        {/* DASHBOARD */}
         <li>
           <NavLink to="/dashboard">Dashboard</NavLink>
         </li>
-        {/* DROPDOWN BELOW CLOSET NAME */}
+
+        {/* CLOSETS */}
         <li>
           <div className="dropdown__container">
             <NavLink to={selectedDisplay.path}>
-              <button className="dropdown__button" onClick={() => setShowDropdown(!showDropdown)}>
+              <button className="dropdown__button" onClick={() => setShowClosetsDropdown(!showClosetsDropdown)}>
                 {selectedDisplay.label}
                 <MdKeyboardArrowDown style={{ marginLeft: "8px" }} />
               </button>
             </NavLink>
-            {showDropdown ? (
+            {showClosetsDropdown && (
               <ul className="dropdown__list">
                 <li
                   onClick={() => {
                     navigate("/closets")
                     setSelectedDisplay({ label: "My Closet", path: "/closets" })
-                    setShowDropdown(!showDropdown)
+                    setShowClosetsDropdown(!showClosetsDropdown)
                   }}>
                   My Closet
                 </li>
@@ -62,75 +68,77 @@ function Header() {
                   onClick={() => {
                     navigate("/mylists")
                     setSelectedDisplay({ label: "My Lists", path: "/mylists" })
-                    setShowDropdown(!showDropdown)
+                    setShowClosetsDropdown(!showClosetsDropdown)
                   }}>
                   My Lists
                 </li>
-                {/* <li
-                  onClick={() => {
-                    navigate("/")
-                    setShowDropdown(!showDropdown)
-                  }}>
-                  My Outfits
-                </li> */}
-                {accessList &&
-                  accessList.map((closet) => (
+                {following &&
+                  following.map((closet) => (
                     <li
                       key={closet}
                       onClick={() => {
                         navigateToCloset(closet)
-                        setShowDropdown(!showDropdown)
+                        setShowClosetsDropdown(!showClosetsDropdown)
                       }}>
                       {closet}'s Closet
                     </li>
                   ))}
               </ul>
-            ) : (
-              <></>
             )}
           </div>
         </li>
-        <li>
-          <button className="btn" onClick={onLogout}>
-            {/* <IoIosLogOut /> */}
-            <CiSettings />
 
-            {/* <li>
-          <NavLink to="/settings">Settings</NavLink>
-        </li> */}
-          </button>
+        {/* ACCOUNT & SETTINGS */}
+        <li>
+          <div className="dropdown__container">
+            <button className="btn" onClick={() => setShowSettingsDropdown(!showSettingsDropdown)}>
+              <CiSettings />
+            </button>
+            {showSettingsDropdown && (
+              <ul className="dropdown__list">
+                <li>
+                  <NavLink to="/settings">Settings</NavLink>
+                </li>
+                <li>
+                  <button className="dropdown__button" style={{ color: "#db512f" }} onClick={() => onLogout()}>
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            )}
+          </div>
         </li>
       </ul>
 
       <div className="hamburger">
-        <button onClick={() => setShowMenu(true)}>
+        <button onClick={() => setShowMobileMenu(true)}>
           <IoMenuOutline style={{ color: "#6ed563" }} />
         </button>
       </div>
-      <div className={`mobile__menu ${showMenu ? "show" : ""}`}>
+      <div className={`mobile__menu ${showMobileMenu ? "show" : ""}`}>
         <ul>
           <li>
-            <button className="btn close__button" onClick={() => setShowMenu(false)}>
+            <button className="btn close__button" onClick={() => setShowMobileMenu(false)}>
               <IoIosCloseCircleOutline />
             </button>
           </li>
           <li>
-            <NavLink to="/dashboard" onClick={() => setShowMenu(false)}>
+            <NavLink to="/dashboard" onClick={() => setShowMobileMenu(false)}>
               Dashboard
             </NavLink>
           </li>
           <li>
-            <NavLink to="/closets" onClick={() => setShowMenu(false)}>
+            <NavLink to="/closets" onClick={() => setShowMobileMenu(false)}>
               My Closet
             </NavLink>
           </li>
           <li>
-            <NavLink to="/mylists" onClick={() => setShowMenu(false)}>
+            <NavLink to="/mylists" onClick={() => setShowMobileMenu(false)}>
               My Lists
             </NavLink>
           </li>
           <li>
-            <NavLink to="/settings" onClick={() => setShowMenu(false)}>
+            <NavLink to="/settings" onClick={() => setShowMobileMenu(false)}>
               Settings
             </NavLink>
           </li>

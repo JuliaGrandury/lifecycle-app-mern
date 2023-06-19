@@ -86,11 +86,11 @@ const generateToken = (id) => {
   })
 }
 
-// @desc Get all usernames for lookup by username
-// @route GET /api/v1/users/allUsernames
+// @desc Get all usernames for potential sharing
+// @route GET /api/v1/closet
 // @acces Private
 const getAllUsernames = asyncHandler(async (req, res) => {
-  const usernames = await User.find({}, { username: 1, _id: 0 })
+  const usernames = await User.find({}, { username: 1 })
   res.status(200).json(usernames)
 })
 
@@ -98,5 +98,5 @@ module.exports = {
   registerUser,
   loginUser,
   getUser,
-  getAllUsernames
+  getAllUsernames,
 }

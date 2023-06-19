@@ -1,16 +1,18 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { MdOutlineKeyboardArrowDown } from "react-icons/md"
-import styles from "./Statistics.module.css"
+import styles from "./Dashboard.module.css"
 import default_image from "../assets/default_image.png"
 import { toast } from "react-toastify"
 import { getStatistics } from "../features/items/itemSlice"
-import Spinner from "../components/Spinner"
+import Spinner from "../components/Shared/Spinner"
 
-const Statistics = () => {
+const Dashboard = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const [showDetails, setShowDetails] = useState(false)
 
   const { user } = useSelector((state) => state.auth)
   const { totalItemsNum, outOfClosetNum, toRepairNum, wornItems, lastMonthSpending, mostWorn, leastWorn } = useSelector((state) => state.items.statistics)
@@ -48,6 +50,35 @@ const Statistics = () => {
             See Details
             <MdOutlineKeyboardArrowDown />
           </button>
+          {showDetails && (
+            <div className={styles.scrollable__div}>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Tops</td>
+                  </tr>
+                  <tr>
+                    <td>Bottoms</td>
+                  </tr>
+                  <tr>
+                    <td>Dresses and Jumpsuits</td>
+                  </tr>
+                  <tr>
+                    <td>Coats and Jackets</td>
+                  </tr>
+                  <tr>
+                    <td>Shoes</td>
+                  </tr>
+                  <tr>
+                    <td>Swimwear</td>
+                  </tr>
+                  <tr>
+                    <td>Accessories</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
         <div className={styles.closet__card}>
           <span>{outOfClosetNum}</span> Items out of Closet
@@ -115,4 +146,4 @@ const Statistics = () => {
   )
 }
 
-export default Statistics
+export default Dashboard

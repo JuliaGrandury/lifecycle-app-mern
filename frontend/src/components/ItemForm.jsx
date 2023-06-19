@@ -5,7 +5,7 @@ import { createItem } from "../features/items/itemSlice"
 import styles from "./ItemForm.module.css"
 import { IoCloseCircle } from "react-icons/io5"
 import allCategories from "../utils/allCategories"
-import ColorSphere from "./ColorSphere"
+import ColorSphere from "./Shared/ColorSphere"
 import { getLocations } from "../features/locations/locationSlice"
 
 // don't need to update everytime component remounts

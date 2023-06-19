@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler")
 
 const Location = require("../models/locationModel")
 
-// @desc GET a location
+// @desc Get a location
 // @route GET /api/v1/locations
 // @acces Private
 const getLocations = asyncHandler(async (req, res) => {

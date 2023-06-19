@@ -1,9 +1,9 @@
 import { TextField } from '@mui/material'
-import styles from '../pages/Authentication.module.css'
+import styles from "../../pages/Authentication.module.css"
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { register } from '../features/auth/authSlice'
+import { register } from '../../features/auth/authSlice'
 
 const RegisterForm = () => {
 
