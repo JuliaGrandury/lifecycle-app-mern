@@ -90,7 +90,8 @@ const generateToken = (id) => {
 // @route GET /api/v1/closet
 // @acces Private
 const getAllUsernames = asyncHandler(async (req, res) => {
-  const usernames = await User.find({}, { username: 1 })
+  // const usernames = await User.find({}, { username: 1, _id: 0 })
+  const usernames = await User.distinct("username")
   res.status(200).json(usernames)
 })
 

@@ -43,15 +43,6 @@
     background-color: transparent;
 }
 
-/* FILTER BAR TAGS STYLING */
-/* .tag {
-    font-family: "Poppins, sans-serif";
-    height: 30px;
-    width: fit-content;
-    border-radius: 15px;
-    color: var(--primary-blue)
-} */
-
 /* CLOSET TOOLBAR RIGHT */
 .closet__toolbar__right {
     display: flex;
@@ -72,7 +63,7 @@
 
 .dropdown__list {
     position: absolute;
-    top: 40px;
+    top: 50px;
     right: 0px;
     color: white;
     padding: 10px 10px;
@@ -89,7 +80,7 @@
     border-radius: 5px;
 }
 
-.dropdown__list li:hover {
+.filter__list li:hover {
     border: 0.5px solid var(--primary-blue);
     color: var(--primary-blue);
 }
@@ -102,6 +93,13 @@
     background-color: var(--bg-black);
     font-family: 'Poppins', sans-serif;
     color: var(--bg-light);
+}
+
+.dropdown__container .remove__follower {
+    background-color: transparent;
+    border: transparent;
+    color: var(--primary-rust);
+    float: right;
 }
 
 

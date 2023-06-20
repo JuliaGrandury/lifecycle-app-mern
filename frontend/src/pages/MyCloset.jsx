@@ -7,9 +7,8 @@ import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { toast } from "react-toastify"
 import { getItems, reset, updateFilter } from "../features/items/itemSlice"
-// import { getAllUsernames } from "../features/closet/closetSlice"
+import { getAllUsernames } from "../features/closet/closetSlice"
 import ItemForm from "../components/ItemForm"
-// import ItemCompSmall from "../components/ItemCompSmall"
 import ItemCardGrid from "./ItemCardGrid"
 import FilterBar from "../components/FilterBar"
 import Spinner from "../components/Shared/Spinner"
@@ -19,8 +18,6 @@ import allCategories from "../utils/allCategories"
 import Autocomplete from "@mui/material/Autocomplete"
 import TextField from "@mui/material/TextField"
 import CircularProgress from "@mui/material/CircularProgress"
-
-import { getAllUsernames } from "../features/closet/closetSlice"
 
 //don't need to update everytime the component remounts
 const filters = allCategories.filters
@@ -33,8 +30,6 @@ const MyCloset = () => {
   const { items, isLoading, isError, message, filterObject } = useSelector((state) => state.items)
   const { usernames } = useSelector((state) => state.closet)
   const { followers } = useSelector((state) => state.closet)
-
-  const options = ["The Godfather", "Pulp Fiction"]
 
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedAction, setSelectedAction] = useState({
@@ -115,7 +110,7 @@ const MyCloset = () => {
               </button>
               <div>
                 {selectedAction.filter && (
-                  <ul className={styles.dropdown__list}>
+                  <ul className={`${styles.dropdown__list} ${styles.filter__list}`}>
                     {Object.entries(filters).map(([label, value]) => (
                       <li key={label} onClick={() => handleFilter(value)}>
                         {label}
@@ -134,35 +129,43 @@ const MyCloset = () => {
                 <IoIosAddCircleOutline />
               </button>
               {selectedAction.share && (
-                <ul className="dropdown__list">
+                <ul className={styles.dropdown__list} style={{right: '-30px'}}>
+                  <h4 style={{ textAlign: "center", padding: "10px 0px" }}>Followers</h4>
                   <li>
                     <Autocomplete
                       multiple
                       id="tags-outlined"
-                      options={options}
-                      sx={{ width: 300, backgroundColor: "white" }}
+                      options={usernames}
+                      sx={{
+                        width: 350,
+                        backgroundColor: "white",
+                        "& .MuiAutocomplete-input": {
+                          fontSize: "12px", // Set the desired font size for the input
+                        },
+                        "& .MuiAutocomplete-tag": {
+                          fontSize: "12px", // Set the desired font size for the tags
+                        },
+                        "& .MuiAutocomplete-option": {
+                          fontSize: "12px", // Set the desired font size for the options in the dropdown list
+                        },
+                        "& .MuiAutocomplete-placeholder": {
+                          fontSize: "12px", // Set the desired font size for the placeholder
+                        },
+                      }}
                       getOptionLabel={(option) => option}
                       filterSelectedOptions
                       renderInput={(params) => <TextField {...params} placeholder="Add by Username" />}
                     />
-                    {/* <Autocomplete
-                      disablePortal
-                      id="combo-box-demo"
-                      options={options}
-                      sx={{ width: 300, backgroundColor: "white" }}
-                      renderInput={(params) => <TextField {...params} label="+ Add by username" />}
-                    /> */}
                   </li>
-                  <h4>Current Followers</h4>
                   {followers.length > 0 ? (
                     followers.map((user) => (
-                      <li>
+                      <li key={user}>
                         {user}
-                        <button>x</button>
+                        <button className={styles.remove__follower}>x</button>
                       </li>
                     ))
                   ) : (
-                    <li>No followers.</li>
+                    <li style={{ textAlign: "center", color: "var(--primary-grey)" }}>No followers.</li>
                   )}
                 </ul>
               )}
